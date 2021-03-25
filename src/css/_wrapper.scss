@@ -1,0 +1,126 @@
+.wp {
+    &-con {
+        width: 100vw;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        font-family: "Montserrat";
+        align-items: center;
+
+        &__header {
+            flex: 0 0 300px;
+            margin-bottom: -150px;
+            display: flex;
+            justify-content: center;
+            background-color: $blue;
+            width: 100%;
+        }
+        &__body {
+            flex: 1;
+            border-radius: 30px;
+            @include container;
+            &.active {
+                background-color: #fff;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
+                    0 1px 2px rgba(0, 0, 0, 0.24);
+                transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            }
+            margin-bottom: 20px;
+        }
+        &__footer {
+            flex: 0 0 50px;
+            background-color: $blue;
+            width: 100vw;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1px;
+            & > div {
+                cursor: pointer;
+                font-size: 12px;
+
+                &:not(:last-child) {
+                    margin-right: 10px;
+                }
+            }
+            & > .active {
+                text-decoration: underline 2px solid #fff;
+            }
+        }
+    }
+    &-header {
+        @include container();
+        margin: 30px 0;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 150px;
+        &__title {
+            display: flex;
+            flex-direction: column;
+            &T {
+                display: flex;
+                align-items: center;
+                & > img {
+                    width: 150px;
+                }
+                & > div {
+                    display: block;
+                    font-size: 36px;
+                    font-weight: 500;
+                    margin-left: 7.5px;
+                    align-self: flex-end;
+                    line-height: 1;
+                }
+            }
+            &Slogan {
+                margin-top: 10px;
+            }
+        }
+        &__pages {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        &__nav {
+            display: flex;
+            flex: 1;
+            align-items: center;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+
+            &-item {
+                &,
+                &:active,
+                &:visited {
+                    text-decoration: none;
+                    color: #fff;
+                }
+                margin-right: 15px;
+                padding: 5px 10px;
+                border-bottom: 5px solid #0000;
+                transition: border 0.2s;
+                &.active,
+                &:hover {
+                    border-bottom: 5px solid $accent;
+                }
+            }
+            &-login {
+                padding: 5px 15px;
+                text-transform: uppercase;
+                border-radius: 10px;
+                background-color: $accent;
+                margin-top: -10px;
+            }
+        }
+        &__subnav {
+            flex: 1;
+            height: 35px;
+            background-color: #fff;
+            display: flex;
+        }
+    }
+}
