@@ -2,6 +2,6 @@ import React, { Component } from "react";
 
 export default class index extends Component {
     render() {
-        return <div>Farhan</div>;
+        return <div>Ralph</div>;
     }
 }
