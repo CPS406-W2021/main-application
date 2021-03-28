@@ -41,12 +41,20 @@ import rootReducer from "./store/reducer/index";
 import Contact from "./pages/general/Contact";
 import Home from "./pages/general/Home";
 import PortalBase from "./pages/portal";
+import Login from "./pages/account/Login";
+import Register from "./pages/account/Register";
 import RAPBase from "./pages/reportAProblem";
 require("dotenv").config();
 export default class App extends Component {
     render() {
         return (
             <Router>
+                <Route path="/login">
+                    <Login />
+                </Route>
+                <Route path="/register">
+                    <Register />
+                </Route>
                 <Route path="/portal">
                     <PortalBase />
                 </Route>
