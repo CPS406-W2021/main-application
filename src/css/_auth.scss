@@ -1,3 +1,124 @@
-.User_login{
-    color: aqua;
+
+input {
+    -webkit-box-shadow: 0 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow:  0 8px 6px -6px black;
+        
+}
+
+div{
+
+}
+.wp {
+    &-con {
+        width: 100vw;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        font-family: "Montserrat";
+        background-image: url("../images/torontoMap.PNG");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;    
+        text-align: center; 
+
+        &__body {
+            justify-content: center;
+            @include container;         
+            & > h1 {
+               padding-bottom: 20px;
+            }
+            & > a {
+                    padding: 5px 15px;
+                    text-transform: uppercase;
+                    border-radius: 10px;
+                    background-color: $accent;
+                    margin-top: -10px;
+                
+            }
+            & > p {
+                padding-top: 60px;
+                padding-bottom: 30px;
+            }
+            &__login-form{
+                padding-bottom: 20px;
+            }
+
+
+            &.active {
+
+                padding-top: 40px;  
+                justify-content: center;
+                width: 35vw;
+                border-radius: 30px;
+                background-color: #fff;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
+                    0 1px 2px rgba(0, 0, 0, 0.24);
+                transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            }
+   
+            margin-bottom: 20px;
+        }
+        
+        &__footer {
+            flex: 0 0 50px;
+            background-color: $blue;
+            width: 100vw;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1px;
+            & > div {
+                cursor: pointer;
+                font-size: 12px;
+
+                &:not(:last-child) {
+                    margin-right: 10px;
+                }
+            }
+            & > .active {
+                text-decoration: underline 2px solid #fff;
+            }
+        }
+    }
+    &-header {
+        @include container;
+        &.active {
+            justify-content: center;
+            text-align: center;
+            width: 35vw;
+            border-radius: 30px;
+            background-color: $blue;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
+                0 1px 2px rgba(0, 0, 0, 0.24);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }        
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 60px;
+
+        &__title {
+            display: flex;
+            align-items: center;
+            &T {
+                display: flex;
+                align-items: center;
+                & > img {
+                    width: 15vw;
+                }
+                & > div {
+                    display: block;
+                    font-size: 60px;
+                    font-weight: 500;
+                    margin-left: 7.5px;
+                    line-height: 1;
+                }
+            }
+
+        }
+
+    }
 }
