@@ -1,13 +1,11 @@
-
 input {
     -webkit-box-shadow: 0 8px 6px -6px black;
     -moz-box-shadow: 0 8px 6px -6px black;
-    box-shadow:  0 8px 6px -6px black;
-        
+    box-shadow: 0 8px 6px -6px black;
+    width: 100%;
 }
 
-div{
-
+div {
 }
 .auth {
     &-con {
@@ -19,35 +17,32 @@ div{
         background-image: url("../images/torontoMap.PNG");
         background-position: center;
         background-repeat: no-repeat;
-        background-size: cover;    
-        text-align: center; 
+        background-size: cover;
+        text-align: center;
 
         &__body {
             justify-content: center;
-            @include container;         
+            @include container;
             & > h1 {
-               padding-bottom: 20px;
+                padding-bottom: 20px;
             }
             & > a {
-                    padding: 5px 15px;
-                    text-transform: uppercase;
-                    border-radius: 10px;
-                    background-color: $accent;
-                    margin-top: -10px;
-                
+                padding: 5px 15px;
+                text-transform: uppercase;
+                border-radius: 10px;
+                background-color: $accent;
+                margin-top: -10px;
             }
             & > p {
                 padding-top: 60px;
                 padding-bottom: 30px;
             }
-            &__login-form{
+            &__login-form {
                 padding-bottom: 20px;
             }
 
-
             &.active {
-
-                padding-top: 40px;  
+                padding-top: 40px;
                 justify-content: center;
                 width: 35vw;
                 border-radius: 30px;
@@ -55,11 +50,14 @@ div{
                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
                     0 1px 2px rgba(0, 0, 0, 0.24);
                 transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+                @media (max-width: 800px) {
+                    width: 100vw;
+                }
             }
-   
+
             margin-bottom: 20px;
         }
-        
+
         &__footer {
             flex: 0 0 50px;
             background-color: $blue;
@@ -87,13 +85,18 @@ div{
         &.active {
             justify-content: center;
             text-align: center;
-            width: 35vw;
+            width: 500px;
             border-radius: 30px;
             background-color: $blue;
+            padding: 15px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
                 0 1px 2px rgba(0, 0, 0, 0.24);
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }        
+            @media (max-width: 800px) {
+                width: 70vw;
+                margin: 0 auto;
+            }
+        }
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -107,7 +110,7 @@ div{
                 display: flex;
                 align-items: center;
                 & > img {
-                    width: 15vw;
+                    height: 75px;
                 }
                 & > div {
                     display: block;
@@ -117,8 +120,6 @@ div{
                     line-height: 1;
                 }
             }
-
         }
-
     }
 }
