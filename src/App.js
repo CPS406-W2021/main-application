@@ -44,6 +44,7 @@ import PortalBase from "./pages/portal";
 import Login from "./pages/account/Login";
 import Register from "./pages/account/Register";
 import RAPBase from "./pages/reportAProblem";
+import TellAFriend from "./pages/dashboard/TellAFriend";
 require("dotenv").config();
 export default class App extends Component {
     render() {
@@ -60,6 +61,9 @@ export default class App extends Component {
                 </Route>
                 <Route path="/rap">
                     <RAPBase />
+                </Route>
+                <Route path="/taf">
+                    <TellAFriend />
                 </Route>
                 <Route path="/contact">
                     <Contact />
