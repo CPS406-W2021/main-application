@@ -1,0 +1,40 @@
+.rap {
+    &-con {
+        display: flex;
+        flex: 1;
+    }
+    &-map {
+        background-color: #555;
+        flex: 1;
+    }
+    &-body {
+        background-color: #fff;
+        margin: 30px;
+
+        flex: 1.5;
+    }
+    &-h1 {
+        font-size: 26px;
+        margin-bottom: 5px;
+    }
+    &-line {
+        margin: 0px 0 10px;
+    }
+    &-sub {
+        line-height: 1;
+        font-size: 12px;
+        margin-left: 5px;
+        color: #444;
+        margin-bottom: 30px;
+    }
+    &-buttons {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        & > button {
+            &:not(:last-child) {
+                margin-right: 10px;
+            }
+        }
+    }
+}
