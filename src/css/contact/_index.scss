@@ -1,0 +1,78 @@
+//HEADER 
+$blue: #9CB8CF;
+$yellow: #FFEDCB;
+
+header {
+    h1 {
+        position:relative;
+        bottom:-10px;
+        margin: 25px 0 ;
+        margin-left: 10px;
+        font-family: Open Sans;
+    }
+        input{
+            position:absolute;
+            left: 750px;
+            top: 193px;
+            height: 17px;
+            width: 500px;
+            background-color: #e6e6e6;
+            padding: 4px;
+        }
+            label{
+                position:absolute;
+                left:1330px;
+                top:198px;
+            }
+                button {
+                    position:absolute;
+                    top:193px;
+                    left: 1400px;
+                    padding: 3px;
+                    width: 120px;
+                    font-family: Open Sans;
+                    color: #A6A6A6;       
+                }
+}
+
+// CONTENT TABLE
+.content{
+    border-collapse: collapse;
+    position: absolute;
+    left: 360px;
+    width: 1200px;
+    margin: 10px 0;
+    min-width: 400px;
+    padding: 12 px 15px;
+    overflow: hidden; 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    font-size: 1em;
+    font-family:Open Sans;
+
+    thead tr {
+        background-color: $blue;
+        text-align: left;
+        font-family:Open Sans;
+        font-weight: 700;
+        color:white;
+    }
+        th{
+            padding: 25px 15px;
+        }
+            td {
+                padding: 32px 15px;
+            }
+                td:nth-child(1)  {
+                    font-weight:bold;
+                }
+                    tbody tr {
+                        border-bottom: 1px solid #dddddd;
+                    }
+                        tbody tr:nth-child(even) {
+                            background-color: $yellow;
+                        }
+}
+
+
+
+
