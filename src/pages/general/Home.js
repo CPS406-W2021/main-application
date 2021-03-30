@@ -1,17 +1,19 @@
 import React, { Component } from "react";
 import DashboarWrapper from "../../components/ThemeWrapper";
-import Image from "../../images/skyline.png";
+import Image from "../../images/slogan.png";
 
 function Slogan() {
     return (
-        <section class="slogan-container">
-            <img src={Image} alt="Toronto Skyline"></img>
-            <h1 class="main-slogan">Keeping Toronto Safe</h1>
-            <i class="descr-slogan">"Lorem ipsum dolor sit amet, consectetur adipiscing
+        <section>
+            <div class="slogan-container">
+                <img src={Image} alt="Toronto Skyline"></img>
+                <h1 class="main-slogan">Keeping Toronto Safe</h1>
+                <i class="descr-slogan">"Lorem ipsum dolor sit amet, consectetur adipiscing
             elit, sed do eiusmod <br></br> tempor incididunt ut labore et dolore magna aliqua.”</i>
-            <div>
-                <a href="/login"><button type="button" class="btn-login">Log In</button></a>
-                <a href="/register"><button type="button" class="btn-signup">Sign Up</button></a>
+                <div>
+                    <a href="/login"><button type="button" class="btn-login">Log In</button></a>
+                    <a href="/register"><button type="button" class="btn-signup">Sign Up</button></a>
+                </div>
             </div>
         </section>
     );
@@ -32,14 +34,22 @@ function Survey() {
 
 function FAQ() {
     return (
-        <div>
-            <h1>Frequently Asked Questions (FAQ)</h1>
-            <h3>Question 1</h3>
-            <p>Answer 1</p>
-            <h3>Question 2</h3>
-            <p>Answer 2</p>
-            <h3>Question 3</h3>
-            <p>Answer 3</p>
+        <div class="faq-container">
+            <h1 class="faq-header">Frequently Asked Questions (FAQ)</h1>
+            <div>
+                <div>
+                    <h3>Question 1</h3>
+                    <p>Answer 1</p>
+                </div>
+                <div>
+                    <h3>Question 2</h3>
+                    <p>Answer 2</p>
+                </div>
+                <div>
+                    <h3>Question 3</h3>
+                    <p>Answer 3</p>
+                </div>
+            </div>
         </div>
     );
 }

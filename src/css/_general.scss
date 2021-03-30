@@ -23,10 +23,11 @@ $accent: #dea01e;
     position: relative;
     width: 100%;
     max-width: 400px;
-  }
-  
+}
+
+
 .slogan-container img {
-    width: 200%;
+    width: 290%;
     height: auto;
 }
 
@@ -92,10 +93,26 @@ $accent: #dea01e;
 .survey-text {
     color: black;
     font-size: 16px;
-    text-align: center
+    text-align: center;
+    padding-top: 130px;
+    padding-bottom: 100px;
+    font-weight: 100;
 }
 
 a {
     color: $accent;
 }
+
+.faq-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.faq-container .faq-header{
+    font-size: 200;
+    white-space: nowrap;
+}
+
 /* ---------------------------------- */
