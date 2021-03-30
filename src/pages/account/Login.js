@@ -4,22 +4,17 @@ export default class Login extends Component {
     render() {
         return (
             <SingePageWrapper>
-                <h1>User Login</h1>
-                <div className="auth-con__body__login-form">
-                    <label for="email" className="auth-label">
+                <div className="login-form">
+                    <h1>User Login</h1>
+
+                    <label for="email">
                         Email
                     </label>
                     <br></br>
-                    <input
-                        type="text"
-                        id="email"
-                        name="email"
-                        className="auth-input"
-                    ></input>
-                    <br></br>
-                    <br></br>
+                    <input type="text" id="email" name="email" ></input><br></br>
 
-                    <label for="pwd" className="auth-label">
+
+                    <label for="pwd">
                         Password:
                     </label>
                     <br></br>
@@ -27,13 +22,11 @@ export default class Login extends Component {
                         type="password"
                         id="pwd"
                         name="pwd"
-                        className="auth-input"
                     ></input>
                 </div>
-                <br></br>
-                <br></br>
-                <a href="/portal">Log In</a>
-                <p>
+
+                <a href="/portal" className = "login">Log In</a>
+                <p className = "login">
                     Don't have an account? <a href="/register">Register now</a>{" "}
                 </p>
                 {/* 
@@ -74,3 +67,4 @@ export default class Login extends Component {
         );
     }
 }
+

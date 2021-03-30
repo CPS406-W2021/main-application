@@ -1,15 +1,5 @@
 .auth {
-    &-input {
-        border: 1px solid black;
 
-        -webkit-box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
-        -moz-box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
-        box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
-        width: 100%;
-    }
-    &-label {
-        margin-right: auto;
-    }
     &-bg {
         width: 75vw;
         height: 100vh;
@@ -119,6 +109,7 @@
             justify-content: center;
             text-align: center;
             width: 600px;
+            height: 300px;
             border-radius: 30px;
             background-color: $blue;
             padding: 15px;
@@ -138,8 +129,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding-top: 40px;
-        padding-bottom: 60px;
+
 
         &__title {
             padding-bottom: 15px;
@@ -164,4 +154,54 @@
             }
         }
     }
+}
+.login-form{
+    padding-bottom: 20px;
+    margin-top: 25px;
+
+    margin-bottom: 40px;
+    width: 80%;
+    & > h1 {
+        padding-top: 20px;
+         text-align: center;
+     }
+    & > input {
+        border: 1px solid black;
+
+        -webkit-box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
+        -moz-box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
+        box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
+        width: 100%;
+        margin-bottom: 20px;
+
+    }
+    & > label {
+        margin-right: auto;
+    }
+}
+
+.register-form{
+    padding-bottom: 20px;
+    margin-top: 40px;
+    width: 80%;  
+    margin-bottom: 40px;
+
+    & > h1 {
+       padding-top: 15px;
+        text-align: center;
+    }
+
+    & > input  {
+        border: 1px solid black;
+
+        -webkit-box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
+        -moz-box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
+        box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    & > label {
+        margin-right: auto;
+
+    }    
 }
