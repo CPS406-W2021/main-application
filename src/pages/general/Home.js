@@ -34,20 +34,50 @@ function Survey() {
 
 function FAQ() {
     return (
-        <div class="faq-container">
-            <h1 class="faq-header">Frequently Asked Questions (FAQ)</h1>
-            <div>
-                <div>
-                    <h3>Question 1</h3>
-                    <p>Answer 1</p>
+        <div>
+            <h1 class="faq-title">Frequently Asked Questions (FAQ)</h1>
+            <div class="faq">
+                <div class="faq-item">
+                    <div class="faq-item-header">
+                        This is question 1.
+                    </div>
+                    <div class="faq-item-body">
+                        <div class="faq-item-body-content">
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h3>Question 2</h3>
-                    <p>Answer 2</p>
+                <div class="faq-item">
+                    <div class="faq-item-header">
+                        This is question 2.
+                    </div>
+                    <div class="faq-item-body">
+                        <div class="faq-item-body-content">
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h3>Question 3</h3>
-                    <p>Answer 3</p>
+                <div class="faq-item">
+                    <div class="faq-item-header">
+                        This is question 3.
+                    </div>
+                    <div class="faq-item-body">
+                        <div class="faq-item-body-content">
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,8 +87,16 @@ function FAQ() {
 function Footer() {
     return (
         <footer>
-            <p>Insta, Twitter, Facebook</p>
-            <p>CyPress ©️ | CPS406 W2021</p>
+            <div class="footer-content">
+                <ul class="socials">
+                    <li><a href="#"><p>Facebook</p></a></li>
+                    <li><a href="#"><p>Twitter</p></a></li>
+                    <li><a href="#"><p>Instagram</p></a></li>
+                </ul>
+            </div>
+            <div class="footer-bottom">
+                <h3>CyPress ©️ | CPS406 W2021</h3>
+            </div>
         </footer>
     );
 }
