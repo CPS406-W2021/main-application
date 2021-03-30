@@ -1,16 +1,19 @@
-input {
-    -webkit-box-shadow: 0 8px 6px -6px black;
-    -moz-box-shadow: 0 8px 6px -6px black;
-    box-shadow: 0 8px 6px -6px black;
-    width: 100%;
-}
-
-div {
-}
 .auth {
+
+    &-input{
+        border: 1px solid black ;
+    
+        -webkit-box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
+        -moz-box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
+        box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
+        width: 80%;
+    }
+
     &-con {
+        padding-top: 50px;
         width: 100vw;
-        min-height: 100vh;
+
+
         display: flex;
         flex-direction: column;
         font-family: "Montserrat";
@@ -19,15 +22,19 @@ div {
         background-repeat: no-repeat;
         background-size: cover;
         text-align: center;
+        align-items: center;
+        &__body 
+        {   
 
-        &__body {
             justify-content: center;
             @include container;
+
             & > h1 {
                 padding-bottom: 20px;
             }
             & > a {
-                padding: 5px 15px;
+                padding: 9px 65px 9px 65px;
+                width: 30%;
                 text-transform: uppercase;
                 border-radius: 10px;
                 background-color: $accent;
@@ -42,17 +49,23 @@ div {
             }
 
             &.active {
+
                 padding-top: 40px;
                 justify-content: center;
-                width: 35vw;
+                align-content: center;
+                width: 600px;
                 border-radius: 30px;
                 background-color: #fff;
                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
                     0 1px 2px rgba(0, 0, 0, 0.24);
                 transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
                 @media (max-width: 800px) {
-                    width: 100vw;
+                    width: 75vw;
                 }
+                @media (max-width: 400px) {
+                    width: 75vw;
+                    margin: 0 auto;
+                }                         
             }
 
             margin-bottom: 20px;
@@ -60,6 +73,7 @@ div {
 
         &__footer {
             flex: 0 0 50px;
+            align-self: flex-end;
             background-color: $blue;
             width: 100vw;
             color: #fff;
@@ -81,11 +95,12 @@ div {
         }
     }
     &-header {
+        color: #fff;
         @include container;
         &.active {
             justify-content: center;
             text-align: center;
-            width: 500px;
+            width: 600px;
             border-radius: 30px;
             background-color: $blue;
             padding: 15px;
@@ -93,9 +108,14 @@ div {
                 0 1px 2px rgba(0, 0, 0, 0.24);
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             @media (max-width: 800px) {
-                width: 70vw;
+                width: 75vw;
                 margin: 0 auto;
             }
+
+            @media (max-width: 400px) {
+                width: 75vw;
+                margin: 0 auto;
+            }                        
         }
         display: flex;
         justify-content: space-between;
@@ -103,20 +123,25 @@ div {
         padding-top: 40px;
         padding-bottom: 60px;
 
-        &__title {
+        &__title {    
+           padding-bottom: 15px;   
             display: flex;
             align-items: center;
             &T {
                 display: flex;
                 align-items: center;
+              
                 & > img {
                     height: 75px;
+                    width: 165px;
+                           
                 }
                 & > div {
+                    padding-top: 10px;
                     display: block;
-                    font-size: 60px;
+                    font-size: 50px;
                     font-weight: 500;
-                    margin-left: 7.5px;
+                    margin-left: 20px;
                     line-height: 1;
                 }
             }

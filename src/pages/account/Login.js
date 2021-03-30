@@ -13,17 +13,17 @@ export default class Login extends Component {
                             </div>
 
                         </div>
-                    </div>
+                    </div><br></br><br></br>
 
                 <div className={`auth-con__body ${this.props.clearbg ? "" : "active"}`}>
                     <h1>User Login</h1>
                     <div className = "auth-con__body__login-form">
-                        <label for="email">Email</label><br></br>
-                        <input type="text" id="email" name="email"></input><br></br><br></br>
+                        <label for="email" className = "auth-label">Email</label><br></br>
+                        <input type="text" id="email" name="email" className="auth-input"></input><br></br><br></br>
 
-                        <label for="pwd">Password:</label><br></br>
-                        <input type="password" id="pwd" name="pwd"></input>
-                    </div><br></br>
+                        <label for="pwd" className = "auth-label">Password:</label><br></br>
+                        <input type="password" id="pwd" name="pwd" className="auth-input"></input>
+                    </div><br></br><br></br>
                     <a href="/portal">Log In</a>
                     <p>Don't have an account? <a href="/register">Register now</a> </p>
 
