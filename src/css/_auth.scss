@@ -1,18 +1,33 @@
 .auth {
+    &-input {
+        border: 1px solid black;
 
-    &-input{
-        border: 1px solid black ;
-    
         -webkit-box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
         -moz-box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
         box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
-        width: 80%;
+        width: 100%;
     }
-
+    &-label {
+        margin-right: auto;
+    }
+    &-bg {
+        width: 75vw;
+        height: 100vh;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #aaa5;
+        z-index: 50;
+        @media (max-width: 1200px) {
+            width: 100vw;
+        }
+    }
     &-con {
+        height: 100vh;
+        box-sizing: border-box;
         padding-top: 50px;
         width: 100vw;
-
 
         display: flex;
         flex-direction: column;
@@ -21,14 +36,9 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        text-align: center;
         align-items: center;
-        &__body 
-        {   
-
-            justify-content: center;
-            @include container;
-
+        position: relative;
+        &__body {
             & > h1 {
                 padding-bottom: 20px;
             }
@@ -46,32 +56,37 @@
             }
             &__login-form {
                 padding-bottom: 20px;
+                width: 80%;
             }
 
-            &.active {
-
-                padding-top: 40px;
-                justify-content: center;
-                align-content: center;
-                width: 600px;
-                border-radius: 30px;
-                background-color: #fff;
-                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
-                    0 1px 2px rgba(0, 0, 0, 0.24);
-                transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-                @media (max-width: 800px) {
-                    width: 75vw;
-                }
-                @media (max-width: 400px) {
-                    width: 75vw;
-                    margin: 0 auto;
-                }                         
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 100;
+            justify-content: center;
+            flex: 1;
+            width: 750px;
+            border-radius: 30px;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            background-color: #fff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
+                0 1px 2px rgba(0, 0, 0, 0.24);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            @media (max-width: 800px) {
+                width: 75vw;
             }
-
-            margin-bottom: 20px;
+            @media (max-width: 400px) {
+                width: 75vw;
+                margin: 0 auto;
+            }
         }
 
         &__footer {
+            position: relative;
+            z-index: 100;
             flex: 0 0 50px;
             align-self: flex-end;
             background-color: $blue;
@@ -81,6 +96,7 @@
             justify-content: center;
             align-items: center;
             padding: 1px;
+            margin-top: auto;
             & > div {
                 cursor: pointer;
                 font-size: 12px;
@@ -95,6 +111,8 @@
         }
     }
     &-header {
+        position: relative;
+        z-index: 100;
         color: #fff;
         @include container;
         &.active {
@@ -115,7 +133,7 @@
             @media (max-width: 400px) {
                 width: 75vw;
                 margin: 0 auto;
-            }                        
+            }
         }
         display: flex;
         justify-content: space-between;
@@ -123,18 +141,17 @@
         padding-top: 40px;
         padding-bottom: 60px;
 
-        &__title {    
-           padding-bottom: 15px;   
+        &__title {
+            padding-bottom: 15px;
             display: flex;
             align-items: center;
             &T {
                 display: flex;
                 align-items: center;
-              
+
                 & > img {
                     height: 75px;
                     width: 165px;
-                           
                 }
                 & > div {
                     padding-top: 10px;
