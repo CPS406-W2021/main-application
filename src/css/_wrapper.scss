@@ -17,6 +17,7 @@
         }
         &__body {
             flex: 1;
+            position: relative;
             border-radius: 30px;
             @include container;
             &.active {
