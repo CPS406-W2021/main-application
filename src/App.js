@@ -41,15 +41,22 @@ import rootReducer from "./store/reducer/index";
 import Contact from "./pages/general/Contact";
 import Home from "./pages/general/Home";
 import PortalBase from "./pages/portal";
+import Login from "./pages/account/Login";
+import Register from "./pages/account/Register";
 import RAPBase from "./pages/reportAProblem";
+import TellAFriend from "./pages/dashboard/TellAFriend";
 import ProfileInfo from "./pages/account/ProfileInfo";
+
 require("dotenv").config();
 export default class App extends Component {
     render() {
         return (
             <Router>
-                <Route path="/profileinfo">
-                    <ProfileInfo />
+                <Route path="/login">
+                    <Login />
+                </Route>
+                <Route path="/register">
+                    <Register />
                 </Route>
                 <Route path="/portal">
                     <PortalBase />
@@ -57,11 +64,17 @@ export default class App extends Component {
                 <Route path="/rap">
                     <RAPBase />
                 </Route>
+                <Route path="/taf">
+                    <TellAFriend />
+                </Route>
                 <Route path="/contact">
                     <Contact />
                 </Route>
                 <Route exact path="/">
                     <Home />
+                </Route>
+                <Route path="/profileinfo">
+                    <ProfileInfo />
                 </Route>
             </Router>
         );
