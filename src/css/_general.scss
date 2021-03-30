@@ -33,14 +33,21 @@ $accent: #dea01e;
     }
 }
 
-.slogan-container .slogan-container .main-slogan {
+.main-slogan {
     color: white;
-    position: absolute;
     font-size: 50px;
-    top: 100px;
-    left: 50px;
     white-space: nowrap;
     overflow: hidden;
+    font-size: 16px;
+    @media (min-width: 768px) {
+        font-size: 24px;
+    }
+    @media (min-width: 992px) {
+        font-size: 30px;
+    }
+    @media (min-width: 1200px) {
+        font-size: 40px;
+    }
 }
 
 .slogan-container .descr-slogan {
