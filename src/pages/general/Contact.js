@@ -4,25 +4,33 @@ import DashboarWrapper from "../../components/ThemeWrapper";
 
 export default class Contact extends Component {
     render() {
-        
+
         function Header() {
             return (
-                <header>
-                    
-                    <h1>Contact City Officials </h1>
-
-                    <div className="header">
-                        <input type="text" placeholder="Search..."></input>
-                        <label for="user"> Sort By: </label>
-                        <button>Ward Name</button> 
+                <div className= "contact">
+                    <h1 className="contact-h1">Contact City Officials </h1>
+                    <input className="contact-search" type="text" placeholder="Search..."></input>
+                    <label className="contact-label" for="user"> Sort By: </label>
+                    <div className="contact-field">
+                        <div class="ui form">
+                            <div class="contact-field">
+                                <select>
+                                    <option value="-1">
+                                        Ward Name
+                                    </option>
+                                    <option value="1">Councillor</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                </header>
+                   
+                </div>
         );
     }
     function Table() {
             return (
                 <table className="content">
-                    <thead>
+                    <thead className="content-header">
                         <tr>
                             <th>WARD NAME</th>
                             <th>COUNCILLOR</th>
@@ -31,7 +39,7 @@ export default class Contact extends Component {
                         </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody className="content-body">
                         <tr>
                             <td>Etobicoke North</td>
                             <td>Councillor Michael Ford</td>
