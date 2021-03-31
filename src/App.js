@@ -42,11 +42,15 @@ import Contact from "./pages/general/Contact";
 import Home from "./pages/general/Home";
 import PortalBase from "./pages/portal";
 import RAPBase from "./pages/reportAProblem";
+import Login from "./pages/account/Login"
 require("dotenv").config();
 export default class App extends Component {
     render() {
         return (
             <Router>
+                <Route path="/login">
+                    <Login />
+                </Route>
                 <Route path="/portal">
                     <PortalBase />
                 </Route>
