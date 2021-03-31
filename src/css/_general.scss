@@ -18,3 +18,188 @@
 }
 $blue: #175689;
 $accent: #dea01e;
+
+/* Home Page ------------------------ */
+
+.slogan {
+    &-con {
+        position: relative;
+        width: 100%;
+        background-image: url("../images/slogan.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 500px;
+        & img {
+            width: 100%;
+            height: auto;
+        }
+        .main-slogan {
+            color: white;
+            font-size: 50px;
+            font-size: 16px;
+            position: absolute;
+            bottom: 8px;
+            top: 100px;
+            left: 50px;
+            @media (min-width: 768px) {
+                font-size: 34px;
+            }
+            @media (min-width: 992px) {
+                font-size: 40px;
+            }
+            @media (min-width: 1200px) {
+                font-size: 50px;
+            }
+        }
+        .descr-slogan {
+            color: white;
+            position: absolute;
+            bottom: 8px;
+            font-size: 18px;
+            top: 180px;
+            left: 50px;
+        }
+        .btn-login {
+            background-color: $accent;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            font-family: "Montserrat";
+            padding: 6px 50px;
+            border-radius: 8px;
+            border: none;
+            transition-duration: 0.4s;
+            position: absolute;
+            bottom: 170px;
+            left: 50px;
+        }
+        .btn-login:hover {
+            background-color: white;
+            color: $accent;
+        }
+        .btn-signup {
+            background-color: #9cb8cf;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            font-family: "Montserrat";
+            padding: 6px 50px;
+            border-radius: 8px;
+            border: none;
+            transition-duration: 0.4s;
+            position: absolute;
+            bottom: 170px;
+            left: 230px;
+            :hover {
+                background-color: white;
+                color: #9cb8cf;
+            }
+        }
+        .btn-signup:hover {
+            background-color: white;
+            color: #9cb8cf;
+        }
+    }
+}
+
+
+.survey-text {
+    color: black;
+    font-size: 16px;
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    font-weight: 100;
+    a {
+        color: $accent;
+    }
+    @media (min-width: 768px) {
+        font-size: 10px;
+    }
+    @media (min-width: 992px) {
+        font-size: 15px;
+    }
+    @media (min-width: 1200px) {
+        font-size: 20px;
+    }
+}
+
+
+.faq-title {
+    text-align: center;
+    @media (min-width: 768px) {
+        font-size: 20px;
+    }
+    @media (min-width: 992px) {
+        font-size: 24px;
+    }
+    @media (min-width: 1200px) {
+        font-size: 36px;
+    }
+}
+
+.faq {
+    width: 90%;
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding-bottom: 100px;
+
+    &-item {
+        background-color: $blue;
+        color: white;
+        margin: 1rem 0;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
+        &-header {
+            padding: 0.5rem 3rem 0.5rem 1rem;
+            min-height: 3.5rem;
+            line-height: 1.25rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+        }
+        &-header:hover {
+            background-color: $accent;
+            transition: 0.3s;
+        }
+    }
+}
+
+.faq-item-body {
+    padding: 1rem;
+    line-height: 1.5 rem;
+    border-top: 3px solid white;
+    overflow: hidden;
+    height: 100px;
+    transition: padding 0.6s, height 0.5s;
+    &-content {
+        font-weight: 20;
+    }
+}
+
+.faq-item-body.closed {
+    padding: 0 1rem;
+    height: 0;
+}
+
+.footer-con {
+    padding: 20px 0px;
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0 auto;
+    background: #9cb8cf;
+    height: auto;
+    width: 100vw;
+    color: white;
+    align-items: center;
+    .footer-bottom {
+        text-align: center;
+        padding-bottom: 5px;
+    }
+}
+
+/* ---------------------------------- */

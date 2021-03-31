@@ -6,7 +6,7 @@ export default class DashboarWrapper extends Component {
         const pages = [
             { text: "Home", route: "/" },
             { text: "Portal", route: "/portal" },
-            { text: "Report A Problem", route: "/rap" },
+            { text: "My Account", route: "/rap" },
             { text: "Contact", route: "/contact" },
         ];
         let currentPage = this.props.currentPage || 0;
@@ -28,9 +28,8 @@ export default class DashboarWrapper extends Component {
                                 {pages.map(({ text, route }, i) => (
                                     <Link
                                         to={route}
-                                        className={`wp-header__nav-item ${
-                                            i == currentPage ? "active" : ""
-                                        }`}
+                                        className={`wp-header__nav-item ${i == currentPage ? "active" : ""
+                                            }`}
                                     >
                                         {text}
                                     </Link>
@@ -44,9 +43,8 @@ export default class DashboarWrapper extends Component {
                     </div>
                 </div>
                 <div
-                    className={`wp-con__body ${
-                        this.props.clearbg ? "" : "active"
-                    }`}
+                    className={`wp-con__body ${this.props.clearbg ? "" : "active"
+                        }`}
                 >
                     {this.props.children}
                 </div>
