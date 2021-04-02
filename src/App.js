@@ -44,6 +44,9 @@ import PortalBase from "./pages/portal";
 import Login from "./pages/account/Login";
 import Register from "./pages/account/Register";
 import RAPBase from "./pages/reportAProblem";
+import SurveyC from "./pages/general/SurveyConfirmation";
+import Survey from "./pages/general/Survey";
+
 require("dotenv").config();
 export default class App extends Component {
     render() {
@@ -64,6 +67,12 @@ export default class App extends Component {
                 <Route path="/contact">
                     <Contact />
                 </Route>
+                <Route path="/Surveyconfirmation">
+                    <SurveyC/>
+                </Route> 
+                <Route path="/Survey">
+                    <Survey/>
+                </Route>                                  
                 <Route exact path="/">
                     <Home />
                 </Route>

@@ -5,7 +5,7 @@ export default class Login extends Component {
     render() {
         return (
             <SingePageWrapper>
-                <div className = "register-form">
+                <div className = "register-form ui small form">
                 <h1>Sign Up</h1>
 
                         <label for="name"   >Name:</label><br></br>
@@ -22,12 +22,13 @@ export default class Login extends Component {
 
                         <label for="pwd"  >Confirm Password:</label><br></br>
                         <input type="password" id="cpwd" name="cpwd"    ></input><br></br>
-                </div>
-                <a href="/login" className = "register">Register</a>
-                    <p>
+                        <button class="ui yellow button">REGISTER</button>
+                        <p>
                         {" "}
                         <a href="/" className = "register ">Cancel</a>{" "}
-                    </p>                
+                    </p>     
+                </div>
+           
             </SingePageWrapper>
         );
     }
