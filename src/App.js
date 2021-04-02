@@ -47,6 +47,7 @@ import RAPBase from "./pages/dashboard/ReportAProblem";
 import TellAFriend from "./pages/dashboard/TellAFriend";
 import Vote from "./pages/dashboard/Vote";
 import ProfileInfo from "./pages/account/ProfileInfo";
+import ViewReports from "./pages/dashboard/ViewReports";
 
 require("dotenv").config();
 export default class App extends Component {
@@ -76,6 +77,9 @@ export default class App extends Component {
                 </Route>
                 <Route path="/contact">
                     <Contact />
+                </Route>
+                <Route path="/viewReports">
+                    <ViewReports />
                 </Route>
                 <Route exact path="/">
                     <Home />
