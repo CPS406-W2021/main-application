@@ -2,30 +2,44 @@
     &-con {
         display: flex;
         flex: 1;
+        
     }
     &-map {
-        background-color: #555;
+        background-image: url("../../images/Map_2.png" );
+        background-size: 730px;
+        background-repeat: no-repeat;
+        background-position:-110px;
         flex: 1;
     }
+ 
     &-body {
         background-color: #fff;
         margin: 30px;
-
         flex: 1.5;
     }
     &-h1 {
         font-size: 26px;
-        margin-bottom: 5px;
     }
     &-line {
-        margin: 0px 0 10px;
+        margin: 0 0 2em;
+        height: 1px;
+        background-color: #888888;
+        border: none;
     }
     &-sub {
+        background-image: url("../../images/pinpoint.png");
+        background-repeat: no-repeat;
+        background-size: 12px;
         line-height: 1;
         font-size: 12px;
         margin-left: 5px;
         color: #444;
         margin-bottom: 30px;
+
+        .address {
+            position:relative;
+            left: 15px;
+        }
     }
     &-buttons {
         width: 100%;
@@ -37,4 +51,71 @@
             }
         }
     }
+    &-submit{
+        .ui.form .field{
+            margin:0 0 2.5em;
+            }
+        .ui.form .field i, .name{
+            margin-top: 10px;
+            font-size: 30px;
+            position:relative;
+            left: 25px;
+            color: rgb(77, 156, 221);
+        }
+    }
+    &-descr{
+        .ui.form .descr{
+            margin:0 0 1em;
+            text-decoration: underline;
+            }
+        .ui.form .text{
+            font-weight: bold;
+            font-size:small;
+            padding: 5px;
+            text-align: left;
+            margin:0 15px 5em;
+        }
+    }
+
+    &-progress ul li{
+        display:inline-block;
+        width: 120px;
+        margin: 0 0 1.1em;
+        position:relative;
+        z-index:1;
+        p{
+            font-size:12px;
+        }
+    }
+    &-progress ul li:not(:last-child)::after{
+        content: '';
+        background: rgb(235, 229, 229);
+        height:5px;
+        width:102px;
+        display:block;
+        position:relative;
+        left:68px;
+        top:-31px;
+        z-index: -1;
+    }
+    &-progress ul li:nth-child(1)::after{
+        background:green;
+    }
+
 }
+i.icon{
+    font-size: 1.5em;
+}
+
+i.icon.outline{
+    color:green;
+}
+
+.svg-inline--fa {
+    font-size: 1.5em;
+    color:rgb(192, 191, 189);
+}
+ul{
+    text-align: center;
+}
+
