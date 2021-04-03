@@ -20,7 +20,7 @@ export default class PastReports extends Component {
                                     Select Period:
                                 </label>
                                 <div className="reports-Period">
-                                    <div class="ui form fluid">
+                                    <div className="ui form fluid">
                                         <div>
                                             <select>
                                                 <option value="-1">
@@ -38,7 +38,7 @@ export default class PastReports extends Component {
                                 Sort By:
                             </label>
                             <div className="reports-By">
-                                <div class="ui form fluid">
+                                <div className="ui form fluid">
                                     <div>
                                         <select>
                                             <option value="-1">
@@ -58,19 +58,19 @@ export default class PastReports extends Component {
             );
         }
         function Table() {
-            const success = [<div class="ui green progress">
-                                <div class="bar"></div>
-                                <div class="label">Successful</div>
+            const success = [<div className="ui green progress">
+                                <div className="bar"></div>
+                                <div className="label">Successful</div>
                             </div>]
 
-            const newEntry = [<div class="ui brown progress">
-                                <div class="bar"></div>
-                                <div class="label">New Entry</div>
+            const newEntry = [<div className="ui brown progress">
+                                <div className="bar"></div>
+                                <div className="label">New Entry</div>
                             </div>]
 
-            const pending = [<div class="ui red progress">
-                                <div class="bar"></div>
-                                <div class="label">Pending</div>
+            const pending = [<div className="ui red progress">
+                                <div className="bar"></div>
+                                <div className="label">Pending</div>
                             </div>]
 
             const information = [
@@ -146,9 +146,9 @@ export default class PastReports extends Component {
                                     <td>{status}</td>
                                     <td>{
                                         <div>
-                                            <a href="#" class="bell"><i class="bell icon"></i></a>
-                                            <a href="#" class="edit"><i class="edit icon"></i> </a>
-                                            <a href="#" class="trash"><i class="trash alternate icon"></i></a>
+                                            <a href="#" className="bell"><i className="bell icon"></i></a>
+                                            <a href="#" className="edit"><i className="edit icon"></i> </a>
+                                            <a href="#" className="trash"><i className="trash alternate icon"></i></a>
                                         </div>}</td>
                                 </tr>
                             );
