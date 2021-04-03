@@ -1,0 +1,78 @@
+.pro {
+    &-con {
+        display: flex;
+        flex: 1;
+    }
+    &-nav {
+        background-color: rgb(248, 230, 190);
+        flex: 1;
+
+        & > h1 {
+                margin: 20px;
+            }
+    }
+    &-body {
+        background-color: #fff;
+        margin: 50px;
+
+        flex: 2;
+ 
+    }
+    & > h2 {
+        font-size: 26px;
+        margin-bottom: 5px;
+
+    }
+
+    &-line {
+        margin: 0px 0 10px;
+    }
+
+        
+    
+    &-sub {
+        line-height: 1;
+        font-size: 12px;
+        margin-left: 5px;
+        color: #444;
+        margin-bottom: 30px;
+
+        & > .ui.green.button{
+                width: 20%;
+                margin-left: 80%;
+                margin-right: 40px;
+        }       
+    }
+
+    &-del {
+        line-height: 1;
+        font-size: 12px;
+        margin-left: 5px;
+        color: #444;
+        margin-bottom: 30px;
+        & > .ui.red.button{
+            width: 20%;
+            margin-left: 80%;
+            margin-right: 40px;
+    }           
+    }
+
+    &-buttons {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        & > button {
+            &:not(:last-child) {
+                margin-right: 10px;
+            }
+        }
+    }
+   
+ 
+}
+
+.profile-form.ui.small.form{
+    margin-top: 30px;
+    margin-bottom: 50px;
+
+}   
