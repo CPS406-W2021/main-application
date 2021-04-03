@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
 }
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap");
 body {
     overflow-x: hidden;
 }
@@ -9,9 +10,13 @@ body {
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
 @import "general";
 @import "wrapper";
+
+@import "auth";
 @import "home/general";
 @import "contact/index";
 @import "dashboard/taf";
 @import "dashboard/portal";
 @import "dashboard/rap";
-@import "dashboard/reports"
+@import "dashboard/reports";
+@import "dashboard/vote";
+@import "profile/profileinfo";

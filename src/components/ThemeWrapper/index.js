@@ -1,13 +1,14 @@
+
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Image from "../../images/header.png";
 export default class DashboarWrapper extends Component {
     render() {
         const pages = [
-            { text: "Home", route: "/" },
-            { text: "Portal", route: "/portal" },
-            { text: "My Account", route: "/rap" },
-            { text: "Contact", route: "/contact" },
+            { text: 'Home', route: '/' },
+            { text: 'Portal', route: '/portal' },
+            { text: 'My Account', route: '/rap' },
+            { text: 'Contact', route: '/contact' },
         ];
         let currentPage = this.props.currentPage || 0;
         return (
@@ -20,32 +21,29 @@ export default class DashboarWrapper extends Component {
                                 <div>Cypress</div>
                             </div>
                             <div className="wp-header__titleSlogan">
-                                Cypress / {pages[currentPage]["text"]}
+                                Cypress / {pages[currentPage]['text']}
                             </div>
                         </div>
                         <div className="wp-header__pages">
                             <div className="wp-header__nav">
                                 {pages.map(({ text, route }, i) => (
                                     <Link
+                                        key={text}
                                         to={route}
-                                        className={`wp-header__nav-item ${i == currentPage ? "active" : ""
-                                            }`}
+                                        className={`wp-header__nav-item ${
+                                            i === currentPage ? 'active' : ''
+                                        }`}
                                     >
                                         {text}
                                     </Link>
                                 ))}
-                                <div className="wp-header__nav-login">
-                                    LOGIN
-                                </div>
+                                <div className="wp-header__nav-login">LOGIN</div>
                             </div>
                             <div className="wp-header__subnav">subnav</div>
                         </div>
                     </div>
                 </div>
-                <div
-                    className={`wp-con__body ${this.props.clearbg ? "" : "active"
-                        }`}
-                >
+                <div className={`wp-con__body ${this.props.clearbg ? '' : 'active'}`}>
                     {this.props.children}
                 </div>
                 <div className="wp-con__footer">
