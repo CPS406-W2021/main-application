@@ -9,8 +9,10 @@ import RAPBase from './pages/dashboard/ReportAProblem';
 import TellAFriend from './pages/dashboard/TellAFriend';
 import Vote from './pages/dashboard/Vote';
 import ProfileInfo from './pages/account/ProfileInfo';
+import SurveyC from "./pages/general/SurveyConfirmation";
+import Survey from "./pages/general/Survey";
 
-require('dotenv').config();
+require("dotenv").config();
 export default class App extends Component {
     render() {
         return (
@@ -39,6 +41,12 @@ export default class App extends Component {
                 <Route path="/contact">
                     <Contact />
                 </Route>
+                <Route path="/Surveyconfirmation">
+                    <SurveyC/>
+                </Route> 
+                <Route path="/Survey">
+                    <Survey/>
+                </Route>                                  
                 <Route exact path="/">
                     <Home />
                 </Route>

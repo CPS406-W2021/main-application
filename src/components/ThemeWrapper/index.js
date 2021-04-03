@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import Image from '../../images/header.png';
+
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import Image from "../../images/header.png";
 export default class DashboarWrapper extends Component {
     render() {
         const pages = [
