@@ -12,18 +12,21 @@ class Login extends Component {
         this.props.login(this.state)
     }
     render() {
-        return (
-        <div>
-            Login!
-            <br/>
-            <form onSubmit={this.handleSubmit}>
-                <label for='email'>Email</label><br/>
-                <input type='email' placeholder='Email' name='email' required /><br/>
-                <label for='password'>Password</label><br/>
-                <input type='password' placeholder='Password' name='password' required /><br/>
-                <button type='submit'>Login</button>
-            </form>
-        </div>);
+        return <div>
+            <h1>User Login</h1>
+            <div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" name="email"></input>
+                </div>
+                <div>
+                    <label for="pwd">Password:</label>
+                    <input type="password" id="pwd" name="pwd"></input>
+                </div>
+                <a href="/portal"><button type="button">Log In</button></a>
+                <p>Don't have an account? <a href="/register">Register now</a> </p>
+            </div>
+        </div>
     }
 }
 

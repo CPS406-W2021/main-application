@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import DashboarWrapper from "../../components/ThemeWrapper";
 
-export default class ProfileInfo extends Component {
+export default class Vote extends Component {
     render() {
-        return <DashboarWrapper>Account Settings</DashboarWrapper>;
+        return <DashboarWrapper>Current Problems in Toronto</DashboarWrapper>;
     }
 }

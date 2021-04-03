@@ -5,6 +5,14 @@
 body {
     overflow-x: hidden;
 }
-@import "general";
 
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
+@import "general";
 @import "wrapper";
+@import "home/general";
+@import "contact/index";
+@import "dashboard/taf";
+@import "dashboard/portal";
+@import "dashboard/rap";
+@import "dashboard/vote";
+@import "profile/profileinfo";
