@@ -30,6 +30,7 @@ export const signOut = () => {
 
 export const register = ({ email, password, name, username }) => {
     return (dispatch, getState, getFirebase) => {
+        // console.log({ email, password, name, username });
         const firebase = getFirebase();
         // Do registeration
         dispatch({ type: 'REGISTERATION_COMPLETE' });
