@@ -1,18 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import { applyMiddleware, createStore } from "redux";
-import rootReducer from "./store/reducer/index";
-import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-
-import "./css/main.scss";
-
-const store = createStore(rootReducer, applyMiddleware(thunk));
-
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import Root from './store/firebase/Root';
+import './css/main.scss';
 ReactDOM.render(
-    <Provider store={store}>
+    <Root>
         <App />
-    </Provider>,
-    document.getElementById("root")
+    </Root>,
+    document.getElementById('root'),
 );
