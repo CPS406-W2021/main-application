@@ -1,6 +1,18 @@
 import React, { Component } from "react";
 import SingePageWrapper from "../../components/SinglePageWrapper";
 export default class Login extends Component {
+import { connect } from 'react-redux'
+import { signIn } from '../../store/actions/authActions'
+
+class Login extends Component {
+    state = {
+        email: '',
+        password: ''
+    }
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.login(this.state)
+    }
     render() {
         return (
             <SingePageWrapper>
@@ -32,3 +44,14 @@ export default class Login extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        authError: state.auth.authError
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        login: (creds) => dispatch(signIn(creds))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
