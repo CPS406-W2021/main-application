@@ -18,7 +18,7 @@ import rootReducer from '../reducer/index';
 // Firebase
 import fb from './config';
 
-export default ({ children }) => {
+let SetupFirebase = ({ children }) => {
     const store = createStore(
         rootReducer,
         compose(applyMiddleware(thunk.withExtraArgument(getFirebase))),
@@ -44,3 +44,4 @@ export default ({ children }) => {
         </Provider>
     );
 };
+export default SetupFirebase;
