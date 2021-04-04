@@ -30,9 +30,16 @@ export const signOut = () => {
 
 export const register = ({ email, password, name, username }) => {
     return (dispatch, getState, getFirebase) => {
-        // console.log({ email, password, name, username });
         const firebase = getFirebase();
-        // Do registeration
-        dispatch({ type: 'REGISTERATION_COMPLETE' });
-    };
+        
+        // Do registeration & generate profile
+        firebase.createUser({email, password}, {name, username}) //Params login creds & profile info
+            .then((auth) => {
+                console.log(auth)
+                dispatch({ type: 'REGISTERATION_COMPLETE' })
+            })
+            .catch((err) => {
+                dispatch({ type: 'REGISTERATION_ERROR', error: err.message, })
+            })
+    }
 };

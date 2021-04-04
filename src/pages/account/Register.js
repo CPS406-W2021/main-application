@@ -93,6 +93,7 @@ class Register extends Component {
 }
 
 const mapStateToProps = (state) => ({
+    error: state.auth.error,
     registerredirect: state.auth.registerredirect,
 });
 

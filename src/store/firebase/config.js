@@ -9,11 +9,13 @@ var firebaseConfig = {
     messagingSenderId: '689646040251',
     appId: '1:689646040251:web:6a27ad6da125ddc8e2a59e',
 };
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 // firebase.firestore().settings({ timestampsInSnapshots: true });
 // firebase.firestore().settings({  });
 // firebase.analytics();???
+
 
 export const fbConfig = firebaseConfig;
 export default firebase;

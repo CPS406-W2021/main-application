@@ -37,7 +37,15 @@ const authReducer = (state = INIT_STATE, action) => {
             alert('Registration Successful!');
             return {
                 ...state,
+                error: '',
                 registerredirect: <Redirect to="/login"></Redirect>,
+            };
+        case 'REGISTERATION_ERROR':
+            alert('REGISTERATION_ERROR!');
+            return {
+                ...state,
+                error: action.error,
+                registerredirect: '',
             };
         default:
             return state;
