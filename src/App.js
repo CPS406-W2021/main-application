@@ -13,7 +13,7 @@ import SurveyC from "./pages/general/SurveyConfirmation";
 import Survey from "./pages/general/Survey";
 import PastReports from "./pages/dashboard/PastReports";
 
-require("dotenv").config();
+require('dotenv').config();
 export default class App extends Component {
     render() {
         return (
@@ -46,11 +46,11 @@ export default class App extends Component {
                     <PastReports />
                 </Route>
                 <Route path="/Surveyconfirmation">
-                    <SurveyC/>
-                </Route> 
+                    <SurveyC />
+                </Route>
                 <Route path="/Survey">
-                    <Survey/>
-                </Route>       
+                    <Survey />
+                </Route>
                 <Route exact path="/">
                     <Home />
                 </Route>
