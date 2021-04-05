@@ -9,8 +9,9 @@ import RAPBase from './pages/dashboard/ReportAProblem';
 import TellAFriend from './pages/dashboard/TellAFriend';
 import Vote from './pages/dashboard/Vote';
 import ProfileInfo from './pages/account/ProfileInfo';
-import SurveyC from './pages/general/SurveyConfirmation';
-import Survey from './pages/general/Survey';
+import SurveyC from "./pages/general/SurveyConfirmation";
+import Survey from "./pages/general/Survey";
+import PastReports from "./pages/dashboard/PastReports";
 
 require('dotenv').config();
 export default class App extends Component {
@@ -40,6 +41,9 @@ export default class App extends Component {
                 </Route>
                 <Route path="/contact">
                     <Contact />
+                </Route>
+                <Route path="/pastReports">
+                    <PastReports />
                 </Route>
                 <Route path="/Surveyconfirmation">
                     <SurveyC />
