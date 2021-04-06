@@ -1,8 +1,24 @@
 
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import Image from "../../images/header.png";
-export default class DashboarWrapper extends Component {
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import Image from '../../images/header.png';
+import { signIn, signOut } from '../../store/actions/authActions';
+class DashboarWrapper extends Component {
+    renderAuthButton() {
+        if (this.props.loggedin) {
+            return (
+                <div className="wp-header__nav-login" onClick={this.props.logout}>
+                    LOGOUT
+                </div>
+            );
+        }
+        return (
+            <Link to="/login" className="wp-header__nav-login">
+                LOGIN
+            </Link>
+        );
+    }
     render() {
         const pages = [
             { text: 'Home', route: '/' },
@@ -37,7 +53,7 @@ export default class DashboarWrapper extends Component {
                                         {text}
                                     </Link>
                                 ))}
-                                <div className="wp-header__nav-login">LOGIN</div>
+                                {this.renderAuthButton()}
                             </div>
                             <div className="wp-header__subnav">subnav</div>
                         </div>
@@ -54,3 +70,15 @@ export default class DashboarWrapper extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    loggedin: state.auth.loggedin,
+});
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        login: (creds) => dispatch(signIn(creds)),
+        logout: () => dispatch(signOut()),
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(DashboarWrapper);
