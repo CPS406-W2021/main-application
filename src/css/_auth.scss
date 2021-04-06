@@ -1,5 +1,4 @@
 .auth {
-
     &-bg {
         width: 75vw;
         height: 100vh;
@@ -122,7 +121,6 @@
         justify-content: space-between;
         align-items: center;
 
-
         &__title {
             padding-bottom: 15px;
             display: flex;
@@ -147,7 +145,7 @@
         }
     }
 }
-.login-form.ui.small.form{
+.login-form.ui.small.form {
     padding-bottom: 20px;
     margin-top: 25px;
     margin-bottom: 40px;
@@ -156,37 +154,33 @@
     & > h1 {
         padding-top: 20px;
         margin-bottom: 40px;
-         text-align: center;
-     }
+        text-align: center;
+    }
     & > input {
-
         -webkit-box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
         -moz-box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
         box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
         width: 100%;
         margin-top: 2px;
         margin-bottom: 35px;
-
     }
     & > label {
         margin-right: auto;
     }
 
-    & > .ui.yellow.button{
+    & > .ui.yellow.button {
         margin-top: 30px;
         width: 33%;
         margin-left: 33%;
-
     }
 
     & > p {
         margin-top: 20px;
         text-align: center;
     }
-    
 }
 
-.register-form.ui.small.form{
+.register-form.ui.small.form {
     margin-top: 25px;
     margin-bottom: 40px;
     width: 80%;
@@ -194,37 +188,33 @@
     & > h1 {
         padding-top: 20px;
         margin-bottom: 40px;
-         text-align: center;
-     }
+        text-align: center;
+    }
     & > input {
-
         -webkit-box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
         -moz-box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
         box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
         width: 100%;
         margin-top: 2px;
         margin-bottom: 20px;
-
     }
     & > label {
         margin-right: auto;
     }
 
-    & > .ui.yellow.button{
+    & > .ui.yellow.button {
         margin-top: 30px;
         width: 33%;
         margin-left: 33%;
-    } 
+    }
 
     & > p {
         margin-top: 20px;
         text-align: center;
     }
-        
 }
 
-
-.surveyC{
+.surveyC {
     padding-bottom: 100px;
     margin-top: 100px;
     margin-bottom: 40px;
@@ -233,9 +223,9 @@
     & > h1 {
         padding-top: 20px;
         margin-bottom: 40px;
-         text-align: center;
-     }
-     
+        text-align: center;
+    }
+
     & > p {
         margin-top: 20px;
         text-align: center;
@@ -245,22 +235,20 @@
         color: rgb(241, 213, 50);
     }
 
-    & > .ui.yellow.button{
+    & > .ui.yellow.button {
         margin-top: 30px;
         width: 40%;
         margin-left: 5%;
         margin-right: 40px;
-    } 
+    }
 
-    & > .ui.grey.button{
+    & > .ui.grey.button {
         margin-top: 30px;
         width: 40%;
-    } 
-
-        
+    }
 }
 
-.survey.ui.form{
+.survey.ui.form {
     padding-bottom: 100px;
     margin-top: 80px;
     margin-bottom: 40px;
@@ -268,34 +256,21 @@
 
     & > h1 {
         padding-top: 20px;
-        margin-bottom: 60px;
-         text-align: center;
-     }
-
-    & > .options {
-        text-align: right;
-        margin-right:20px;
-
-    } 
-         
-    & > .ui.yellow.button{
-        margin-top: 45px;
-        width: 33%;
-        margin-left: 33%;
-    } 
-
-
-    & > .inline.fields {
-        margin-left: 4px;
-        & > label {
-            font-size: 13px;
-        }
-
-        & > .field {
-            margin-left: 20px;
-            margin-right: auto;
-        } 
-   
+        margin-bottom: 40px;
+        text-align: center;
     }
 
+    & > .ui.yellow.button {
+        margin-top: 30px;
+        width: 33%;
+        margin-left: 33%;
+    }
+    & > label {
+        margin-right: 30px;
+        padding-right: 30px;
+    }
+    & > .field {
+        margin-left: 30px;
+        padding-left: 40px;
+    }
 }
