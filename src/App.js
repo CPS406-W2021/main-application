@@ -9,7 +9,6 @@ import RAPBase from './pages/dashboard/ReportAProblem';
 import TellAFriend from './pages/dashboard/TellAFriend';
 import Vote from './pages/dashboard/Vote';
 import ProfileInfo from './pages/account/ProfileInfo';
-import SurveyC from "./pages/general/SurveyConfirmation";
 import Survey from "./pages/general/Survey";
 import PastReports from "./pages/dashboard/PastReports";
 
@@ -48,7 +47,7 @@ export default class App extends Component {
                 <Route path="/Surveyconfirmation">
                     <SurveyC />
                 </Route>
-                <Route path="/Survey">
+                <Route path="/survey">
                     <Survey />
                 </Route>
                 <Route exact path="/">
