@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { authIsReady } from "react-redux-firebase";
 import { Link } from "react-router-dom";
 import DashboarWrapper from "../../components/ThemeWrapper";
 import { createReport } from "../../store/actions/reportActions";
@@ -14,6 +15,7 @@ class ReportAProblem extends Component {
     }
     onSubmit = (e) => {
         e.preventDefault();
+        const uid = this.props.uid;
         const { checkUpdates, selection, information } = this.state;
         const selectionType = ["Tree", "Pothole", "Other"];
         const add = "123 St";
@@ -21,6 +23,7 @@ class ReportAProblem extends Component {
         this.props.createReport(
             {},
             {
+                uid,
                 checkUpdates,
                 selection: selectionType[Number(selection)],
                 information,
@@ -132,8 +135,14 @@ class ReportAProblem extends Component {
         );
     }
 }
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+    error: state.report.error,
+    uid: state.auth.uid
+});
 
-const mapDispatchToProps = { createReport };
+const mapDispatchToProps = (dispatch) => ({
+    createReport: ({ uid, checkUpdates, selection, information, latlong, add }) => 
+        dispatch(createReport({ uid, checkUpdates, selection, information, latlong, add }))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReportAProblem);

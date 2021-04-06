@@ -1,12 +1,13 @@
 import { Redirect } from 'react-router-dom';
 
-const INIT_STATE = { loggedin: false, error: '', registerredirect: '' };
+const INIT_STATE = { loggedin: false, uid: '', error: '', registerredirect: '' };
 const authReducer = (state = INIT_STATE, action) => {
     switch (action.type) {
         case 'LOGIN_ERROR':
             return {
                 ...state,
                 loggedin: false,
+                uid: '',
                 error: action.error,
                 registerredirect: '',
             };
@@ -14,6 +15,7 @@ const authReducer = (state = INIT_STATE, action) => {
             return {
                 ...state,
                 loggedin: true,
+                uid: action.uid,
                 error: '',
                 registerredirect: '',
             };
@@ -22,14 +24,15 @@ const authReducer = (state = INIT_STATE, action) => {
             return {
                 ...state,
                 loggedin: false,
+                uid: '',
                 error: '',
                 registerredirect: '',
             };
         case 'LOGOUT_FAILURE':
             alert(action.error);
             return {
-                loggedin: true,
                 ...state,
+                loggedin: true,
                 error: action.error,
                 registerredirect: '',
             };
