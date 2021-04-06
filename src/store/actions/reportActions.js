@@ -1,22 +1,26 @@
-export const createReport = ({ uid, checkUpdates, selection, information, latlong, add }) => {
-    const report = { checkUpdates, selection, information, latlong, add }
+export const createReport = ({
+    uid,
+    checkUpdates,
+    selection,
+    information,
+    latlong,
+    add,
+}) => {
+    const report = { checkUpdates, selection, information, latlong, add };
     return (dispatch, getState, getFirebase) => {
         // make an entry for the report
         // ALSO make sure to associate the user, maybe firebase has a auth().getUser() or something...
         // Associate the id of the username from the database, dont care about the custom username.
-        const firebase = getFirebase();
-
-        firebase.push('reports', report) //${uid}
+        const firebase = getFirebase().firestore();
+        let f = "titleOneX";
+        firebase
+            .collection("reports")
+            .add(report)
             .then(() => {
-                console.log('done');
-                dispatch({ type: 'REPORT_SUCCESS' })
+                alert("W");
             })
             .catch((err) => {
-                console.log('not done');
-                console.log(err.message);
-                dispatch({ type: 'REPORT_ERROR', error: err.message, })
-            })
-
-        alert("reducer called");
+                alert("L");
+            });
     };
 };
