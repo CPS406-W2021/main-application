@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import SingePageWrapper from "../../components/SinglePageWrapper";
-export default class Survey extends Component {
+import { enterSurvey } from "../../store/actions/surveryActions";
+class Survey extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,9 +22,13 @@ export default class Survey extends Component {
         if (answers.some((i) => i === -1)) {
             alert("Please fill out all of the questions");
         }
-        console.log(this.state.answers);
+        this.props.enterSurvey(answers);
     };
     render() {
+        if (this.props.surveyEntered) {
+            alert("Thanks for filling out the survery!");
+            return <Redirect to="/"></Redirect>;
+        }
         if (this.state.redirecToHome) {
             return <Redirect to="/"></Redirect>;
         }
@@ -36,8 +42,8 @@ export default class Survey extends Component {
                                 Would you like to part-take in a survey about
                                 the city?
                             </strong>
-                            <br></br> This Would take approximately
-                            <span>5 minutes </span>to complete
+                            <br></br> This Would take approximately{" "}
+                            <span>5 minutes </span> to complete
                         </p>
 
                         <button
@@ -86,8 +92,16 @@ export default class Survey extends Component {
             <SingePageWrapper>
                 <div className="survey ui form">
                     <h1>User Survey</h1>
-                    <div className="options">No &nbsp; Somewhat &nbsp; Yes</div>
-                    {surveyC.map(({ q, a }, i) => (
+
+                    <div class="inline fields">
+                        <label className="q">
+                            Do you agree with the following statements?
+                        </label>
+                        <div class="field">No</div>
+                        <div class="field">Somewhat</div>
+                        <div class="field">Yes</div>
+                    </div>
+                    {surveyC.map(({ q }, i) => (
                         <SurveryRow
                             text={q}
                             i={i}
@@ -107,7 +121,7 @@ class SurveryRow extends Component {
         const { i, text, changeInput } = this.props;
         return (
             <div class="inline fields">
-                <label>{text}</label>
+                <label className="q">{text}</label>
                 <div class="field">
                     <div class="ui radio checkbox">
                         <input
@@ -145,3 +159,13 @@ class SurveryRow extends Component {
         );
     }
 }
+const mapStateToProps = (state) => {
+    console.log(state);
+    return { surveyEntered: state.survey.entered };
+};
+
+const mapDispatchToProps = {
+    enterSurvey: enterSurvey,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Survey);
