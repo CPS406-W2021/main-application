@@ -1,7 +1,34 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import DashboarWrapper from "../../components/ThemeWrapper";
-
-export default class ReportAProblem extends Component {
+import { createReport } from "../../store/actions/reportActions";
+class ReportAProblem extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            checkUpdates: true,
+            selection: -1,
+            information: "",
+        };
+    }
+    onSubmit = (e) => {
+        e.preventDefault();
+        const { checkUpdates, selection, information } = this.state;
+        const selectionType = ["Tree", "Pothole", "Other"];
+        const add = "123 St";
+        const latlong = [0, 0];
+        this.props.createReport(
+            {},
+            {
+                checkUpdates,
+                selection: selectionType[Number(selection)],
+                information,
+                add,
+                latlong,
+            }
+        );
+    };
     render() {
         return (
             <DashboarWrapper currentPage={2}>
@@ -13,42 +40,90 @@ export default class ReportAProblem extends Component {
 
                         <form class="ui form">
                             <div class="field">
+                                <label>Report Title</label>
+                                <div className="reports-search__con ui input">
+                                    <input
+                                        onChange={(e) =>
+                                            this.setState({
+                                                title: e.target.value,
+                                            })
+                                        }
+                                        val={this.state.title}
+                                        className="reports-search "
+                                        type="text"
+                                        placeholder="Rat Cleanup at Aisle 7"
+                                    ></input>
+                                </div>
+                            </div>
+                            <div class="field">
                                 <label>Problem at Site</label>
                                 <div class="ui form">
                                     <div class="field">
-                                        <select>
+                                        <select
+                                            onChange={(e) => {
+                                                this.setState({
+                                                    selection: e.target.value,
+                                                });
+                                            }}
+                                            val={this.state.selection}
+                                        >
                                             <option value="-1">
                                                 Select an Issue
                                             </option>
-                                            <option value="1">Pothole</option>
                                             <option value="0">Tree</option>
+                                            <option value="1">Pothole</option>
+                                            <option value="2">Other</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="field">
-                                <div class="ui checkbox">
+                                <div
+                                    class="ui checkbox"
+                                    onClick={() =>
+                                        this.setState({
+                                            checkUpdates: !this.state
+                                                .checkUpdates,
+                                        })
+                                    }
+                                >
                                     <input
                                         type="checkbox"
                                         tabindex="0"
                                         class="hidden"
+                                        checked={this.state.checkUpdates}
                                     />
                                     <label>
-                                        I want to receive updates on this
-                                        report:
+                                        I want to receive updates on this report
                                     </label>
                                 </div>
                             </div>
                             <div class="field">
                                 <label>Enter more information:</label>
-                                <textarea></textarea>
+                                <textarea
+                                    val={this.state.information}
+                                    onChange={(e) => {
+                                        this.setState({
+                                            information: e.target.value,
+                                        });
+                                    }}
+                                ></textarea>
                             </div>
                             <hr className="rap-line"></hr>
                             <div className="rap-buttons">
-                                <button class="ui green button">Submit</button>
-                                <button class="ui button" type="submit">
-                                    Cancel
+                                <button
+                                    class="ui green button"
+                                    onClick={this.onSubmit}
+                                >
+                                    Submit
                                 </button>
+                                <Link
+                                    to="/portal"
+                                    class="ui button"
+                                    type="submit"
+                                >
+                                    Cancel
+                                </Link>
                             </div>
                         </form>
                     </div>
@@ -57,3 +132,8 @@ export default class ReportAProblem extends Component {
         );
     }
 }
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = { createReport };
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReportAProblem);
