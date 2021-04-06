@@ -1,20 +1,19 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Contact from './pages/general/Contact';
-import Home from './pages/general/Home';
-import PortalBase from './pages/portal';
-import Login from './pages/account/Login';
-import Register from './pages/account/Register';
-import RAPBase from './pages/dashboard/ReportAProblem';
-import TellAFriend from './pages/dashboard/TellAFriend';
-import Vote from './pages/dashboard/Vote';
-import ProfileInfo from './pages/account/ProfileInfo';
-import SurveyC from "./pages/general/SurveyConfirmation";
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Contact from "./pages/general/Contact";
+import Home from "./pages/general/Home";
+import PortalBase from "./pages/portal";
+import Login from "./pages/account/Login";
+import Register from "./pages/account/Register";
+import RAPBase from "./pages/dashboard/ReportAProblem";
+import TellAFriend from "./pages/dashboard/TellAFriend";
+import Vote from "./pages/dashboard/Vote";
+import ProfileInfo from "./pages/account/ProfileInfo";
 import Survey from "./pages/general/Survey";
 import PastReports from "./pages/dashboard/PastReports";
 import ViewReports from "./pages/dashboard/ViewReports"
 
-require('dotenv').config();
+require("dotenv").config();
 export default class App extends Component {
     render() {
         return (
@@ -49,10 +48,7 @@ export default class App extends Component {
                 <Route path="/ViewReports">
                     <ViewReports/>
                 </Route> 
-                <Route path="/Surveyconfirmation">
-                    <SurveyC />
-                </Route>
-                <Route path="/Survey">
+                <Route path="/survey">
                     <Survey />
                 </Route>
                 <Route exact path="/">

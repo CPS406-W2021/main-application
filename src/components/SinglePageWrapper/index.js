@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Image from '../../images/header.png';
+
 export default class SingePageWrapper extends Component {
     render() {
         return (
