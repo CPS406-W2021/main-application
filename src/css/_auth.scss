@@ -1,0 +1,276 @@
+.auth {
+    &-bg {
+        width: 75vw;
+        height: 100vh;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #aaa5;
+        z-index: 50;
+        @media (max-width: 1200px) {
+            width: 100vw;
+        }
+    }
+    &-con {
+        height: 100vh;
+        box-sizing: border-box;
+        padding-top: 30px;
+        width: 100vw;
+
+        display: flex;
+        flex-direction: column;
+        font-family: "Montserrat";
+        background-image: url("../images/torontoMap.PNG");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        align-items: center;
+        position: relative;
+        &__body {
+            & > a {
+                padding: 9px 65px 9px 65px;
+                width: 30%;
+                text-transform: uppercase;
+                border-radius: 10px;
+                background-color: $accent;
+                margin-top: -10px;
+            }
+            & > p {
+                padding-bottom: 30px;
+            }
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 100;
+            justify-content: center;
+            flex: 1;
+            width: 700px;
+            border-radius: 30px;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            background-color: #fff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
+                0 1px 2px rgba(0, 0, 0, 0.24);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            @media (max-width: 800px) {
+                width: 75vw;
+            }
+            @media (max-width: 400px) {
+                width: 75vw;
+                margin: 0 auto;
+            }
+        }
+
+        &__footer {
+            position: relative;
+            z-index: 100;
+            flex: 0 0 50px;
+            align-self: flex-end;
+            background-color: $blue;
+            width: 100vw;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1px;
+            margin-top: auto;
+            & > div {
+                cursor: pointer;
+                font-size: 12px;
+
+                &:not(:last-child) {
+                    margin-right: 10px;
+                }
+            }
+            & > .active {
+                text-decoration: underline 2px solid #fff;
+            }
+        }
+    }
+    &-header {
+        position: relative;
+        z-index: 100;
+        color: #fff;
+        @include container;
+        &.active {
+            justify-content: center;
+            text-align: center;
+            width: 600px;
+            height: 300px;
+            border-radius: 30px;
+            background-color: $blue;
+            padding: 15px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
+                0 1px 2px rgba(0, 0, 0, 0.24);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            @media (max-width: 800px) {
+                width: 75vw;
+                margin: 0 auto;
+            }
+
+            @media (max-width: 400px) {
+                width: 75vw;
+                margin: 0 auto;
+            }
+        }
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &__title {
+            padding-bottom: 15px;
+            display: flex;
+            align-items: center;
+            &T {
+                display: flex;
+                align-items: center;
+
+                & > img {
+                    height: 75px;
+                    width: 165px;
+                }
+                & > div {
+                    padding-top: 10px;
+                    display: block;
+                    font-size: 50px;
+                    font-weight: 500;
+                    margin-left: 20px;
+                    line-height: 1;
+                }
+            }
+        }
+    }
+}
+.login-form.ui.small.form {
+    padding-bottom: 20px;
+    margin-top: 25px;
+    margin-bottom: 40px;
+    width: 80%;
+
+    & > h1 {
+        padding-top: 20px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+    & > input {
+        -webkit-box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
+        -moz-box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
+        box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
+        width: 100%;
+        margin-top: 2px;
+        margin-bottom: 35px;
+    }
+    & > label {
+        margin-right: auto;
+    }
+
+    & > .ui.yellow.button {
+        margin-top: 30px;
+        width: 33%;
+        margin-left: 33%;
+    }
+
+    & > p {
+        margin-top: 20px;
+        text-align: center;
+    }
+}
+
+.register-form.ui.small.form {
+    margin-top: 25px;
+    margin-bottom: 40px;
+    width: 80%;
+
+    & > h1 {
+        padding-top: 20px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+    & > input {
+        -webkit-box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
+        -moz-box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
+        box-shadow: 0 8px 6px -6px rgb(124, 121, 121);
+        width: 100%;
+        margin-top: 2px;
+        margin-bottom: 20px;
+    }
+    & > label {
+        margin-right: auto;
+    }
+
+    & > .ui.yellow.button {
+        margin-top: 30px;
+        width: 33%;
+        margin-left: 33%;
+    }
+
+    & > p {
+        margin-top: 20px;
+        text-align: center;
+    }
+}
+
+.surveyC {
+    padding-bottom: 100px;
+    margin-top: 100px;
+    margin-bottom: 40px;
+    width: 80%;
+
+    & > h1 {
+        padding-top: 20px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    & > p {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    > span {
+        color: rgb(241, 213, 50);
+    }
+
+    & > .ui.yellow.button {
+        margin-top: 30px;
+        width: 40%;
+        margin-left: 5%;
+        margin-right: 40px;
+    }
+
+    & > .ui.grey.button {
+        margin-top: 30px;
+        width: 40%;
+    }
+}
+
+.survey.ui.form {
+    padding-bottom: 100px;
+    margin-top: 80px;
+    margin-bottom: 40px;
+    width: 80%;
+
+    & > h1 {
+        padding-top: 20px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    & > .ui.yellow.button {
+        margin-top: 30px;
+        width: 33%;
+        margin-left: 33%;
+    }
+    & > label {
+        margin-right: 30px;
+        padding-right: 30px;
+    }
+    & > .field {
+        margin-left: 30px;
+        padding-left: 40px;
+    }
+}

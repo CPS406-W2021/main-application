@@ -1,0 +1,61 @@
+
+.taf {
+    &-con {
+        display: flex;
+        flex: 1;
+        // align-items: center;
+        
+    }
+    &-map {
+        background-image: url("../../images/taf4.png" );
+        background-size: 1280px;
+        background-repeat: no-repeat;
+        background-position:-330px;
+        position: relative;
+        left: -7px;
+        flex:1;
+        
+    }
+    
+    &-body {
+
+        margin: 30px;
+        display: block;
+        flex: 1.5;
+        position: relative;
+        bottom:-120px;
+    }
+    &-h1 {
+        font-size: 26px;
+        margin-bottom: 10px;
+    }
+
+    &-line {
+        margin: 0px 0 10px;
+        height: 1px;
+        background-color: #E5E5E5;
+        border: none;
+    }
+    &-sub {
+        line-height: 1;
+        font-size: 12px;
+        margin-left: 5px;
+        color: #444;
+        margin-bottom: 30px;
+    }
+    &-buttons {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        & > button {
+            &:not(:last-child) {
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
+.ui.form
+textarea:not([rows]){
+    height:17em;
+}
