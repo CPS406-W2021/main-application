@@ -1,30 +1,36 @@
 import React, { Component } from "react";
 import DashboarWrapper from "../../components/ThemeWrapper";
-
-const UpdateInfo = [
+const Request = [
     {
         q: <i class="info circle icon"></i>,
         a:<form class="ui form"> <div class="field"><label>Request received.</label></div></form>
     },
+];
+const Approved =[ 
     {
         q: <i class="info circle icon"></i>,
         a:<form class="ui form"> <div class="field"><label>Request Approved.</label></div></form>
     },
+];
+const Update1 =[ 
     {
         q: <i class="info circle icon"></i>,
-        a: <form class="ui form"> <div class="field"><label>Update 1:</label> <label>City of Toronto is taking action to clear the fallen tree.</label></div></form>,
-            
-    },
-    {
-        q: <i class="info circle icon"></i>,
-        a:<form class="ui form"> <div class="field"><label>Update 2:</label> <label> Unexpected Problems causing delay.</label></div></form>
-    },
-
-    {
-        q: <i class="info circle icon"></i>,
-        a:<form class="ui form"> <div class="field"><label>Resolved:</label> <label>Road has been cleared.</label></div></form>
+        a: <form class="ui form"> <div class="field"><label>Update 1 : City of Toronto is taking action to clear the fallen tree.</label></div></form>,
     },
 ];
+const Update2 =[ 
+    {
+        q: <i class="info circle icon"></i>,
+        a:<form class="ui form"> <div class="field"><label>Update 2 : Unexpected Problems causing delay.</label></div></form>,
+    },
+];
+const Resolved = [
+    {
+        q: <i class="info circle icon"></i>,
+        a:<form class="ui form"> <div class="field"><label>Resolved : Road has been cleared.</label></div></form>
+    },
+];
+
 class Updates extends Component {
     constructor(props) {
         super(props);
@@ -59,22 +65,47 @@ export default class ViewReports extends Component {
                         <div className="view-sub"> <span class="address"> at 123 St. Street St. Toronto, ON. Canada</span></div>
                         <div className="view-progress">    
                             <ul>
-                                <li> <p>Request</p>
-                                 <i className="check circle outline icon"></i></li>
-                                <li><p>Approved</p> 
-                                    <i className="check circle outline icon"></i></li>
-                                <li> <p>Update 1</p> 
-                                    <i class="fas fa-exclamation-circle"></i></li>
-                                <li> <p>Update 2</p> 
-                                    <i class="fas fa-exclamation-circle"></i></li>
-                                <li> <p>Resolved</p> 
-                                <i className="check circle outline icon"></i></li>
+                                <li> 
+                                    <i className="check circle outline icon"></i> <p>Request</p>
+                                    <div class="update">
+                                        {Request.map(({ q, a }) => {
+                                            return <Updates q={q} a={a} />;
+                                        })}
+                                    </div>
+                                 </li>
+                                <li>
+                                    <i className="check circle outline icon"></i><p>Approved</p> 
+                                    <div class="update">
+                                        {Approved.map(({ q, a }) => {
+                                            return <Updates q={q} a={a} />;
+                                        })}
+                                    </div>
+                                </li>
+                                <li> 
+                                    <i class="fas fa-exclamation-circle"></i><p> Update 1</p> 
+                                    <div class="update">
+                                        {Update1.map(({ q, a }) => {
+                                            return <Updates q={q} a={a} />;
+                                        })}
+                                    </div>
+                                </li>
+                                <li> 
+                                    <i class="fas fa-exclamation-circle"></i> <p> Update 2</p> 
+                                    <div class="update">
+                                        {Update2.map(({ q, a }) => {
+                                            return <Updates q={q} a={a} />;
+                                        })}
+                                    </div>
+                                </li>
+                                <li> 
+                                <i className="check circle outline icon"></i><p>Resolved</p>
+                                <div class="update">
+                                        {Resolved.map(({ q, a }) => {
+                                            return <Updates q={q} a={a} />;
+                                        })}
+                                    </div>
+                                </li>
                             </ul>
-                        </div>
-                        <div class="update">
-                            {UpdateInfo.map(({ q, a }) => {
-                                return <Updates q={q} a={a} />;
-                            })}
                         </div>
                         <hr className="view-line"></hr>
                         <div className="view-submit">
@@ -86,7 +117,6 @@ export default class ViewReports extends Component {
                                 </div>
                             </form>
                         </div>
-
                         <div className="view-descr">
                             <form className="ui form">
                                 <div className="field">
