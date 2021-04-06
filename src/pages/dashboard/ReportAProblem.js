@@ -21,7 +21,6 @@ class ReportAProblem extends Component {
         const add = "123 St";
         const latlong = [0, 0];
         this.props.createReport(
-            {},
             {
                 uid,
                 checkUpdates,
