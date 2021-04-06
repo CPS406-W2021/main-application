@@ -1,6 +1,53 @@
 import React, { Component } from "react";
 import DashboarWrapper from "../../components/ThemeWrapper";
 
+const UpdateInfo = [
+    {
+        q: <i class="info circle icon"></i>,
+        a:<form class="ui form"> <div class="field"><label>Request received.</label></div></form>
+    },
+    {
+        q: <i class="info circle icon"></i>,
+        a:<form class="ui form"> <div class="field"><label>Request Approved.</label></div></form>
+    },
+    {
+        q: <i class="info circle icon"></i>,
+        a: <form class="ui form"> <div class="field"><label>Update 1:</label> <label>City of Toronto is taking action to clear the fallen tree.</label></div></form>,
+            
+    },
+    {
+        q: <i class="info circle icon"></i>,
+        a:<form class="ui form"> <div class="field"><label>Update 2:</label> <label> Unexpected Problems causing delay.</label></div></form>
+    },
+
+    {
+        q: <i class="info circle icon"></i>,
+        a:<form class="ui form"> <div class="field"><label>Resolved:</label> <label>Road has been cleared.</label></div></form>
+    },
+];
+class Updates extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { open: false };
+    }
+    render() {
+        return (
+            <div class="update-item">
+                <div
+                    class="update-item-header"
+                    onClick={() => {
+                        this.setState({ open: !this.state.open });
+                    }}
+                >
+                    {this.props.q}
+                </div>
+                <div class={`update-item-body ${this.state.open ? "" : "closed"}`}>
+                    {this.props.a}
+                </div>
+            </div>
+        );
+    }
+}
 export default class ViewReports extends Component {
     render() {
         return (
@@ -12,19 +59,23 @@ export default class ViewReports extends Component {
                         <div className="view-sub"> <span class="address"> at 123 St. Street St. Toronto, ON. Canada</span></div>
                         <div className="view-progress">    
                             <ul>
-                                <li> <i className="check circle outline icon"></i>
-                                     <p>Submitted</p></li>
-                                <li> <i className="check circle outline icon"></i>
-                                     <p>Approved</p> </li>
-                                <li> <i className="fas fa-circle"></i>
-                                    <p>In Progress</p> </li>
-                                <li> <i className="fas fa-circle"></i>
-                                    <p>Processing</p></li>
-                                <li> <i className="fas fa-circle"></i>
-                                <p>Resolved</p></li>
+                                <li> <p>Request</p>
+                                 <i className="check circle outline icon"></i></li>
+                                <li><p>Approved</p> 
+                                    <i className="check circle outline icon"></i></li>
+                                <li> <p>Update 1</p> 
+                                    <i class="fas fa-exclamation-circle"></i></li>
+                                <li> <p>Update 2</p> 
+                                    <i class="fas fa-exclamation-circle"></i></li>
+                                <li> <p>Resolved</p> 
+                                <i className="check circle outline icon"></i></li>
                             </ul>
                         </div>
-                        
+                        <div class="update">
+                            {UpdateInfo.map(({ q, a }) => {
+                                return <Updates q={q} a={a} />;
+                            })}
+                        </div>
                         <hr className="view-line"></hr>
                         <div className="view-submit">
                             <form className="ui form">
