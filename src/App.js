@@ -26,9 +26,9 @@ export default class App extends Component {
                     <Route path="/register">
                         <Register />
                     </Route>
-                    <Route path="/profileinfo">
+                    {/* <Route path="/profileinfo">
                         <ProfileInfo />
-                    </Route>
+                    </Route> */}
                     <Route path="/portal">
                         <PortalBase />
                     </Route>

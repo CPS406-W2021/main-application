@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { authIsReady } from "react-redux-firebase";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import DashboarWrapper from "../../components/ThemeWrapper";
 import { createReport } from "../../store/actions/reportActions";
+import ReactMapboxGl from "react-mapbox-gl";
+import { cancelReport } from "../../store/actions/reportActions";
+
 class ReportAProblem extends Component {
     constructor(props) {
         super(props);
