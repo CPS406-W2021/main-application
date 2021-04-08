@@ -1,14 +1,20 @@
-
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import Image from '../../images/header.png';
-import { signIn, signOut } from '../../store/actions/authActions';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import Image from "../../images/header.png";
+import { signIn, signOut } from "../../store/actions/authActions";
+import {
+    changeLangtoEng,
+    changeLangtoFr,
+} from "../../store/actions/langActions";
 class DashboarWrapper extends Component {
     renderAuthButton() {
         if (this.props.loggedin) {
             return (
-                <div className="wp-header__nav-login" onClick={this.props.logout}>
+                <div
+                    className="wp-header__nav-login"
+                    onClick={this.props.logout}
+                >
                     LOGOUT
                 </div>
             );
@@ -21,10 +27,10 @@ class DashboarWrapper extends Component {
     }
     render() {
         const pages = [
-            { text: 'Home', route: '/' },
-            { text: 'Portal', route: '/portal' },
-            { text: 'My Account', route: '/rap' },
-            { text: 'Contact', route: '/contact' },
+            { text: "Home", route: "/" },
+            { text: "Portal", route: "/portal" },
+            { text: "My Account", route: "/profileinfo" },
+            { text: "Contact", route: "/contact" },
         ];
         let currentPage = this.props.currentPage || 0;
         return (
@@ -37,7 +43,7 @@ class DashboarWrapper extends Component {
                                 <div>Cypress</div>
                             </div>
                             <div className="wp-header__titleSlogan">
-                                Cypress / {pages[currentPage]['text']}
+                                Cypress / {pages[currentPage]["text"]}
                             </div>
                         </div>
                         <div className="wp-header__pages">
@@ -47,7 +53,7 @@ class DashboarWrapper extends Component {
                                         key={text}
                                         to={route}
                                         className={`wp-header__nav-item ${
-                                            i === currentPage ? 'active' : ''
+                                            i === currentPage ? "active" : ""
                                         }`}
                                     >
                                         {text}
@@ -59,12 +65,26 @@ class DashboarWrapper extends Component {
                         </div>
                     </div>
                 </div>
-                <div className={`wp-con__body ${this.props.clearbg ? '' : 'active'}`}>
+                <div
+                    className={`wp-con__body ${
+                        this.props.clearbg ? "" : "active"
+                    }`}
+                >
                     {this.props.children}
                 </div>
                 <div className="wp-con__footer">
-                    <div className="active">English (En)</div>
-                    <div>Français (Fr)</div>
+                    <div
+                        className={this.props.lang === "en" && "active"}
+                        onClick={this.props.changeLangtoEng}
+                    >
+                        English (En)
+                    </div>
+                    <div
+                        className={this.props.lang === "fr" && "active"}
+                        onClick={this.props.changeLangtoFr}
+                    >
+                        Français (Fr)
+                    </div>
                 </div>
             </div>
         );
@@ -73,12 +93,15 @@ class DashboarWrapper extends Component {
 
 const mapStateToProps = (state) => ({
     loggedin: state.auth.loggedin,
+    lang: state.lang.lang,
 });
 
 const mapDispatchToProps = (dispatch) => {
     return {
         login: (creds) => dispatch(signIn(creds)),
         logout: () => dispatch(signOut()),
+        changeLangtoEng: () => dispatch(changeLangtoEng()),
+        changeLangtoFr: () => dispatch(changeLangtoFr()),
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(DashboarWrapper);
