@@ -18,8 +18,8 @@ class PortalBase extends Component {
             accessToken:
                 "pk.eyJ1IjoiZmFyaGFuaG0iLCJhIjoiY2tuMTUxYjNnMHIyODJvbzJueDJzdWJmcCJ9.EIl7ZcqlshPyJxnxyGNGhg",
         });
-        console.log(this.props);
-        if (this.props.setup !== {}) {
+        console.log(this.props.setup);
+        if (this.props.setup["lat"]) {
             return <Redirect to="/rap"></Redirect>;
         }
         return (

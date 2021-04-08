@@ -4,3 +4,6 @@ export const setupReport = (report) => {
         dispatch({ type: "REPORT_SETUP", payload: report });
     };
 };
+export const cancelReport = () => {
+    return { type: "REPORT_CANCEL" };
+};

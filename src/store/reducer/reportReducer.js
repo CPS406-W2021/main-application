@@ -11,7 +11,7 @@ const reportReducer = (state = initState, action) => {
                 ready: true,
                 setupreport: action.payload,
             };
-        case "CANCEL_REPORT":
+        case "REPORT_CANCEL":
             return {
                 ...state,
                 ...initState,
