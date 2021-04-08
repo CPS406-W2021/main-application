@@ -61,3 +61,18 @@ export const resetPassword = ({ email }) => {
             })
     }
 };
+
+export const deleteAccount = ({uid}) => {
+    return (dispatch, getState, getFirebase) => {
+        const firebase = getFirebase();
+        firebase
+            .auth()
+            .deleteUser(uid)
+            .then(() => {
+                dispatch({ type: 'ACCOUNT_DELETE_SUCCESS' });
+            })
+            .catch((err) => {
+                dispatch({ type: 'ACCOUNT_DELETE_ERROR', error: err.message });
+            })
+    }
+}
