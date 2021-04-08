@@ -1,12 +1,6 @@
 import React, { Component } from "react";
 import DashboarWrapper from "../../components/ThemeWrapper";
 import { connect } from "react-redux";
-{/* <h1 className="main-slogan">
-{L === "en"
-    ? "Keeping Toronto Safe"
-    : "Assurer la sécurité de Toronto"}
-</h1> */}
-
 class ReportAProblem extends Component {
     render() {
         const L = this.props.lang;
