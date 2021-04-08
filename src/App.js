@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Contact from './pages/general/Contact';
-import Home from './pages/general/Home';
-import PortalBase from './pages/portal';
-import Login from './pages/account/Login';
-import Register from './pages/account/Register';
-import RAPBase from './pages/dashboard/ReportAProblem';
-import TellAFriend from './pages/dashboard/TellAFriend';
-import Vote from './pages/dashboard/Vote';
-import ProfileInfo from './pages/account/ProfileInfo';
-import SurveyC from "./pages/general/SurveyConfirmation";
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Contact from "./pages/general/Contact";
+import Home from "./pages/general/Home";
+import PortalBase from "./pages/portal";
+import Login from "./pages/account/Login";
+import Register from "./pages/account/Register";
+import RAPBase from "./pages/dashboard/ReportAProblem";
+import TellAFriend from "./pages/dashboard/TellAFriend";
+import Vote from "./pages/dashboard/Vote";
+import ProfileInfo from "./pages/account/ProfileInfo";
 import Survey from "./pages/general/Survey";
+import PastReports from "./pages/dashboard/PastReports";
 
 require("dotenv").config();
 export default class App extends Component {
@@ -41,12 +41,12 @@ export default class App extends Component {
                 <Route path="/contact">
                     <Contact />
                 </Route>
-                <Route path="/Surveyconfirmation">
-                    <SurveyC/>
-                </Route> 
-                <Route path="/Survey">
-                    <Survey/>
-                </Route>                                  
+                <Route path="/pastReports">
+                    <PastReports />
+                </Route>
+                <Route path="/survey">
+                    <Survey />
+                </Route>
                 <Route exact path="/">
                     <Home />
                 </Route>
