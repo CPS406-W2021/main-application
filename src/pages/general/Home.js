@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DashboarWrapper from '../../components/ThemeWrapper';
+import { connect } from "react-redux";
 
 const FAQInfo = [
     {
@@ -43,11 +44,16 @@ class FAQSingle extends Component {
     }
 }
 
-export default class Home extends Component {
+class Home extends Component {
     renderSlogan() {
+        const L = this.props.lang;
         return (
             <div className="slogan-con">
-                <h1 className="main-slogan">Keeping Toronto Safe</h1>
+                <h1 className="main-slogan">
+                    {L === "en"
+                        ? "Keeping Toronto Safe"
+                        : "Assurer la sécurité de Toronto"}
+                </h1>
                 <i className="descr-slogan">
                     The CyPress system is designed to allow you to report problems that concern you
                     about the city. Our mission is to improve the city's public safety through the
@@ -112,3 +118,11 @@ export default class Home extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    lang: state.lang.lang,
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
