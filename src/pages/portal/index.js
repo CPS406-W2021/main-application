@@ -18,8 +18,7 @@ class PortalBase extends Component {
             accessToken:
                 "pk.eyJ1IjoiZmFyaGFuaG0iLCJhIjoiY2tuMTUxYjNnMHIyODJvbzJueDJzdWJmcCJ9.EIl7ZcqlshPyJxnxyGNGhg",
         });
-        console.log(this.props.setup);
-        if (this.props.setup["lat"]) {
+        if (this.props.ready) {
             return <Redirect to="/rap"></Redirect>;
         }
         return (
@@ -77,7 +76,7 @@ class PortalBase extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    setup: state.report.setupreport,
+    ready: state.report.ready,
 });
 
 const mapDispatchToProps = (dispatch) => ({
