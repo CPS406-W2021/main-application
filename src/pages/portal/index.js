@@ -1,97 +1,86 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import DashboarWrapper from "../../components/ThemeWrapper";
+import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
+import { connect } from "react-redux";
+import "mapbox-gl/dist/mapbox-gl.css";
+import blueMarker from "../../images/icons/blue.png";
+import MapLayout from "./mapLayout";
+import axios from "axios";
+import { setupReport } from "../../store/actions/reportActions";
+import { Redirect } from "react-router-dom";
+class PortalBase extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { stage: 0, mapLoc: [-79.3788, 43.6577] };
+    }
+    renderMap = () => {
+        const Map = ReactMapboxGl({
+            accessToken:
+                "pk.eyJ1IjoiZmFyaGFuaG0iLCJhIjoiY2tuMTUxYjNnMHIyODJvbzJueDJzdWJmcCJ9.EIl7ZcqlshPyJxnxyGNGhg",
+        });
+        if (this.props.ready) {
+            return <Redirect to="/rap"></Redirect>;
+        }
+        return (
+            <Map
+                style="mapbox://styles/mapbox/streets-v9"
+                containerStyle={{
+                    flex: 1,
+                    borderRadius: 35,
+                }}
+                center={[-79.3788, 43.6577]}
+                zoom={[16]}
+                onClick={(map, e) => {
+                    const lat = map.getCenter().lat.toFixed(4);
+                    const long = map.getCenter().lng.toFixed(4);
 
-export default class PortalBase extends Component {
+                    axios
+                        .get(
+                            `https://api.mapbox.com/geocoding/v5/mapbox.places/${long},${lat}.json?access_token=pk.eyJ1IjoiZmFyaGFuaG0iLCJhIjoiY2tuMTUxYjNnMHIyODJvbzJueDJzdWJmcCJ9.EIl7ZcqlshPyJxnxyGNGhg`
+                        )
+                        .then(({ data }) => {
+                            const { place_name } = data["features"][0];
+                            if (
+                                window.confirm(
+                                    `Comfirm your point\nLAT:${long}\nLONG:${lat}\n${place_name}\n`
+                                )
+                            ) {
+                                this.props.setupReport({
+                                    lat,
+                                    long,
+                                    name: place_name,
+                                });
+                            }
+                        })
+                        .catch((e) => {
+                            console.log(e);
+                        });
+                }}
+            >
+                <Marker coordinates={[-79.3788, 43.6577]} anchor="center">
+                    <img src={blueMarker} width="30px" height="30px" />
+                </Marker>
+            </Map>
+        );
+    };
     render() {
-        const dummyData = [
-            {
-                type: "Pothole",
-                address: "123 Street St.",
-                date: "3/21/2021 11:24AM",
-            },
-            {
-                type: "Pothole",
-                address: "123 Street St.",
-                date: "3/21/2021 11:24AM",
-            },
-            {
-                type: "Pothole",
-                address: "123 Street St.",
-                date: "3/21/2021 11:24AM",
-            },
-            {
-                type: "Pothole",
-                address: "123 Street St.",
-                date: "3/21/2021 11:24AM",
-            },
-            {
-                type: "Pothole",
-                address: "123 Street St.",
-                date: "3/21/2021 11:24AM",
-            },
-            {
-                type: "Pothole",
-                address: "123 Stret St.",
-                date: "3/21/2021 11:24AM",
-            },
-            {
-                type: "Pothole",
-                address: "123 Street St.",
-                date: "3/21/2021 11:24AM",
-            },
-            {
-                type: "Pothole",
-                address: "123 Street St.",
-                date: "3/21/2021 11:24AM",
-            },
-            {
-                type: "Pothole",
-                address: "123 Street St.",
-                date: "3/21/2021 11:24AM",
-            },
-            {
-                type: "Pothole",
-                address: "123 Street St.",
-                date: "3/21/2021 11:24AM",
-            },
-            {
-                type: "Pothole",
-                address: "123 Street St.",
-                date: "3/21/2021 11:24AM",
-            },
-            {
-                type: "Pothole",
-                address: "123 Street St.",
-                date: "3/21/2021 11:24AM",
-            },
-        ];
         return (
             <DashboarWrapper currentPage={1} clearbg={true}>
                 <div className="portal-con">
-                    <div className="portal-button">Report</div>
-                    <div className="portal-search">
-                        <div className="portal-search__header">
-                            <div>Recent Activity </div>
-                            <div>
-                                <i class="far fa-clock"></i>
-                            </div>
-                        </div>
-                        <div className="portal-search__body">
-                            {dummyData.map(({ type, address, date }) => (
-                                <div className="portal-search__issue">
-                                    <div>
-                                        <span>{type}</span>
-                                        <span>at</span>
-                                        <span>{address}</span>
-                                    </div>
-                                    <div>Reported on {date}</div>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="portal-search__footer">Filter by:</div>
-                    </div>
+                    {this.renderMap()}
+                    <MapLayout></MapLayout>
                 </div>
             </DashboarWrapper>
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    ready: state.report.ready,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    setupReport: (report) => dispatch(setupReport(report)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PortalBase);

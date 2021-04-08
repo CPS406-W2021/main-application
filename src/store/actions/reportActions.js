@@ -24,3 +24,6 @@ export const createReport = ({
             });
     };
 };
+export const cancelReport = () => {
+    return { type: "REPORT_CANCEL" };
+};

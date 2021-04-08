@@ -1,0 +1,186 @@
+.view {
+    &-by {
+        display: flex;
+        margin-top: 15px;
+        align-items: center;
+        &__icon {
+            font-size: 30px;
+            margin: 0;
+            display: flex;
+            margin-right: 10px;
+            align-items: center;
+            & > i {
+                line-height: 1;
+            }
+        }
+    }
+    &-con {
+        display: flex;
+        flex: 1;
+    }
+    &-map {
+        flex: 1;
+        display: flex;
+    }
+    &-body {
+        background-color: #fff;
+        margin: 30px;
+        flex: 1.2;
+    }
+    &-h1 {
+        font-size: 26px;
+    }
+    &-line {
+        margin: 0 0 2em;
+        height: 1px;
+        background-color: #888888;
+        border: none;
+    }
+    &-sub {
+        background-image: url("../../images/pinpoint.png");
+        background-repeat: no-repeat;
+        background-size: 12px;
+        line-height: 1;
+        font-size: 12px;
+        margin-left: 5px;
+        color: #444;
+        margin-bottom: 30px;
+
+        .address {
+            position: relative;
+            left: 15px;
+        }
+    }
+    &-buttons {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        & > button {
+            &:not(:last-child) {
+                margin-right: 10px;
+            }
+        }
+    }
+    &-submit {
+        .ui.form .field {
+            margin: 0 0 2em;
+        }
+        .ui.form .field i,
+        .name {
+            margin-top: 10px;
+            font-size: 30px;
+            position: relative;
+            left: 25px;
+            color: rgb(77, 156, 221);
+        }
+    }
+    &-descr {
+        .ui.form .descr {
+            margin: 0 0 1em;
+            text-decoration: underline;
+        }
+        .ui.form .text {
+            font-weight: bold;
+            font-size: small;
+            padding: 5px;
+            text-align: left;
+            margin: 0 15px 5em;
+        }
+    }
+    &-progress ul li {
+        display: flex;
+        margin: 0 0 2em;
+        position: relative;
+        z-index: 1;
+        &:last-child {
+            margin: 0 0 15px;
+        }
+        p {
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+        }
+        i.check,
+        circle.outline.icon {
+            font-size: 1.5em;
+        }
+    }
+    &-progress ul li:not(:last-child)::after {
+        content: "";
+        background: rgb(235, 229, 229);
+        height: 160%;
+        width: 4px;
+        display: block;
+        position: absolute;
+        left: 10px;
+        top: 19px;
+    }
+    &-progress ul li:last-child::after {
+        height: 0;
+    }
+    &-progress ul li.s::after {
+        background: green;
+    }
+    &-progress ul li.a::after {
+        background: green;
+    }
+    &-progress ul li.u::after {
+        background: $accent;
+    }
+}
+.update {
+    &-body {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        text-align: left;
+        display: flex;
+    }
+    &-title {
+        display: flex;
+        & > i {
+            position: relative;
+            z-index: 300;
+            margin-right: 10px;
+            background-color: #fff;
+        }
+    }
+    &-listi {
+        display: flex;
+        align-items: flex-start;
+    }
+    &-item {
+        &-header {
+            min-height: 2rem;
+            line-height: 1.25rem;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+        }
+        &-header:hover {
+            color: $accent;
+            transition: 0.3s;
+        }
+    }
+}
+.update-item-body {
+    overflow: hidden;
+    height: 20px;
+    transition: padding 0.6s, height 0.5s;
+}
+.update-item-body.closed {
+    padding: 0 1rem;
+    height: 0;
+}
+
+i.icon.outline {
+    color: green;
+}
+.svg-inline--fa.fa-w-14 {
+    width: 0.8em;
+    position: relative;
+    left: -2px;
+}
+.ui.form .field > label {
+    font-size: 0.95em;
+}

@@ -20,25 +20,41 @@ class ReportAProblem extends Component {
         const selectionType = ["Tree", "Pothole", "Other"];
         const add = "123 St";
         const latlong = [0, 0];
-        this.props.createReport(
-            {
-                uid,
-                checkUpdates,
-                selection: selectionType[Number(selection)],
-                information,
-                add,
-                latlong,
-            }
-        );
+        this.props.createReport({
+            uid,
+            checkUpdates,
+            selection: selectionType[Number(selection)],
+            information,
+            add,
+            latlong,
+        });
     };
     render() {
+        const Map = ReactMapboxGl({
+            accessToken:
+                "pk.eyJ1IjoiZmFyaGFuaG0iLCJhIjoiY2tuMTUxYjNnMHIyODJvbzJueDJzdWJmcCJ9.EIl7ZcqlshPyJxnxyGNGhg",
+            interactive: false,
+        });
+        if (this.props.setup === false) {
+            return <Redirect to="/portal"></Redirect>;
+        }
         return (
             <DashboarWrapper currentPage={2}>
                 <div className="rap-con">
-                    <div className="rap-map"></div>
+                    <div className="rap-map">
+                        <Map
+                            style="mapbox://styles/mapbox/streets-v9"
+                            containerStyle={{
+                                flex: 1,
+                                borderRadius: 35,
+                            }}
+                            center={[-79.3788, 43.6577]}
+                            zoom={[17]}
+                        ></Map>
+                    </div>
                     <div className="rap-body">
                         <h1 className="rap-h1">Report a Problem</h1>
-                        <div className="rap-sub">at 123 St. Street St.</div>
+                        <div className="rap-sub">at {this.props.place}</div>
 
                         <form class="ui form">
                             <div class="field">
@@ -136,12 +152,15 @@ class ReportAProblem extends Component {
 }
 const mapStateToProps = (state) => ({
     error: state.report.error,
-    uid: state.auth.uid
+    uid: state.auth.uid,
+    place: state.report.setupreport["name"],
+    loc: [state.report.setupreport["long"], state.report.setupreport["lat"]],
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    createReport: ({ uid, checkUpdates, selection, information, latlong, add }) => 
-        dispatch(createReport({ uid, checkUpdates, selection, information, latlong, add }))
+    createReport: (r) => dispatch(createReport(r)),
+
+    cancelReport: () => dispatch(cancelReport),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReportAProblem);
