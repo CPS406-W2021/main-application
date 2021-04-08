@@ -45,3 +45,19 @@ export const register = ({ email, password, name, username }) => {
             })
     }
 };
+
+export const resetPassword = ({ email }) => {
+    return (dispatch, getState, getFirebase) => {
+        const firebase = getFirebase();
+
+        firebase
+            .auth()
+            .sendPasswordResetEmail(email)
+            .then(() => {
+                dispatch({ type: 'RESET_PASS_SUCCESS' });
+            })
+            .catch((err) => {
+                dispatch({ type: 'RESET_PASS_ERROR', error: err.message });
+            })
+    }
+};

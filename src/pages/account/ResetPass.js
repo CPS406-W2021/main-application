@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import SingePageWrapper from "../../components/SinglePageWrapper";
 import { connect } from "react-redux";
-import { signIn } from "../../store/actions/authActions";
+import { resetPassword } from "../../store/actions/authActions";
 import { Link, Redirect } from "react-router-dom";
 
-class Login extends Component {
+class Reset extends Component {
     state = {
-        email: "",
-        password: "",
+        email: ""
     };
+
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.login({ ...this.state });
+        this.props.resetPass({ ...this.state });
     };
     render() {
         if (this.props.loggedin) {
@@ -20,7 +20,7 @@ class Login extends Component {
         return (
             <SingePageWrapper>
                 <div className="login-form ui small form">
-                    <h1>User Login</h1>
+                    <h1>Reset Password</h1>
                     <label for="email">Email</label>
                     <input
                         type="text"
@@ -31,16 +31,6 @@ class Login extends Component {
                         }
                         val={this.state.email}
                     ></input>
-                    <label for="pwd">Password:</label>
-                    <input
-                        type="password"
-                        id="pwd"
-                        name="pwd"
-                        onChange={(e) =>
-                            this.setState({ password: e.target.value })
-                        }
-                        val={this.state.password}
-                    ></input>
                     {this.props.error ? (
                         <div class="ui red message">{this.props.error}</div>
                     ) : (
@@ -50,15 +40,11 @@ class Login extends Component {
                         class="ui yellow button"
                         onClick={this.handleSubmit}
                     >
-                        LOG IN
+                        Reset Password
                     </button>
                     <p>
-                        Don't have an account?{" "}
-                        <Link to="/register">Register Now</Link>
-                    </p>
-                    <p>
-                        Forgot your password?{" "}
-                        <Link to="/resetPass">Reset Now</Link>
+                        Go back to Login?{" "}
+                        <Link to="/login">Login</Link>
                     </p>
                 </div>
             </SingePageWrapper>
@@ -67,15 +53,14 @@ class Login extends Component {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        login: (creds) => dispatch(signIn(creds)),
+        resetPass: (creds) => dispatch(resetPassword(creds)),
     };
 };
 const mapStateToProps = (state) => {
     console.log(state);
     return {
-        loggedin: state.auth.loggedin,
         error: state.auth.error,
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Reset);
