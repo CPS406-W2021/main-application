@@ -23,6 +23,7 @@
         max-height: 90%;
         top: 5%;
         overflow-y: hidden;
+        z-index: 5;
         &__header {
             box-sizing: border-box;
             padding: 25px 10px 15px;
@@ -104,6 +105,13 @@
         letter-spacing: 0.5px;
         font-size: 20px;
         background-color: #ff5e5e;
+        &.portal-cap {
+            width: 200px;
+            right: 220px;
+        }
+        &.portal-cancel {
+            background-color: #555555;
+        }
         &:hover {
             cursor: pointer;
         }
