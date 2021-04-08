@@ -1,14 +1,16 @@
-
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import Image from '../../images/header.png';
-import { signIn, signOut } from '../../store/actions/authActions';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import Image from "../../images/header.png";
+import { signIn, signOut } from "../../store/actions/authActions";
 class DashboarWrapper extends Component {
     renderAuthButton() {
         if (this.props.loggedin) {
             return (
-                <div className="wp-header__nav-login" onClick={this.props.logout}>
+                <div
+                    className="wp-header__nav-login"
+                    onClick={this.props.logout}
+                >
                     LOGOUT
                 </div>
             );
@@ -20,11 +22,11 @@ class DashboarWrapper extends Component {
         );
     }
     render() {
-        const pages = [
-            { text: 'Home', route: '/' },
-            { text: 'Portal', route: '/portal' },
-            { text: 'My Account', route: '/rap' },
-            { text: 'Contact', route: '/contact' },
+        let pages = [
+            { text: "Home", route: "/" },
+            { text: "Portal", route: "/portal" },
+            { text: "My Account", route: "/rap" },
+            { text: "Contact", route: "/contact" },
         ];
         let currentPage = this.props.currentPage || 0;
         return (
@@ -37,29 +39,38 @@ class DashboarWrapper extends Component {
                                 <div>Cypress</div>
                             </div>
                             <div className="wp-header__titleSlogan">
-                                Cypress / {pages[currentPage]['text']}
+                                Cypress / {pages[currentPage]["text"]}
                             </div>
                         </div>
                         <div className="wp-header__pages">
                             <div className="wp-header__nav">
-                                {pages.map(({ text, route }, i) => (
-                                    <Link
-                                        key={text}
-                                        to={route}
-                                        className={`wp-header__nav-item ${
-                                            i === currentPage ? 'active' : ''
-                                        }`}
-                                    >
-                                        {text}
-                                    </Link>
-                                ))}
+                                {this.props.loggedin &&
+                                    pages.map(({ text, route }, i) => (
+                                        <Link
+                                            key={text}
+                                            to={route}
+                                            className={`wp-header__nav-item ${
+                                                i === currentPage
+                                                    ? "active"
+                                                    : ""
+                                            }`}
+                                        >
+                                            {text}
+                                        </Link>
+                                    ))}
                                 {this.renderAuthButton()}
                             </div>
-                            <div className="wp-header__subnav">subnav</div>
+                            {this.props.loggedin && (
+                                <div className="wp-header__subnav">subnav</div>
+                            )}
                         </div>
                     </div>
                 </div>
-                <div className={`wp-con__body ${this.props.clearbg ? '' : 'active'}`}>
+                <div
+                    className={`wp-con__body ${
+                        this.props.clearbg ? "" : "active"
+                    }`}
+                >
                     {this.props.children}
                 </div>
                 <div className="wp-con__footer">

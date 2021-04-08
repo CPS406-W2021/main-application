@@ -4,8 +4,11 @@ export const signIn = (credentials) => {
         firebase
             .auth()
             .signInWithEmailAndPassword(credentials.email, credentials.password)
-            .then(() => {
-                dispatch({ type: 'LOGIN_SUCCESS' });
+            .then((info) => {
+                dispatch({
+                    type: 'LOGIN_SUCCESS',
+                    uid: info.user.uid
+                });
             })
             .catch((err) => {
                 dispatch({
@@ -31,11 +34,10 @@ export const signOut = () => {
 export const register = ({ email, password, name, username }) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase();
-        
+
         // Do registeration & generate profile
-        firebase.createUser({email, password}, {name, username}) //Params login creds & profile info
+        firebase.createUser({ email, password }, { name, username }) //Params login creds & profile info
             .then((auth) => {
-                console.log(auth)
                 dispatch({ type: 'REGISTERATION_COMPLETE' })
             })
             .catch((err) => {

@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import 'firebase/database';
 import 'firebase/auth';
 var firebaseConfig = {
     apiKey: 'AIzaSyD0rwdY-yeuRK-3SV8kRLRjLH2Gfmzk2Ro',
@@ -13,7 +14,7 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 // firebase.firestore().settings({ timestampsInSnapshots: true });
-// firebase.firestore().settings({  });
+firebase.firestore()
 // firebase.analytics();???
 
 
