@@ -23,6 +23,7 @@
         max-height: 90%;
         top: 5%;
         overflow-y: hidden;
+        z-index: 5;
         &__header {
             box-sizing: border-box;
             padding: 25px 10px 15px;
@@ -94,7 +95,7 @@
         width: 140px;
         text-align: center;
         color: #fff;
-        font-family: 'Montserrat';
+        font-family: "Montserrat";
         padding: 7.5px;
         border-radius: 10px;
         position: absolute;
@@ -104,6 +105,13 @@
         letter-spacing: 0.5px;
         font-size: 20px;
         background-color: #ff5e5e;
+        &.portal-cap {
+            width: 200px;
+            right: 220px;
+        }
+        &.portal-cancel {
+            background-color: #555555;
+        }
         &:hover {
             cursor: pointer;
         }
