@@ -13,16 +13,22 @@ class Login extends Component {
         e.preventDefault();
         this.props.login({ ...this.state });
     };
+    
     render() {
+        const L = this.props.lang;
         if (this.props.loggedin) {
             return <Redirect to="/"></Redirect>;
         }
         return (
             <SingePageWrapper>
                 <div className="login-form ui small form">
-                    <h1>User Login</h1>
+                    <h1>
+                        { L === "en" ? "User Login" : "Utilisateur en Ligne" }
+                    </h1>
 
-                    <label for="email">Email</label>
+                    <label for="email">
+                        { L === "en" ? "E-mail:" : "E-mail:" }
+                    </label>
                     <input
                         type="text"
                         id="email"
@@ -30,7 +36,9 @@ class Login extends Component {
                         onChange={(e) => this.setState({ email: e.target.value })}
                         val={this.state.email}
                     ></input>
-                    <label for="pwd">Password:</label>
+                    <label for="pwd">
+                        { L === "en" ? "Password:" : "Mot de passe:" }
+                    </label>
                     <input
                         type="password"
                         id="pwd"
@@ -40,10 +48,17 @@ class Login extends Component {
                     ></input>
                     {this.props.error ? <div class="ui red message">{this.props.error}</div> : ''}
                     <button class="ui yellow button" onClick={this.handleSubmit}>
-                        LOG IN
+                        { L === "en" ? "LOG IN" : "CONNEXION" }
                     </button>
                     <p>
-                        Don't have an account? <Link to="/register">Register Now</Link>
+                        { L === "en" 
+                            ? "Don't have an account? " 
+                            : "Vous n'avez pas de compte? " }
+                        <Link to="/register">
+                        { L === "en" 
+                            ? "Register Now" 
+                            : "S'inscrire maintenant" }
+                        </Link>
                     </p>
                 </div>
             </SingePageWrapper>
@@ -59,6 +74,7 @@ const mapStateToProps = (state) => {
     return {
         loggedin: state.auth.loggedin,
         error: state.auth.error,
+        lang: state.lang.lang,
     };
 };
 
