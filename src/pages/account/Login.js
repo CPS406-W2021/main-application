@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import SingePageWrapper from '../../components/SinglePageWrapper';
-import { connect } from 'react-redux';
-import { signIn } from '../../store/actions/authActions';
-import { Link, Redirect } from 'react-router-dom';
+import React, { Component } from "react";
+import SingePageWrapper from "../../components/SinglePageWrapper";
+import { connect } from "react-redux";
+import { signIn } from "../../store/actions/authActions";
+import { Link, Redirect } from "react-router-dom";
 
 class Login extends Component {
     state = {
-        email: '',
-        password: '',
+        email: "",
+        password: "",
     };
     handleSubmit = (e) => {
         e.preventDefault();
@@ -21,13 +21,14 @@ class Login extends Component {
             <SingePageWrapper>
                 <div className="login-form ui small form">
                     <h1>User Login</h1>
-
                     <label for="email">Email</label>
                     <input
                         type="text"
                         id="email"
                         name="email"
-                        onChange={(e) => this.setState({ email: e.target.value })}
+                        onChange={(e) =>
+                            this.setState({ email: e.target.value })
+                        }
                         val={this.state.email}
                     ></input>
                     <label for="pwd">Password:</label>
@@ -35,15 +36,25 @@ class Login extends Component {
                         type="password"
                         id="pwd"
                         name="pwd"
-                        onChange={(e) => this.setState({ password: e.target.value })}
+                        onChange={(e) =>
+                            this.setState({ password: e.target.value })
+                        }
                         val={this.state.password}
                     ></input>
-                    {this.props.error ? <div class="ui red message">{this.props.error}</div> : ''}
-                    <button class="ui yellow button" onClick={this.handleSubmit}>
+                    {this.props.error ? (
+                        <div class="ui red message">{this.props.error}</div>
+                    ) : (
+                        ""
+                    )}
+                    <button
+                        class="ui yellow button"
+                        onClick={this.handleSubmit}
+                    >
                         LOG IN
                     </button>
                     <p>
-                        Don't have an account? <Link to="/register">Register Now</Link>
+                        Don't have an account?{" "}
+                        <Link to="/register">Register Now</Link>
                     </p>
                 </div>
             </SingePageWrapper>
