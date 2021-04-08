@@ -8,7 +8,6 @@ import Register from "./pages/account/Register";
 import RAPBase from "./pages/dashboard/ReportAProblem";
 import TellAFriend from "./pages/dashboard/TellAFriend";
 import Vote from "./pages/dashboard/Vote";
-import SurveyC from "./pages/general/SurveyConfirmation";
 import Survey from "./pages/general/Survey";
 import PastReports from "./pages/dashboard/PastReports";
 import ProtectedRoute from "./Routes/ProtectedRoute";
@@ -29,27 +28,24 @@ export default class App extends Component {
                     {/* <Route path="/profileinfo">
                         <ProfileInfo />
                     </Route> */}
-                    <Route path="/portal">
+                    <ProtectedRoute path="/portal">
                         <PortalBase />
-                    </Route>
+                    </ProtectedRoute>
                     <ProtectedRoute exact path="/rap">
                         <RAPBase />
                     </ProtectedRoute>
                     <ProtectedRoute exact path="/taf">
                         <TellAFriend />
                     </ProtectedRoute>
-                    <Route path="/vote">
+                    <ProtectedRoute path="/vote">
                         <Vote />
-                    </Route>
+                    </ProtectedRoute>
                     <Route path="/contact">
                         <Contact />
                     </Route>
-                    <Route path="/pastReports">
+                    <ProtectedRoute path="/pastReports">
                         <PastReports />
-                    </Route>
-                    <Route path="/Surveyconfirmation">
-                        <SurveyC />
-                    </Route>
+                    </ProtectedRoute>
                     <Route path="/Survey">
                         <Survey />
                     </Route>

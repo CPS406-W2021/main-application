@@ -6,8 +6,18 @@ export const createReport = ({
     latlong,
     add,
 }) => {
-    let updates = ['Request Recieved'];
-    const report = { checkUpdates, selection, information, latlong, add, date: Date.now(), updates, 'upvotes': 0, 'downvotes': 0 };
+    let updates = ["Request Recieved"];
+    const report = {
+        checkUpdates,
+        selection,
+        information,
+        latlong,
+        add,
+        date: Date.now(),
+        updates,
+        upvotes: 0,
+        downvotes: 0,
+    };
     return (dispatch, getState, getFirebase) => {
         // make an entry for the report
         // ALSO make sure to associate the user, maybe firebase has a auth().getUser() or something...
@@ -26,10 +36,7 @@ export const createReport = ({
     };
 };
 export const setupReport = (report) => {
-    return (dispatch) => {
-        // report:{lat,long, name}
-        dispatch({ type: "REPORT_SETUP", payload: report });
-    };
+    return { type: "REPORT_SETUP", payload: report };
 };
 export const cancelReport = () => {
     return { type: "REPORT_CANCEL" };
