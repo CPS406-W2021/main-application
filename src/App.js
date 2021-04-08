@@ -11,7 +11,7 @@ import Vote from "./pages/dashboard/Vote";
 import ProfileInfo from "./pages/account/ProfileInfo";
 import Survey from "./pages/general/Survey";
 import PastReports from "./pages/dashboard/PastReports";
-import ViewReports from "./pages/dashboard/ViewReports"
+import ViewReports from "./pages/dashboard/ViewReports";
 
 require("dotenv").config();
 export default class App extends Component {
@@ -45,9 +45,9 @@ export default class App extends Component {
                 <Route path="/pastReports">
                     <PastReports />
                 </Route>
-                <Route path="/ViewReports">
-                    <ViewReports/>
-                </Route> 
+                <Route path="/report">
+                    <ViewReports />
+                </Route>
                 <Route path="/survey">
                     <Survey />
                 </Route>
