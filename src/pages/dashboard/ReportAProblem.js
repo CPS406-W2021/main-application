@@ -4,9 +4,11 @@ import { authIsReady } from "react-redux-firebase";
 import { Link, Redirect } from "react-router-dom";
 import DashboarWrapper from "../../components/ThemeWrapper";
 import { createReport } from "../../store/actions/reportActions";
-import ReactMapboxGl from "react-mapbox-gl";
+import ReactMapboxGl, { Marker } from "react-mapbox-gl";
 import { cancelReport } from "../../store/actions/reportActions";
-
+import blueMarker from "../../images/icons/blue.png";
+import greenMarker from "../../images/icons/green.png";
+import redMarker from "../../images/icons/red.png";
 class ReportAProblem extends Component {
     constructor(props) {
         super(props);
@@ -14,6 +16,7 @@ class ReportAProblem extends Component {
             checkUpdates: true,
             selection: -1,
             information: "",
+            Map: false,
         };
     }
     onSubmit = (e) => {
@@ -32,28 +35,27 @@ class ReportAProblem extends Component {
             latlong,
         });
     };
-    render() {
+    componentDidMount() {
         const Map = ReactMapboxGl({
             accessToken:
                 "pk.eyJ1IjoiZmFyaGFuaG0iLCJhIjoiY2tuMTUxYjNnMHIyODJvbzJueDJzdWJmcCJ9.EIl7ZcqlshPyJxnxyGNGhg",
             interactive: false,
         });
-        if (this.props.setup === false) {
+        this.setState({ Map: Map });
+    }
+    render() {
+        if (!this.props.ready) {
             return <Redirect to="/portal"></Redirect>;
         }
+        let Map = this.state.Map;
         return (
             <DashboarWrapper currentPage={2}>
                 <div className="rap-con">
                     <div className="rap-map">
-                        <Map
-                            style="mapbox://styles/mapbox/streets-v9"
-                            containerStyle={{
-                                flex: 1,
-                                borderRadius: 35,
-                            }}
-                            center={[-79.3788, 43.6577]}
-                            zoom={[17]}
-                        ></Map>
+                        <RenderMap
+                            Map={this.state.Map}
+                            selection={this.state.selection}
+                        ></RenderMap>
                     </div>
                     <div className="rap-body">
                         <h1 className="rap-h1">Report a Problem</h1>
@@ -64,11 +66,12 @@ class ReportAProblem extends Component {
                                 <label>Report Title</label>
                                 <div className="reports-search__con ui input">
                                     <input
-                                        onChange={(e) =>
+                                        onChange={(e) => {
+                                            e.preventDefault();
                                             this.setState({
                                                 title: e.target.value,
-                                            })
-                                        }
+                                            });
+                                        }}
                                         val={this.state.title}
                                         className="reports-search "
                                         type="text"
@@ -138,13 +141,14 @@ class ReportAProblem extends Component {
                                 >
                                     Submit
                                 </button>
-                                <Link
+                                <button
                                     to="/portal"
                                     class="ui button"
                                     type="submit"
+                                    onClick={this.cancelReport}
                                 >
                                     Cancel
-                                </Link>
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -158,12 +162,52 @@ const mapStateToProps = (state) => ({
     uid: state.auth.uid,
     place: state.report.setupreport["name"],
     loc: [state.report.setupreport["long"], state.report.setupreport["lat"]],
+    ready: state.report.ready,
 });
 
 const mapDispatchToProps = (dispatch) => ({
     createReport: (r) => dispatch(createReport(r)),
-
-    cancelReport: () => dispatch(cancelReport),
+    cancelReport: () => dispatch(cancelReport()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReportAProblem);
+
+class RenderMap extends Component {
+    constructor(props) {
+        super(props);
+    }
+    renderMarker() {}
+    render() {
+        const markerIcons = [blueMarker, greenMarker, redMarker];
+        const selection = this.props.selection;
+        if (this.props.Map) {
+            let Map = this.props.Map;
+            return (
+                <Map
+                    style="mapbox://styles/mapbox/streets-v9"
+                    containerStyle={{
+                        flex: 1,
+                        borderRadius: 35,
+                    }}
+                    center={[-79.3788, 43.6577]}
+                    zoom={[17]}
+                >
+                    {selection >= 0 && (
+                        <Marker
+                            coordinates={[-79.3788, 43.6577]}
+                            anchor="center"
+                        >
+                            <img
+                                src={markerIcons[selection]}
+                                width="30px"
+                                height="30px"
+                            />
+                        </Marker>
+                    )}
+                </Map>
+            );
+        } else {
+            return <div>Loading Map</div>;
+        }
+    }
+}
