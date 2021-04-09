@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import DashboarWrapper from "../../components/ThemeWrapper";
-import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
+import ReactMapboxGl, { Marker } from "react-mapbox-gl";
 import { connect } from "react-redux";
 import "mapbox-gl/dist/mapbox-gl.css";
 import blueMarker from "../../images/icons/blue.png";
@@ -25,6 +25,7 @@ class PortalBase extends Component {
         const L = this.props.lang;
         return (
             <Map
+                // eslint-disable-next-line
                 style="mapbox://styles/mapbox/streets-v9"
                 containerStyle={{
                     flex: 1,
@@ -62,7 +63,12 @@ class PortalBase extends Component {
                 }}
             >
                 <Marker coordinates={[-79.3788, 43.6577]} anchor="center">
-                    <img src={blueMarker} width="30px" height="30px" />
+                    <img
+                        src={blueMarker}
+                        width="30px"
+                        height="30px"
+                        alt={"marker"}
+                    />
                 </Marker>
             </Map>
         );

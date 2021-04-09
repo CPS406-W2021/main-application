@@ -1,5 +1,3 @@
-import { Redirect } from "react-router-dom";
-
 const INIT_STATE = { error: "", setupreport: {}, ready: false };
 
 const reportReducer = (state = INIT_STATE, action) => {

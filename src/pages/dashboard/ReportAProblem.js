@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { authIsReady } from "react-redux-firebase";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import DashboarWrapper from "../../components/ThemeWrapper";
 import { createReport } from "../../store/actions/reportActions";
 import ReactMapboxGl, { Marker } from "react-mapbox-gl";
@@ -21,11 +20,11 @@ class ReportAProblem extends Component {
     }
     onSubmit = (e) => {
         e.preventDefault();
-        const uid = this.props.uid;
-        const { checkUpdates, selection, information } = this.state;
-        const selectionType = ["Tree", "Pothole", "Other"];
-        const add = "123 St";
-        const latlong = [0, 0];
+        // const uid = this.props.uid;
+        // const { checkUpdates, selection, information } = this.state;
+        // const selectionType = ["Tree", "Pothole", "Other"];
+        // const add = "123 St";
+        // const latlong = [0, 0];
         // this.props.createReport({
         //     uid,
         //     checkUpdates,
@@ -47,7 +46,6 @@ class ReportAProblem extends Component {
         if (!this.props.ready) {
             return <Redirect to="/portal"></Redirect>;
         }
-        let Map = this.state.Map;
         return (
             <DashboarWrapper currentPage={2}>
                 <div className="rap-con">
@@ -175,10 +173,6 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(ReportAProblem);
 
 class RenderMap extends Component {
-    constructor(props) {
-        super(props);
-    }
-    renderMarker() {}
     render() {
         const markerIcons = [blueMarker, greenMarker, redMarker];
         const selection = this.props.selection;
@@ -186,6 +180,7 @@ class RenderMap extends Component {
             let Map = this.props.Map;
             return (
                 <Map
+                    // eslint-disable-next-line
                     style="mapbox://styles/mapbox/streets-v9"
                     containerStyle={{
                         flex: 1,
@@ -200,6 +195,7 @@ class RenderMap extends Component {
                                 src={markerIcons[selection]}
                                 width="30px"
                                 height="30px"
+                                alt="marker"
                             />
                         </Marker>
                     )}
