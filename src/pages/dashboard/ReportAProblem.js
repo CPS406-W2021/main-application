@@ -16,23 +16,23 @@ class ReportAProblem extends Component {
             selection: -1,
             information: "",
             Map: false,
+            title: "",
         };
     }
     onSubmit = (e) => {
         e.preventDefault();
-        // const uid = this.props.uid;
-        // const { checkUpdates, selection, information } = this.state;
-        // const selectionType = ["Tree", "Pothole", "Other"];
-        // const add = "123 St";
-        // const latlong = [0, 0];
-        // this.props.createReport({
-        //     uid,
-        //     checkUpdates,
-        //     selection: selectionType[Number(selection)],
-        //     information,
-        //     add,
-        //     latlong,
-        // });
+        const uid = this.props.uid;
+        const { checkUpdates, selection, information, title } = this.state;
+        const selectionType = ["Tree", "Pothole", "Other"];
+        this.props.createReport({
+            uid,
+            selection: selectionType[Number(selection)],
+            information,
+            name: this.props.place,
+            loc: this.props.loc,
+            title,
+            date: new Date().toISOString(),
+        });
     };
     componentDidMount() {
         const Map = ReactMapboxGl({
