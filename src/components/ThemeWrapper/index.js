@@ -48,20 +48,25 @@ class DashboarWrapper extends Component {
                         </div>
                         <div className="wp-header__pages">
                             <div className="wp-header__nav">
-                                {pages.map(({ text, route }, i) => (
-                                    <Link
-                                        key={text}
-                                        to={route}
-                                        className={`wp-header__nav-item ${
-                                            i === currentPage ? "active" : ""
-                                        }`}
-                                    >
-                                        {text}
-                                    </Link>
-                                ))}
+                                {this.props.loggedin &&
+                                    pages.map(({ text, route }, i) => (
+                                        <Link
+                                            key={text}
+                                            to={route}
+                                            className={`wp-header__nav-item ${
+                                                i === currentPage
+                                                    ? "active"
+                                                    : ""
+                                            }`}
+                                        >
+                                            {text}
+                                        </Link>
+                                    ))}
                                 {this.renderAuthButton()}
                             </div>
-                            <div className="wp-header__subnav">subnav</div>
+                            {this.props.loggedin && (
+                                <div className="wp-header__subnav">subnav</div>
+                            )}
                         </div>
                     </div>
                 </div>

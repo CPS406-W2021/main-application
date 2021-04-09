@@ -76,6 +76,7 @@
                 transition-duration: 0.4s;
                 margin-right: 10px;
                 text-align: center;
+                cursor: pointer;
                 &:hover {
                     background-color: white;
                     color: $accent;
@@ -91,6 +92,7 @@
                 border-radius: 8px;
                 border: none;
                 transition-duration: 0.4s;
+                cursor: pointer;
                 &:hover {
                     background-color: white;
                     color: #9cb8cf;

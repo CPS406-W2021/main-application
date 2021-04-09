@@ -1,19 +1,31 @@
 .view {
+    &-by {
+        display: flex;
+        margin-top: 15px;
+        align-items: center;
+        &__icon {
+            font-size: 30px;
+            margin: 0;
+            display: flex;
+            margin-right: 10px;
+            align-items: center;
+            & > i {
+                line-height: 1;
+            }
+        }
+    }
     &-con {
         display: flex;
         flex: 1;
     }
     &-map {
-        background-image: url("../../images/Map_2.png" );
-        background-size: 830px;
-        background-repeat: no-repeat;
-        background-position:-150px;
         flex: 1;
+        display: flex;
     }
     &-body {
         background-color: #fff;
         margin: 30px;
-        flex: 1.5;
+        flex: 1.2;
     }
     &-h1 {
         font-size: 26px;
@@ -35,7 +47,7 @@
         margin-bottom: 30px;
 
         .address {
-            position:relative;
+            position: relative;
             left: 15px;
         }
     }
@@ -49,78 +61,95 @@
             }
         }
     }
-    &-submit{
-        .ui.form .field{
-            margin:0 0 2em;
-            }
-        .ui.form .field i, .name{
+    &-submit {
+        .ui.form .field {
+            margin: 0 0 2em;
+        }
+        .ui.form .field i,
+        .name {
             margin-top: 10px;
             font-size: 30px;
-            position:relative;
+            position: relative;
             left: 25px;
             color: rgb(77, 156, 221);
         }
     }
-    &-descr{
-        .ui.form .descr{
-            margin:0 0 1em;
+    &-descr {
+        .ui.form .descr {
+            margin: 0 0 1em;
             text-decoration: underline;
-            }
-        .ui.form .text{
+        }
+        .ui.form .text {
             font-weight: bold;
-            font-size:small;
+            font-size: small;
             padding: 5px;
             text-align: left;
-            margin:0 15px 5em;
+            margin: 0 15px 5em;
         }
     }
-    &-progress ul li{
-        display:flex;
+    &-progress ul li {
+        display: flex;
         margin: 0 0 2em;
-        position:relative;
-        z-index:1;
-        p{
-            font-size:14px;
-            display:flex;
+        position: relative;
+        z-index: 1;
+        &:last-child {
+            margin: 0 0 15px;
+        }
+        p {
+            font-size: 14px;
+            display: flex;
             flex-direction: column;
         }
-        i.check,circle.outline.icon{
-            font-size:1.5em;
+        i.check,
+        circle.outline.icon {
+            font-size: 1.5em;
         }
     }
-    &-progress ul li:not(:last-child)::after{
-        content: '';
+    &-progress ul li:not(:last-child)::after {
+        content: "";
         background: rgb(235, 229, 229);
-        height:42px;
-        width:4px;
-        display:block;
-        position:absolute;
-        left:10px;
-        top:19px;
-        z-index: -1;
+        height: 160%;
+        width: 4px;
+        display: block;
+        position: absolute;
+        left: 10px;
+        top: 19px;
     }
-    &-progress ul li:nth-child(1)::after{
+    &-progress ul li:last-child::after {
+        height: 0;
+    }
+    &-progress ul li.s::after {
         background: green;
     }
-    &-progress ul li:nth-child(n+2)::after{
-        background:$accent;
-    }
-    &-progress ul li:nth-child(4)::after{
+    &-progress ul li.a::after {
         background: green;
+    }
+    &-progress ul li.u::after {
+        background: $accent;
     }
 }
 .update {
-    padding: 0 8px;
-    font-size:1em;
-    position:relative;
-    top: 0.1em;
-    
-    &-item {
-        border-radius: 0.5rem;
-        width:500px;
+    &-body {
+        flex: 1;
+        display: flex;
+        align-items: center;
         text-align: left;
         display: flex;
-       
+    }
+    &-title {
+        display: flex;
+        & > i {
+            position: relative;
+            z-index: 300;
+            margin-right: 10px;
+            background-color: #fff;
+        }
+    }
+    &-listi {
+        display: flex;
+        align-items: flex-start;
+    }
+    &-item {
         &-header {
             min-height: 2rem;
             line-height: 1.25rem;
@@ -144,24 +173,14 @@
     height: 0;
 }
 
-ul{
-    text-align: center;
+i.icon.outline {
+    color: green;
 }
-i.icon.outline{
-    color:green;
-}
-.fa, .fas {
-    font-size: 1.55em;
-    color: rgb(77, 156, 221);
-    padding-right: 5px;
-    padding-left: 1px;
-}
-.svg-inline--fa.fa-w-14{
+.svg-inline--fa.fa-w-14 {
     width: 0.8em;
     position: relative;
-    left:-2px;
-    
+    left: -2px;
 }
-.ui.form .field>label{
+.ui.form .field > label {
     font-size: 0.95em;
 }

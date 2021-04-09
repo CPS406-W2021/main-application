@@ -6,12 +6,16 @@
     &-map {
         background-color: #555;
         flex: 1;
+        display: flex;
+        & > div {
+            border-radius: 0 !important;
+        }
     }
     &-body {
         background-color: #fff;
         margin: 30px;
 
-        flex: 1.5;
+        flex: 1.1;
     }
     &-h1 {
         font-size: 26px;

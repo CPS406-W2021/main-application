@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import SingePageWrapper from '../../components/SinglePageWrapper';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { register } from '../../store/actions/authActions';
+import React, { Component } from "react";
+import SingePageWrapper from "../../components/SinglePageWrapper";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { register } from "../../store/actions/authActions";
 
 class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            username: '',
-            email: '',
-            password: '',
-            confpassword: '',
+            name: "",
+            username: "",
+            email: "",
+            password: "",
+            confpassword: "",
         };
     }
     handleSubmission = (e) => {
@@ -35,7 +35,9 @@ class Register extends Component {
                         type="text"
                         id="name"
                         name="name"
-                        onChange={(e) => this.setState({ name: e.target.value })}
+                        onChange={(e) =>
+                            this.setState({ name: e.target.value })
+                        }
                     ></input>
                     <br></br>
 
@@ -45,40 +47,53 @@ class Register extends Component {
                         type="text"
                         id="usrn"
                         name="usrn"
-                        onChange={(e) => this.setState({ username: e.target.value })}
+                        onChange={(e) =>
+                            this.setState({ username: e.target.value })
+                        }
                     ></input>
                     <br></br>
-
                     <label for="email">Email:</label>
                     <br></br>
                     <input
                         type="text"
                         id="email"
                         name="email"
-                        onChange={(e) => this.setState({ email: e.target.value })}
+                        onChange={(e) =>
+                            this.setState({ email: e.target.value })
+                        }
                     ></input>
                     <br></br>
-
                     <label for="pwd">Password:</label>
                     <br></br>
                     <input
                         type="password"
                         id="pwd"
                         name="pwd"
-                        onChange={(e) => this.setState({ password: e.target.value })}
+                        onChange={(e) =>
+                            this.setState({ password: e.target.value })
+                        }
                     ></input>
                     <br></br>
-
                     <label for="pwd">Confirm Password:</label>
                     <br></br>
                     <input
                         type="password"
                         id="cpwd"
                         name="cpwd"
-                        onChange={(e) => this.setState({ confpassword: e.target.value })}
+                        onChange={(e) =>
+                            this.setState({ confpassword: e.target.value })
+                        }
                     ></input>
+                    {this.props.error ? (
+                        <div class="ui red message">{this.props.error}</div>
+                    ) : (
+                        ""
+                    )}
                     <br></br>
-                    <button class="ui yellow button" onClick={this.handleSubmission}>
+                    <button
+                        class="ui yellow button"
+                        onClick={this.handleSubmission}
+                    >
                         REGISTER
                     </button>
                     <p>
