@@ -8,6 +8,7 @@ import MapLayout from "./mapLayout";
 import axios from "axios";
 import { setupReport } from "../../store/actions/reportActions";
 import { Redirect } from "react-router-dom";
+
 class PortalBase extends Component {
     constructor(props) {
         super(props);
@@ -21,6 +22,7 @@ class PortalBase extends Component {
         if (this.props.ready) {
             return <Redirect to="/rap"></Redirect>;
         }
+        const L = this.props.lang;
         return (
             <Map
                 style="mapbox://styles/mapbox/streets-v9"
@@ -42,7 +44,9 @@ class PortalBase extends Component {
                             const { place_name } = data["features"][0];
                             if (
                                 window.confirm(
-                                    `Comfirm your point\nLAT:${long}\nLONG:${lat}\n${place_name}\n`
+                                    L === "en"
+                                        ? `Comfirm your point\nLAT:${long}\nLONG:${lat}\n${place_name}\n`
+                                        : `Confirmez votre point\nLAT:${long}\nLONG:${lat}\n${place_name}\n`
                                 )
                             ) {
                                 this.props.setupReport({
@@ -77,6 +81,8 @@ class PortalBase extends Component {
 
 const mapStateToProps = (state) => ({
     ready: state.report.ready,
+    lang: state.lang.lang,
+    setup: state.report.setupreport,
 });
 
 const mapDispatchToProps = (dispatch) => ({

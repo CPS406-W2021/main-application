@@ -21,15 +21,16 @@ class Register extends Component {
         this.props.register({ email, username, password, name });
     };
     render() {
+        const L = this.props.lang;
         if (this.props.registerredirect) {
             return this.props.registerredirect;
         }
         return (
             <SingePageWrapper>
                 <div className="register-form ui small form">
-                    <h1>Sign Up</h1>
+                    <h1>{L === "en" ? "Sign Up" : "S'inscrire"}</h1>
 
-                    <label for="name">Name:</label>
+                    <label for="name">{L === "en" ? "Name:" : "Nom:"}</label>
                     <br></br>
                     <input
                         type="text"
@@ -41,7 +42,9 @@ class Register extends Component {
                     ></input>
                     <br></br>
 
-                    <label for="usrn">Username:</label>
+                    <label for="usrn">
+                        {L === "en" ? "Username:" : "Nom d'utilisateur:"}
+                    </label>
                     <br></br>
                     <input
                         type="text"
@@ -52,7 +55,8 @@ class Register extends Component {
                         }
                     ></input>
                     <br></br>
-                    <label for="email">Email:</label>
+
+                    <label for="email">E-mail:</label>
                     <br></br>
                     <input
                         type="text"
@@ -63,7 +67,10 @@ class Register extends Component {
                         }
                     ></input>
                     <br></br>
-                    <label for="pwd">Password:</label>
+
+                    <label for="pwd">
+                        {L === "en" ? "Password:" : "Mot de passe:"}
+                    </label>
                     <br></br>
                     <input
                         type="password"
@@ -74,7 +81,12 @@ class Register extends Component {
                         }
                     ></input>
                     <br></br>
-                    <label for="pwd">Confirm Password:</label>
+
+                    <label for="pwd">
+                        {L === "en"
+                            ? "Confirm Password:"
+                            : "Confirmez le mot de passe:"}
+                    </label>
                     <br></br>
                     <input
                         type="password"
@@ -94,11 +106,11 @@ class Register extends Component {
                         class="ui yellow button"
                         onClick={this.handleSubmission}
                     >
-                        REGISTER
+                        {L === "en" ? "REGISTER" : "S'INSCRIRE"}
                     </button>
                     <p>
                         <Link to="/" className="register ">
-                            Cancel
+                            {L === "en" ? "Cancel" : "Annuler"}
                         </Link>
                     </p>
                 </div>
@@ -110,6 +122,7 @@ class Register extends Component {
 const mapStateToProps = (state) => ({
     error: state.auth.error,
     registerredirect: state.auth.registerredirect,
+    lang: state.lang.lang,
 });
 
 const mapDispatchToProps = (dispatch) => ({

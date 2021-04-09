@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Image from "../../images/header.png";
 import { signIn, signOut } from "../../store/actions/authActions";
+import {
+    changeLangtoEng,
+    changeLangtoFr,
+} from "../../store/actions/langActions";
 class DashboarWrapper extends Component {
     renderAuthButton() {
         if (this.props.loggedin) {
@@ -22,10 +26,10 @@ class DashboarWrapper extends Component {
         );
     }
     render() {
-        let pages = [
+        const pages = [
             { text: "Home", route: "/" },
             { text: "Portal", route: "/portal" },
-            { text: "My Account", route: "/rap" },
+            { text: "My Account", route: "/profileinfo" },
             { text: "Contact", route: "/contact" },
         ];
         let currentPage = this.props.currentPage || 0;
@@ -74,8 +78,18 @@ class DashboarWrapper extends Component {
                     {this.props.children}
                 </div>
                 <div className="wp-con__footer">
-                    <div className="active">English (En)</div>
-                    <div>Français (Fr)</div>
+                    <div
+                        className={this.props.lang === "en" && "active"}
+                        onClick={this.props.changeLangtoEng}
+                    >
+                        English (En)
+                    </div>
+                    <div
+                        className={this.props.lang === "fr" && "active"}
+                        onClick={this.props.changeLangtoFr}
+                    >
+                        Français (Fr)
+                    </div>
                 </div>
             </div>
         );
@@ -84,12 +98,15 @@ class DashboarWrapper extends Component {
 
 const mapStateToProps = (state) => ({
     loggedin: state.auth.loggedin,
+    lang: state.lang.lang,
 });
 
 const mapDispatchToProps = (dispatch) => {
     return {
         login: (creds) => dispatch(signIn(creds)),
         logout: () => dispatch(signOut()),
+        changeLangtoEng: () => dispatch(changeLangtoEng()),
+        changeLangtoFr: () => dispatch(changeLangtoFr()),
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(DashboarWrapper);
