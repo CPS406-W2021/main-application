@@ -1,23 +1,5 @@
-export const createReport = ({
-    uid,
-    checkUpdates,
-    selection,
-    information,
-    latlong,
-    add,
-}) => {
+export const createReport = (report) => {
     let updates = ["Request Recieved"];
-    const report = {
-        checkUpdates,
-        selection,
-        information,
-        latlong,
-        add,
-        date: Date.now(),
-        updates,
-        upvotes: 0,
-        downvotes: 0,
-    };
     return (dispatch, getState, getFirebase) => {
         // make an entry for the report
         // ALSO make sure to associate the user, maybe firebase has a auth().getUser() or something...
@@ -25,13 +7,13 @@ export const createReport = ({
         const firebase = getFirebase().firestore();
         // let f = "titleOneX";
         firebase
-            .collection(`reports/${uid}/reports`)
+            .collection(`reports/`)
             .add(report)
             .then(() => {
-                alert("W");
+                dispatch({ type: "REPORT_CANCEL" });
             })
             .catch((err) => {
-                alert("L");
+                console.log(err);
             });
     };
 };
