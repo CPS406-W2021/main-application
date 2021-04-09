@@ -20,6 +20,11 @@ const reportReducer = (state = INIT_STATE, action) => {
                 ready: true,
                 setupreport: action.payload,
             };
+        case "REPORT_CANCEL":
+            return {
+                ...state,
+                ...INIT_STATE,
+            };
         default:
             return state;
     }

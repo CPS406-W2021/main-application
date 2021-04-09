@@ -39,5 +39,6 @@ export const setupReport = (report) => {
     return { type: "REPORT_SETUP", payload: report };
 };
 export const cancelReport = () => {
+    console.log("cancellign report");
     return { type: "REPORT_CANCEL" };
 };
