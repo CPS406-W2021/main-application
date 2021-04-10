@@ -17,6 +17,41 @@ export const createReport = (report) => {
             });
     };
 };
+
+//Report changes as json object with the correct labels within firebase
+export const editReport = ({reportId, reportChanges}) => {
+    return (dispatch, getState, getFirebase) => {
+        const firebase = getFirebase().firestore();
+        firebase
+            .collection(`reports/`)
+            .doc(reportId)
+            .set(reportChanges)
+            .then(() => {
+                dispatch({ type: "REPORT_EDIT_SUCCESS" });
+            })
+            .catch((err) => {
+                dispatch({ type: "REPORT_EDIT_ERROR", error: err.message });
+            });
+    };
+};
+
+
+export const deleteReport = (reportId) => {
+    return (dispatch, getState, getFirebase) => {
+        const firebase = getFirebase().firestore();
+        firebase
+            .collection(`reports/`)
+            .doc(reportId)
+            .delete()
+            .then(() => {
+                dispatch({ type: "REPORT_DELETED_SUCCESS" });
+            })
+            .catch((err) => {
+                dispatch({ type: "REPORT_DELETED_ERROR", error: err.message });
+            });
+    };
+};
+
 export const setupReport = (report) => {
     return { type: "REPORT_SETUP", payload: report };
 };
