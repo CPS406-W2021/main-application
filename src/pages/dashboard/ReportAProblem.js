@@ -22,7 +22,7 @@ class ReportAProblem extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         const uid = this.props.uid;
-        const { checkUpdates, selection, information, title } = this.state;
+        const { selection, information, title } = this.state;
         const selectionType = ["Tree", "Pothole", "Other"];
         this.props.createReport({
             uid,

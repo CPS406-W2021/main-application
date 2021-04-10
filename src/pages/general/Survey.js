@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import SingePageWrapper from "../../components/SinglePageWrapper";
 import { connect } from "react-redux";
+import { enterSurvey } from "../../store/actions/surveyActions";
 
 class Survey extends Component {
     constructor(props) {
@@ -26,10 +27,16 @@ class Survey extends Component {
                     ? "Please fill out all of the questions"
                     : "Veuillez remplir toutes les questions"
             );
+            return;
         }
-        console.log(this.state.answers);
+        alert("Thanks for filling out the survey!");
+        this.setState({ redirect: <Redirect to="/"></Redirect> });
+        this.props.enterSurvey(answers);
     };
     render() {
+        if (this.state.redirect) {
+            return this.state.redirect;
+        }
         const L = this.props.lang;
         if (this.state.redirecToHome) {
             return <Redirect to="/"></Redirect>;
@@ -123,7 +130,9 @@ class Survey extends Component {
                     </h1>
                     <div class="fields survRow">
                         <div className="survRow-text">
-                            Do you agree with the following?
+                            {L === "en"
+                                ? "Do you agree with the following?"
+                                : "Êtes-vous d'accord avec ce qui suit?"}
                         </div>
                         <div class="field survRow-field">
                             {L === "en" ? "No" : "Non"}
@@ -199,6 +208,6 @@ const mapStateToProps = (state) => ({
     lang: state.lang.lang,
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { enterSurvey };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Survey);
