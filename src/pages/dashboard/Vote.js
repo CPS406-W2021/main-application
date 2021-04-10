@@ -118,7 +118,6 @@ const mapStateToProps = (state) => {
           }))
         : [];
     // Rocky here
-    console.log(TOTAL_VOTES);
     return {
         ready: state.report.ready,
         lang: state.lang.lang,
