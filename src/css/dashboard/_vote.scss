@@ -67,12 +67,15 @@
         & > .usr{
           text-decoration: underline;
         } 
+        
       }
 
-
+      & > .loc {
+        color:rgb(143, 143, 143);
+      }
 
       & > .report-icons{
-        padding-top: 25px;
+        padding-top: 15px;
 
         & > .open{ 
           
@@ -93,6 +96,8 @@
 
 
   .map {
+    display: flex;
+    overflow: hidden;
     background-color: #555;
     width: 160px;
     height: 90px;
