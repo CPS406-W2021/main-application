@@ -24,3 +24,55 @@ export const cancelReport = () => {
     console.log("cancellign report");
     return { type: "REPORT_CANCEL" };
 };
+
+export const upVoteReport = ({reportId, uid}) => {
+    return (dispatch, getState, getFirebase) => {
+        const firebase = getFirebase().firestore();
+        let upVote = {vote: 1};
+
+        firebase
+            .collection(`votes/${reportId}_${uid}`)
+            .set(upVote)
+            .then(() => {
+                dispatch({ type: "VOTE_SUCCESS" });
+            })
+            .catch((err) => {
+                dispatch({ type: "VOTE_ERROR", error: err.message });
+            });
+    };
+}
+
+export const downVoteReport = ({reportId, uid}) => {
+    return (dispatch, getState, getFirebase) => {
+        const firebase = getFirebase().firestore();
+        let downVote = {vote: -1};
+
+        firebase
+            .collection(`votes/${reportId}_${uid}`)
+            .set(downVote)
+            .then(() => {
+                dispatch({ type: "VOTE_SUCCESS" });
+            })
+            .catch((err) => {
+                dispatch({ type: "VOTE_ERROR", error: err.message });
+            });
+    };
+}
+
+export const undoVoteReport = ({reportId, uid}) => {
+    return (dispatch, getState, getFirebase) => {
+        const firebase = getFirebase().firestore();
+        let downVote = {vote: 0};
+
+        firebase
+            .collection(`votes/`)
+            .doc(`${reportId}_${uid}`)
+            .delete()
+            .then(() => {
+                dispatch({ type: "UNDO_VOTE_SUCCESS" });
+            })
+            .catch((err) => {
+                dispatch({ type: "UNDO_VOTE_ERROR", error: err.message });
+            });
+    };
+}

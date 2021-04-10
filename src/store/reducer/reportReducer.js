@@ -23,6 +23,26 @@ const reportReducer = (state = INIT_STATE, action) => {
                 ...state,
                 ...INIT_STATE,
             };
+        case "VOTE_SUCCESS":
+            return {
+                ...state,
+                error: "",
+            };
+        case "VOTE_ERROR":
+            return {
+                ...state,
+                error: action.error,
+            };
+        case "UNDO_VOTE_SUCCESS":
+            return {
+                ...state,
+                error: "",
+            };
+        case "UNDO_VOTE_ERROR":
+            return {
+                ...state,
+                error: action.error,
+            };
         default:
             return state;
     }
