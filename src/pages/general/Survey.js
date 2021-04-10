@@ -21,7 +21,11 @@ class Survey extends Component {
         const L = this.props.lang;
         const { answers } = this.state;
         if (answers.some((i) => i === -1)) {
-            alert(L === "en" ? "Please fill out all of the questions" : "Veuillez remplir toutes les questions");
+            alert(
+                L === "en"
+                    ? "Please fill out all of the questions"
+                    : "Veuillez remplir toutes les questions"
+            );
         }
         console.log(this.state.answers);
     };
@@ -35,9 +39,9 @@ class Survey extends Component {
                 <SingePageWrapper>
                     <div className="surveyC">
                         <h1>
-                        {L === "en"
-                            ? "User Survey"
-                            : "Sondage auprès des utilisateurs"}
+                            {L === "en"
+                                ? "User Survey"
+                                : "Sondage auprès des utilisateurs"}
                         </h1>
                         <p>
                             <strong>
@@ -45,8 +49,12 @@ class Survey extends Component {
                                     ? "Would you like to part-take in a survey about the city?"
                                     : "Souhaitez-vous participer à une enquête sur la ville?"}
                             </strong>
-                            <br></br> {L === "en" ? "This Would take approximately" : "Cela prendrait environ"}
-                            <span> 5 minutes </span> {L === "en" ? "to complete" : "compléter"}
+                            <br></br>{" "}
+                            {L === "en"
+                                ? "This Would take approximately"
+                                : "Cela prendrait environ"}
+                            <span> 5 minutes </span>{" "}
+                            {L === "en" ? "to complete" : "compléter"}
                         </p>
 
                         <button
@@ -69,38 +77,65 @@ class Survey extends Component {
         }
         const surveyC = [
             {
-                q:  L === "en" ? "Toronto keeps residents informed about changes that affect them" 
-                               : "Toronto tient les résidents informés des changements qui les touchent",
+                q:
+                    L === "en"
+                        ? "Toronto keeps residents informed about changes that affect them"
+                        : "Toronto tient les résidents informés des changements qui les touchent",
             },
             {
-                q:  L === "en" ? "Toronto keeps resident's views in mind when making decisions"
-                               : "Toronto garde à l'esprit les opinions des résidents lors de la prise de décisions",
+                q:
+                    L === "en"
+                        ? "Toronto keeps resident's views in mind when making decisions"
+                        : "Toronto garde à l'esprit les opinions des résidents lors de la prise de décisions",
             },
             {
-                q:  L === "en" ? "Toronto keeps up with regular maintenace about the city"
-                               : "Toronto assure régulièrement l'entretien de la ville"
+                q:
+                    L === "en"
+                        ? "Toronto keeps up with regular maintenace about the city"
+                        : "Toronto assure régulièrement l'entretien de la ville",
             },
             {
-                q:  L === "en" ? "I am satisfied with the services and facilities provided by Toronto"
-                               : "Je suis satisfait des services et des installations fournis par Toronto"
+                q:
+                    L === "en"
+                        ? "I am satisfied with the services and facilities provided by Toronto"
+                        : "Je suis satisfait des services et des installations fournis par Toronto",
             },
             {
-                q:  L === "en" ? "Toronto's security and safety measures are up to date and I feel safe"
-                               : "Les mesures de sécurité et de sûreté de Toronto sont à jour et je me sens en sécurité"
+                q:
+                    L === "en"
+                        ? "Toronto's security and safety measures are up to date and I feel safe"
+                        : "Les mesures de sécurité et de sûreté de Toronto sont à jour et je me sens en sécurité",
             },
             {
-                q:  L === "en" ? "I would recommend Toronto as a city to live in to others"
-                               : "Je recommanderais Toronto comme ville où vivre aux autres"
-            },  
+                q:
+                    L === "en"
+                        ? "I would recommend Toronto as a city to live in to others"
+                        : "Je recommanderais Toronto comme ville où vivre aux autres",
+            },
         ];
         return (
             <SingePageWrapper>
                 <div className="survey ui form">
-                    <h1>{L === "en" ? "User Survey" : "Sondage auprès des utilisateurs"}</h1>
-                    <div className="options">
-                        {L === "en" ? "No" : "Non"} &nbsp; 
-                        {L === "en" ? "Somewhat" : "Quelque peu"} &nbsp; 
-                        {L === "en" ? "Yes" : "Oui"} </div>
+                    <h1>
+                        {L === "en"
+                            ? "User Survey"
+                            : "Sondage auprès des utilisateurs"}
+                    </h1>
+                    <div class="fields survRow">
+                        <div className="survRow-text">
+                            Do you agree with the following?
+                        </div>
+                        <div class="field survRow-field">
+                            {L === "en" ? "No" : "Non"}
+                        </div>
+                        <div class="field survRow-field">
+                            {L === "en" ? "Somewhat" : "Quelque peu"}
+                        </div>
+                        <div class="field survRow-field">
+                            {L === "en" ? "Yes" : "Oui"}
+                        </div>
+                    </div>
+                    <hr style={{ marginBottom: 10 }}></hr>
                     {surveyC.map(({ q, a }, i) => (
                         <SurveryRow
                             text={q}
@@ -109,7 +144,7 @@ class Survey extends Component {
                         ></SurveryRow>
                     ))}
                     <button class="ui yellow button" onClick={this.onSubmit}>
-                        {L === "en" ? "SUBMIT" : "NOUS FAIRE PARVENIR"} 
+                        {L === "en" ? "SUBMIT" : "NOUS FAIRE PARVENIR"}
                     </button>
                 </div>
             </SingePageWrapper>
@@ -120,9 +155,9 @@ class SurveryRow extends Component {
     render() {
         const { i, text, changeInput } = this.props;
         return (
-            <div class="inline fields">
-                <label>{text}</label>
-                <div class="field">
+            <div class="fields survRow">
+                <div className="survRow-text">{text}</div>
+                <div class="field survRow-field">
                     <div class="ui radio checkbox">
                         <input
                             type="radio"
@@ -133,7 +168,7 @@ class SurveryRow extends Component {
                         <label></label>
                     </div>
                 </div>
-                <div class="field">
+                <div class="field survRow-field">
                     <div class="ui radio checkbox">
                         <input
                             type="radio"
@@ -144,7 +179,7 @@ class SurveryRow extends Component {
                         <label></label>
                     </div>
                 </div>
-                <div class="field">
+                <div class="field survRow-field">
                     <div class="ui radio checkbox">
                         <input
                             type="radio"
