@@ -28,7 +28,7 @@ export const cancelReport = () => {
 export const upVoteReport = ({ reportId, uid }) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase().firestore();
-        let upVote = { vote: 1, reportId };
+        let upVote = { vote: 1, reportId, uid };
 
         firebase
             .collection(`votes/${reportId}_${uid}`)
@@ -45,7 +45,7 @@ export const upVoteReport = ({ reportId, uid }) => {
 export const downVoteReport = ({ reportId, uid }) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase().firestore();
-        let downVote = { vote: -1, reportId };
+        let downVote = { vote: -1, reportId, uid };
 
         firebase
             .collection(`votes/${reportId}_${uid}`)

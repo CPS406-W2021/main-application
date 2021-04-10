@@ -43,6 +43,18 @@ const reportReducer = (state = INIT_STATE, action) => {
                 ...state,
                 error: action.error,
             };
+        case "COUNT_VOTE_SUCCESS":
+            return {
+                ...state,
+                total: action.total,
+                error: "",
+            };
+        case "COUNT_VOTE_ERROR":
+            return {
+                ...state,
+                total: "",
+                error: action.error,
+            };
         default:
             return state;
     }
