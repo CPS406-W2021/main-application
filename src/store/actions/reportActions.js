@@ -25,10 +25,10 @@ export const cancelReport = () => {
     return { type: "REPORT_CANCEL" };
 };
 
-export const upVoteReport = ({reportId, uid}) => {
+export const upVoteReport = ({ reportId, uid }) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase().firestore();
-        let upVote = {vote: 1};
+        let upVote = { vote: 1, reportId };
 
         firebase
             .collection(`votes/${reportId}_${uid}`)
@@ -42,10 +42,10 @@ export const upVoteReport = ({reportId, uid}) => {
     };
 }
 
-export const downVoteReport = ({reportId, uid}) => {
+export const downVoteReport = ({ reportId, uid }) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase().firestore();
-        let downVote = {vote: -1};
+        let downVote = { vote: -1, reportId };
 
         firebase
             .collection(`votes/${reportId}_${uid}`)
@@ -59,10 +59,9 @@ export const downVoteReport = ({reportId, uid}) => {
     };
 }
 
-export const undoVoteReport = ({reportId, uid}) => {
+export const undoVoteReport = ({ reportId, uid }) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase().firestore();
-        let downVote = {vote: 0};
 
         firebase
             .collection(`votes/`)
@@ -76,3 +75,24 @@ export const undoVoteReport = ({reportId, uid}) => {
             });
     };
 }
+
+export const getVotes = ({ reportId }) => {
+    return (dispatch, getState, getFirebase) => {
+        const firebase = getFirebase().firestore();
+        let totalVotes = 0;
+
+        firebase
+            .collection(`votes/`)
+            .where('reportId', '==', reportId)
+            .get()
+            .then((allVotes) => {
+                allVotes.forEach(vote => {
+                    totalVotes += vote.vote;
+                });
+                dispatch({ type: "COUNT_VOTE_SUCCESS", total: totalVotes });
+            })
+            .catch((err) => {
+                dispatch({ type: "COUNT_VOTE_ERROR", error: err.message });
+            });
+    };
+};
