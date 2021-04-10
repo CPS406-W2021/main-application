@@ -1,10 +1,10 @@
 import authReducer from "./authReducer";
 import reportReducer from "./reportReducer";
+import langReducer from "./langReducer";
 
 import { combineReducers } from "redux";
 // import { firestoreReducer } from 'redux-firestore';
 import { firebaseReducer } from "react-redux-firebase";
-import langReducer from "./langReducer";
 import { firestoreReducer } from "redux-firestore";
 
 export default combineReducers({

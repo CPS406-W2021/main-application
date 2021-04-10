@@ -39,61 +39,16 @@ class PortalBase extends Component {
                 // selection={this.state.selection}
             ></RenderMap>
         );
-        // return (
-        //     <Map
-        //         // eslint-disable-next-line
-        //         style="mapbox://styles/mapbox/streets-v9"
-        //         containerStyle={{
-        //             flex: 1,
-        //             borderRadius: 35,
-        //         }}
-        //         center={[-79.3788, 43.6577]}
-        //         zoom={[16]}
-        //         onClick={(map, e) => {
-        //             const lat = map.getCenter().lat.toFixed(4);
-        //             const long = map.getCenter().lng.toFixed(4);
-
-        //             axios
-        //                 .get(
-        //                     `https://api.mapbox.com/geocoding/v5/mapbox.places/${long},${lat}.json?access_token=pk.eyJ1IjoiZmFyaGFuaG0iLCJhIjoiY2tuMTUxYjNnMHIyODJvbzJueDJzdWJmcCJ9.EIl7ZcqlshPyJxnxyGNGhg`
-        //                 )
-        //                 .then(({ data }) => {
-        //                     const { place_name } = data["features"][0];
-        //                     if (
-        //                         window.confirm(
-        //                             L === "en"
-        //                                 ? `Comfirm your point\nLAT:${long}\nLONG:${lat}\n${place_name}\n`
-        //                                 : `Confirmez votre point\nLAT:${long}\nLONG:${lat}\n${place_name}\n`
-        //                         )
-        //                     ) {
-        //                         this.props.setupReport({
-        //                             lat,
-        //                             long,
-        //                             name: place_name,
-        //                         });
-        //                     }
-        //                 })
-        //                 .catch((e) => {
-        //                     console.log(e);
-        //                 });
-        //         }}
-        //     >
-        //         <Marker coordinates={[-79.3788, 43.6577]} anchor="center">
-        //             <img
-        //                 src={blueMarker}
-        //                 width="30px"
-        //                 height="30px"
-        //                 alt={"marker"}
-        //             />
-        //         </Marker>
-        //     </Map>
-        // );
     };
     render() {
         let { reports } = this.props;
         const L = this.props.lang;
         return (
-            <DashboarWrapper currentPage={1} clearbg={true}>
+            <DashboarWrapper
+                currentPage={1}
+                clearbg={true}
+                subnav={[{ title: "Vote on Reports", to: "/vote" }]}
+            >
                 <div className="portal-con">
                     {this.renderMap()}
                     <div className="portal-button">

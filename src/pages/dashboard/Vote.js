@@ -14,7 +14,7 @@ class Vote extends Component {
         this.state = {
             Map: false,
         };
-    }    
+    }
     componentDidMount() {
         const Map = ReactMapboxGl({
             accessToken:
@@ -23,69 +23,111 @@ class Vote extends Component {
         });
         this.setState({ Map: Map });
     }
-    render(){
-        console.log(this.props.reports)
-        return <DashboarWrapper>
-            <div className="vot">
-                <div className="header">
-                    <h1>Current Problems in Toronto</h1>
-                    <div className ="header-icons">
-                        <span className="horn"><i class="large bullhorn icon"></i><strong>Most Relevant</strong></span>
-                        <span className="clock"><i class="large black clock outline icon" ></i><strong>Most Recent</strong> </span>
-                    </div>
-                </div>
-                {this.props.reports.map(({title,name,uid,loc,selection})=>{
-                    console.log({title,name,uid,selection})
-                    const selectionColor = {Other:2,Pothole:1,Tree:0}
-                    return(<Fragment>      
-                        <div className="container">
-                            <div className = "item-arrow">
-                                <i class="arrow up icon"></i>
-                                    <div>76</div>
-                                <i class="arrow down icon"></i>
-                            </div>
-                
-                            <div className="map">
-                                <RenderMap
-                                loc={loc}
-                                Map={this.state.Map}
-                                selection={selectionColor[selection]}
-                            ></RenderMap>                                
-                            </div>
-                
-                            <div className = "item-desc">
-                                <span className="title">{title}</span><br></br>
-                                <span className="info">Posted by <span className ="usr">{uid}</span> 13 hours ago</span><br></br>
-                                <span className="loc">Location: <span className ="address">{name}</span></span>
-
-                                <div className="report-icons">
-                                    <span className = "open"><i class="grey folder open outline icon"></i>View Full Report</span> 
-                                    <span className = "share"><i class="grey share square outline icon"></i>Share</span>    
-                                </div>
-                            </div>
+    render() {
+        return (
+            <DashboarWrapper>
+                <div className="vot">
+                    <div className="header">
+                        <h1>Current Problems in Toronto</h1>
+                        <div className="header-icons">
+                            <span className="horn">
+                                <i class="large bullhorn icon"></i>
+                                <strong>Most Relevant</strong>
+                            </span>
+                            <span className="clock">
+                                <i class="large black clock outline icon"></i>
+                                <strong>Most Recent</strong>{" "}
+                            </span>
                         </div>
-                        <div class="ui divider"></div> 
-                </Fragment>  
+                    </div>
+                    {this.props.reports.map(
+                        ({ title, name, uid, loc, selection }) => {
+                            const selectionColor = {
+                                Other: 2,
+                                Pothole: 1,
+                                Tree: 0,
+                            };
+                            return (
+                                <Fragment>
+                                    <div className="container">
+                                        <div className="item-arrow">
+                                            <i class="arrow up icon"></i>
+                                            <div>76</div>
+                                            <i class="arrow down icon"></i>
+                                        </div>
 
-                )})}
-            </div>
-            </DashboarWrapper>;
+                                        <div className="map">
+                                            <RenderMap
+                                                loc={loc}
+                                                Map={this.state.Map}
+                                                selection={
+                                                    selectionColor[selection]
+                                                }
+                                            ></RenderMap>
+                                        </div>
+
+                                        <div className="item-desc">
+                                            <span className="title">
+                                                {title}
+                                            </span>
+                                            <br></br>
+                                            <span className="info">
+                                                Posted by{" "}
+                                                <span className="usr">
+                                                    {uid}
+                                                </span>{" "}
+                                                13 hours ago
+                                            </span>
+                                            <br></br>
+                                            <span className="loc">
+                                                Location:{" "}
+                                                <span className="address">
+                                                    {name}
+                                                </span>
+                                            </span>
+
+                                            <div className="report-icons">
+                                                <span className="open">
+                                                    <i class="grey folder open outline icon"></i>
+                                                    View Full Report
+                                                </span>
+                                                <span className="share">
+                                                    <i class="grey share square outline icon"></i>
+                                                    Share
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ui divider"></div>
+                                </Fragment>
+                            );
+                        }
+                    )}
+                </div>
+            </DashboarWrapper>
+        );
     }
 }
 
-const mapStateToProps = (state) => ({
-    ready: state.report.ready,
-    lang: state.lang.lang,
-    reports: state.firestore.data["reports"]
-        ? Object.values(state.firestore.data["reports"])
-        : [],
-});
-
-const mapDispatchToProps = (dispatch) => ({
-});
+const mapStateToProps = (state) => {
+    console.log(state.auth.uid);
+    const REPORTS = state.firestore.data["reports"]
+        ? Object.keys(state.firestore.data["reports"]).map((k) => ({
+              key: k,
+              ...state.firestore.data["reports"][k],
+          }))
+        : [];
+    // Rocky here
+    console.log(TOTAL_VOTES);
+    return {
+        ready: state.report.ready,
+        lang: state.lang.lang,
+        reports: REPORTS,
+    };
+};
 
 export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
+    connect(mapStateToProps, {}),
     firestoreConnect(() => {
         return [
             {
@@ -93,9 +135,10 @@ export default compose(
                 orderBy: ["date", "desc"],
                 storeAs: "reports",
             },
+            { collection: "votes" },
         ];
     })
-)(Vote);  
+)(Vote);
 
 class RenderMap extends Component {
     render() {

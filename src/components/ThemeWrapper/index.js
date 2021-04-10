@@ -65,7 +65,14 @@ class DashboarWrapper extends Component {
                                 {this.renderAuthButton()}
                             </div>
                             {this.props.loggedin && (
-                                <div className="wp-header__subnav">subnav</div>
+                                <div className="wp-header__subnav">
+                                    {this.props.subnav &&
+                                        this.props.subnav.map(
+                                            ({ title, to }) => (
+                                                <Link to={to}>{title}</Link>
+                                            )
+                                        )}
+                                </div>
                             )}
                         </div>
                     </div>
