@@ -34,8 +34,9 @@ class Vote extends Component {
                         <span className="clock"><i class="large black clock outline icon" ></i><strong>Most Recent</strong> </span>
                     </div>
                 </div>
-                {this.props.reports.map(({title,name,uid,loc})=>{
-                    console.log({title,name,uid})
+                {this.props.reports.map(({title,name,uid,loc,selection})=>{
+                    console.log({title,name,uid,selection})
+                    const selectionColor = {Other:2,Pothole:1,Tree:0}
                     return(<Fragment>      
                         <div className="container">
                             <div className = "item-arrow">
@@ -48,7 +49,7 @@ class Vote extends Component {
                                 <RenderMap
                                 loc={loc}
                                 Map={this.state.Map}
-                                selection={0}
+                                selection={selectionColor[selection]}
                             ></RenderMap>                                
                             </div>
                 
