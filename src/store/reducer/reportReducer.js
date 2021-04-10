@@ -55,6 +55,26 @@ const reportReducer = (state = INIT_STATE, action) => {
                 total: "",
                 error: action.error,
             };
+        case "REPORT_EDIT_SUCCESS":
+            return {
+                ...state,
+                error: ""
+            };
+        case "REPORT_EDIT_ERROR":
+            return {
+                ...state,
+                error: action.error
+            };
+        case "REPORT_DELETE_SUCCESS":
+            return {
+                ...state,
+                error: ""
+            };
+        case "REPORT_DELETE_ERROR":
+            return {
+                ...state,
+                error: action.error
+            };
         default:
             return state;
     }
