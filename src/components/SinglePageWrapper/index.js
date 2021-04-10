@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import Image from '../../images/header.png';
+import Image from "../../images/header.png";
 import {
     changeLangtoEng,
     changeLangtoFr,
@@ -23,7 +23,9 @@ class SingePageWrapper extends Component {
                 <br></br>
                 <br></br>
 
-                <div className={`auth-con__body active`}>{this.props.children}</div>
+                <div className={`auth-con__body active`}>
+                    {this.props.children}
+                </div>
                 <div className="auth-con__footer">
                     <div
                         className={this.props.lang === "en" && "active"}
@@ -55,4 +57,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingePageWrapper);
-

@@ -26,6 +26,7 @@ class DashboarWrapper extends Component {
         );
     }
     render() {
+        console.log(this.props);
         const pages = [
             { text: "Home", route: "/" },
             { text: "Portal", route: "/portal" },
@@ -71,20 +72,20 @@ class DashboarWrapper extends Component {
                             </div>
                             {this.props.loggedin && (
                                 <div className="wp-header__subnav">
-                                {this.props.loggedin &&
-                                    subpages.map(({ text, route }, i) => (
-                                        <Link
-                                            key={text}
-                                            to={route}
-                                            className={`wp-header__subnav-item ${
-                                                i === currentPage
-                                                    ? "active"
-                                                    : ""
-                                            }`}
-                                        >
-                                            {text}
-                                        </Link>
-                                    ))}
+                                    {this.props.loggedin &&
+                                        subpages.map(({ text, route }, i) => (
+                                            <Link
+                                                key={text}
+                                                to={route}
+                                                className={`wp-header__subnav-item ${
+                                                    i === currentPage
+                                                        ? "active"
+                                                        : ""
+                                                }`}
+                                            >
+                                                {text}
+                                            </Link>
+                                        ))}
                                 </div>
                             )}
                         </div>
