@@ -32,6 +32,11 @@ class DashboarWrapper extends Component {
             { text: "My Account", route: "/profileinfo" },
             { text: "Contact", route: "/contact" },
         ];
+        const subpages = [
+            { text: "Vote", route: "/vote" },
+            { text: "Tell a Friend", route: "/taf" },
+            { text: "My Past Reports", route: "/pastreports" },
+        ];
         let currentPage = this.props.currentPage || 0;
         return (
             <div className="wp-con">
@@ -65,7 +70,22 @@ class DashboarWrapper extends Component {
                                 {this.renderAuthButton()}
                             </div>
                             {this.props.loggedin && (
-                                <div className="wp-header__subnav">subnav</div>
+                                <div className="wp-header__subnav">
+                                {this.props.loggedin &&
+                                    subpages.map(({ text, route }, i) => (
+                                        <Link
+                                            key={text}
+                                            to={route}
+                                            className={`wp-header__subnav-item ${
+                                                i === currentPage
+                                                    ? "active"
+                                                    : ""
+                                            }`}
+                                        >
+                                            {text}
+                                        </Link>
+                                    ))}
+                                </div>
                             )}
                         </div>
                     </div>
