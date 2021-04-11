@@ -56,10 +56,6 @@ class Login extends Component {
                         Don't have an account?{" "}
                         <Link to="/register">Register Now</Link>
                     </p>
-                    <p>
-                        Forgot your password?{" "}
-                        <Link to="/resetPass">Reset Now</Link>
-                    </p>
                 </div>
             </SingePageWrapper>
         );
