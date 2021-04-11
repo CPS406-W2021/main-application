@@ -60,32 +60,44 @@ export const cancelReport = () => {
     return { type: "REPORT_CANCEL" };
 };
 
-export const upVoteReport = ({ reportId, uid }) => {
+export const upVoteReport = async ({ reportId, uid }) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase().firestore();
         let upVote = { vote: 1, reportId, uid };
 
-        //Update vote collection
         firebase
             .collection(`votes/${reportId}_${uid}`)
-            .set(upVote)
-            .then(() => {
+            .get()
+            .then((doc) => {
+                if (doc) {
+                    let voteVal = 2
+                }
+                else {
+                    let voteVal = 1
+                }
 
-                //Aggregate Data
+                //Update vote collection
                 firebase
-                    .collection('reports')
-                    .doc(reportId)
-                    .update({
-                        votes: admin.firestore.FieldValue.increment(1)
-                    }).catch((err) => {
+                    .collection(`votes/${reportId}_${uid}`)
+                    .set(upVote)
+                    .then(() => {
+
+                        //Aggregate Data
+                        firebase
+                            .collection('reports')
+                            .doc(reportId)
+                            .update({
+                                votes: admin.firestore.FieldValue.increment(voteVal)
+                            }).catch((err) => {
+                                dispatch({ type: "VOTE_ERROR", error: err.message });
+                            });
+
+                        dispatch({ type: "VOTE_SUCCESS" });
+                    })
+                    .catch((err) => {
                         dispatch({ type: "VOTE_ERROR", error: err.message });
                     });
-
-                dispatch({ type: "VOTE_SUCCESS" });
             })
-            .catch((err) => {
-                dispatch({ type: "VOTE_ERROR", error: err.message });
-            });
     };
 }
 
@@ -95,27 +107,39 @@ export const downVoteReport = ({ reportId, uid }) => {
         const firebase = getFirebase().firestore();
         let downVote = { vote: -1, reportId, uid };
 
-        //Update vote collection
+
         firebase
             .collection(`votes/${reportId}_${uid}`)
-            .set(downVote)
-            .then(() => {
-
-                //Aggregate Data
+            .get()
+            .then((doc) => {
+                if (doc) {
+                    let voteVal = -2
+                }
+                else {
+                    let voteVal = -1
+                }
+                //Update vote collection
                 firebase
-                    .collection('reports')
-                    .doc(reportId)
-                    .update({
-                        votes: admin.firestore.FieldValue.increment(-1)
-                    }).catch((err) => {
+                    .collection(`votes/${reportId}_${uid}`)
+                    .set(downVote)
+                    .then(() => {
+
+                        //Aggregate Data
+                        firebase
+                            .collection('reports')
+                            .doc(reportId)
+                            .update({
+                                votes: admin.firestore.FieldValue.increment(voteVal)
+                            }).catch((err) => {
+                                dispatch({ type: "VOTE_ERROR", error: err.message });
+                            });
+
+                        dispatch({ type: "VOTE_SUCCESS" });
+                    })
+                    .catch((err) => {
                         dispatch({ type: "VOTE_ERROR", error: err.message });
                     });
-
-                dispatch({ type: "VOTE_SUCCESS" });
             })
-            .catch((err) => {
-                dispatch({ type: "VOTE_ERROR", error: err.message });
-            });
     };
 }
 
