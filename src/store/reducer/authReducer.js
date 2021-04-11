@@ -50,6 +50,34 @@ const authReducer = (state = INIT_STATE, action) => {
                 error: action.error,
                 registerredirect: '',
             };
+        case 'RESET_PASS_SUCCESS':
+            alert('RESET_PASS_SUCCESS');
+            return {
+                ...state,
+                error: '',
+                registerredirect: <Redirect to="/"></Redirect>,
+            };
+        case 'RESET_PASS_ERROR':
+            alert('RESET_PASS_ERROR');
+            return {
+                ...state,
+                error: action.error,
+                registerredirect: '',
+            };
+        case 'ACCOUNT_DELETE_SUCCESS':
+            alert('ACCOUNT_DELETE_SUCCESS');
+            return {
+                ...state,
+                error: '',
+                registerredirect: <Redirect to="/"></Redirect>,
+            };
+        case 'ACCOUNT_DELETE_ERROR':
+            alert('ACCOUNT_DELETE_ERROR');
+            return {
+                ...state,
+                error: action.error,
+                registerredirect: '',
+            };
         default:
             return state;
     }

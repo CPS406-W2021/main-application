@@ -71,6 +71,10 @@ class Login extends Component {
                                 : "S'inscrire maintenant"}
                         </Link>
                     </p>
+                    <p>
+                        Forgot your password?{" "}
+                        <Link to="/resetPass">Reset Now</Link>
+                    </p>
                 </div>
             </SingePageWrapper>
         );

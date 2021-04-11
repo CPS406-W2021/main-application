@@ -45,3 +45,34 @@ export const register = ({ email, password, name, username }) => {
             })
     }
 };
+
+export const resetPassword = ({ email }) => {
+    return (dispatch, getState, getFirebase) => {
+        const firebase = getFirebase();
+
+        firebase
+            .auth()
+            .sendPasswordResetEmail(email)
+            .then(() => {
+                dispatch({ type: 'RESET_PASS_SUCCESS' });
+            })
+            .catch((err) => {
+                dispatch({ type: 'RESET_PASS_ERROR', error: err.message });
+            })
+    }
+};
+
+export const deleteAccount = ({uid}) => {
+    return (dispatch, getState, getFirebase) => {
+        const firebase = getFirebase();
+        firebase
+            .auth()
+            .deleteUser(uid)
+            .then(() => {
+                dispatch({ type: 'ACCOUNT_DELETE_SUCCESS' });
+            })
+            .catch((err) => {
+                dispatch({ type: 'ACCOUNT_DELETE_ERROR', error: err.message });
+            })
+    }
+}
