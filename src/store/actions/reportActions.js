@@ -64,16 +64,16 @@ export const upVoteReport = async ({ reportId, uid }) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase().firestore();
         let upVote = { vote: 1, reportId, uid };
-
+        let voteVal
         firebase
             .collection(`votes/${reportId}_${uid}`)
             .get()
             .then((doc) => {
                 if (doc) {
-                    let voteVal = 2
+                    voteVal = 2
                 }
                 else {
-                    let voteVal = 1
+                    voteVal = 1
                 }
 
                 //Update vote collection
@@ -87,7 +87,7 @@ export const upVoteReport = async ({ reportId, uid }) => {
                             .collection('reports')
                             .doc(reportId)
                             .update({
-                                votes: admin.firestore.FieldValue.increment(voteVal)
+                                votes: firebase.FieldValue.increment(voteVal)
                             }).catch((err) => {
                                 dispatch({ type: "VOTE_ERROR", error: err.message });
                             });
@@ -106,17 +106,17 @@ export const downVoteReport = ({ reportId, uid }) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase().firestore();
         let downVote = { vote: -1, reportId, uid };
-
+        let voteVal
 
         firebase
             .collection(`votes/${reportId}_${uid}`)
             .get()
             .then((doc) => {
                 if (doc) {
-                    let voteVal = -2
+                    voteVal = -2
                 }
                 else {
-                    let voteVal = -1
+                    voteVal = -1
                 }
                 //Update vote collection
                 firebase
@@ -129,7 +129,7 @@ export const downVoteReport = ({ reportId, uid }) => {
                             .collection('reports')
                             .doc(reportId)
                             .update({
-                                votes: admin.firestore.FieldValue.increment(voteVal)
+                                votes: firebase.FieldValue.increment(voteVal)
                             }).catch((err) => {
                                 dispatch({ type: "VOTE_ERROR", error: err.message });
                             });
