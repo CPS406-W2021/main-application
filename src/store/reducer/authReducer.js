@@ -60,6 +60,18 @@ const authReducer = (state = INIT_STATE, action) => {
                 ...state,
                 error: action.error,
             };
+        case 'PROFILE_DELETE_SUCCESS':
+            return {
+                ...state,
+                error: '',
+                registerredirect: <Redirect to="/"></Redirect>,
+            };
+        case 'PROFILE_DELETE_SUCCESS':
+            return {
+                ...state,
+                error: action.error,
+                registerredirect: '',
+            };
         default:
             return state;
     }

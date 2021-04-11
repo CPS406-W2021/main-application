@@ -63,3 +63,20 @@ export const updateProfile = ({ userId, profileChanges }) => {
             });
     }
 }
+
+export const deleteProfile = ({ userId }) => {
+    return (dispatch, getState, getFirebase) => {
+        const firebase = getFirebase().firestore()
+
+        firebase
+            .collection('users')
+            .doc(userId)
+            .delete()
+            .then(() => {
+                dispatch({ type: "PROFILE_DELETE_SUCCESS" });
+            })
+            .catch((err) => {
+                dispatch({ type: "PROFILE_DELETE_ERROR", error: err.message });
+            });
+    }
+}
