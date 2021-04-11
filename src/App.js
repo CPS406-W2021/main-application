@@ -50,6 +50,9 @@ export default class App extends Component {
                     <Route path="/Survey">
                         <Survey />
                     </Route>
+                    <Route path="/resetPass">
+                        <ResetPass />
+                    </Route>
                     <Route exact path="/">
                         <Home />
                     </Route>
