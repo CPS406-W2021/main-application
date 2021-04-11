@@ -50,6 +50,16 @@ const authReducer = (state = INIT_STATE, action) => {
                 error: action.error,
                 registerredirect: '',
             };
+        case 'PROFILE_UPDATE_SUCCESS':
+            return {
+                ...state,
+                error: action.error,
+            };
+        case 'PROFILE_UPDATE_ERROR':
+            return {
+                ...state,
+                error: action.error,
+            };
         default:
             return state;
     }

@@ -45,3 +45,21 @@ export const register = ({ email, password, name, username }) => {
             })
     }
 };
+
+//userId and then a object of only changes.
+export const updateProfile = ({ userId, profileChanges }) => {
+    return (dispatch, getState, getFirebase) => {
+        const firebase = getFirebase().firestore()
+
+        firebase
+            .collection('users')
+            .doc(userId)
+            .set(profileChanges, { merge: true })
+            .then(() => {
+                dispatch({ type: "PROFILE_UPDATE_SUCCESS" });
+            })
+            .catch((err) => {
+                dispatch({ type: "PROFILE_UPDATE_ERROR", error: err.message });
+            });
+    }
+}
