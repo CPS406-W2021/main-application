@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import DashboarWrapper from "../../components/ThemeWrapper";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 const FAQInfo = [
     {
@@ -70,8 +70,17 @@ class FAQSingle extends Component {
 }
 
 class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            redirect: false,
+        };
+    }
     renderSlogan() {
         const L = this.props.lang;
+        if (this.state.redirect) {
+            return this.state.redirect;
+        }
         return (
             <div className="slogan-con">
                 <h1 className="main-slogan">
@@ -85,10 +94,26 @@ class Home extends Component {
                         : "Le système CyPress est conçu pour vous permettre de signaler les problèmes qui vous concernent À propos de la ville. Notre mission est d'améliorer la sécurité publique de la ville grâce au contributions de nos citoyens."}
                 </i>
                 <div className="slogan-btn__con">
-                    <button type="button" className="btn-login">
+                    <button
+                        type="button"
+                        className="btn-login"
+                        onClick={() =>
+                            this.setState({
+                                redirect: <Redirect to="/login"></Redirect>,
+                            })
+                        }
+                    >
                         {L === "en" ? "Log In" : "Connexion"}
                     </button>
-                    <button type="button" className="btn-signup">
+                    <button
+                        type="button"
+                        className="btn-signup"
+                        onClick={() =>
+                            this.setState({
+                                redirect: <Redirect to="/register"></Redirect>,
+                            })
+                        }
+                    >
                         {L === "en" ? "Sign Up" : "S'inscrire"}
                     </button>
                 </div>
@@ -104,11 +129,11 @@ class Home extends Component {
                     {L === "en"
                         ? "We take feedback from our users seriously. This survey will allow us tocontinously improve our system according to our users needs. This will take approximately 5 minutes to complete."
                         : "Nous prenons au sérieux les commentaires de nos utilisateurs. Cette enquête nous permettra d'améliorer continuellement notre système en fonction des besoins de nos utilisateurs. Cela prendra environ 5 minutes."}
-                    <Link to="/survey">
+                    <a href="/survey">
                         {L === "en"
                             ? " Take Survey "
                             : " Participer à l'enquête "}
-                    </Link>
+                    </a>
                 </p>
             </div>
         );
@@ -160,8 +185,9 @@ class Home extends Component {
 
 const mapStateToProps = (state) => ({
     lang: state.lang.lang,
+    redirect: state.redirect,
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

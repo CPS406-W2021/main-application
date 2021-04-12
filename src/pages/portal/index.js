@@ -44,7 +44,11 @@ class PortalBase extends Component {
         let { reports } = this.props;
         const L = this.props.lang;
         return (
-            <DashboarWrapper currentPage={1} clearbg={true}>
+            <DashboarWrapper
+                currentPage={1}
+                clearbg={true}
+                subnav={[{ title: "Vote on Reports", to: "/vote" }]}
+            >
                 <div className="portal-con">
                     {this.renderMap()}
                     <div className="portal-button">

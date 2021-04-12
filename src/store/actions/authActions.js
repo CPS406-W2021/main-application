@@ -37,7 +37,7 @@ export const register = ({ email, password, name, username }) => {
 
         // Do registeration & generate profile
         firebase
-            .createUser({ email, password }, { name, username }) //Params login creds & profile info
+            .createUser({ email, password }, { email, name, username }) //Params login creds & profile info
             .then((auth) => {
                 dispatch({ type: "REGISTERATION_COMPLETE" });
             })
@@ -59,32 +59,86 @@ export const resetPassword = (email = null) => {
             .sendPasswordResetEmail(email)
             .then(() => {
                 dispatch({ type: "RESET_PASS_SUCCESS" });
-            })
-            .catch((err) => {
-                dispatch({ type: "RESET_PASS_ERROR", error: err.message });
             });
     };
 };
 
-export const deleteAccount = ({ uid }) => {
+//userId and then a object of only changes.
+export const updateAccount = (profileChanges) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase();
-        firebase
-            .auth()
-            .deleteUser(uid)
+        const firestore = firebase.firestore();
+        const STATE = getState();
+        function validateEmail(email) {
+            const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+        if (
+            profileChanges["email"] === "" ||
+            !validateEmail(profileChanges["email"])
+        ) {
+            delete profileChanges["email"];
+        }
+        if (profileChanges["name"] === "") {
+            delete profileChanges["name"];
+        }
+        if (profileChanges["address"] === "") {
+            delete profileChanges["address"];
+        }
+        if (STATE.auth.loggedin) {
+            firestore
+                .collection("users")
+                .doc(firebase.auth().currentUser.uid)
+                .set(profileChanges, { merge: true })
+                .then(() => {
+                    dispatch({ type: "PROFILE_UPDATE_SUCCESS" });
+                })
+                .catch((err) => {
+                    dispatch({
+                        type: "PROFILE_UPDATE_ERROR",
+                        error: err.message,
+                    });
+                });
+        }
+    };
+};
+
+export const deleteAccount = () => {
+    return (dispatch, getState, getFirebase) => {
+        const firebase = getFirebase();
+        const firestore = firebase.firestore();
+        const STATE = getState();
+
+        firestore
+            .collection("users")
+            .doc(firebase.auth().currentUser.uid)
+            .delete()
             .then(() => {
-                dispatch({ type: "ACCOUNT_DELETE_SUCCESS" });
+                dispatch({ type: "PROFILE_DELETE_SUCCESS" });
             })
             .catch((err) => {
-                dispatch({ type: "ACCOUNT_DELETE_ERROR", error: err.message });
+                dispatch({
+                    type: "PROFILE_DELETE_ERROR",
+                    error: err.message,
+                });
+            })
+            .then(() => {
+                if (STATE.auth.loggedin) {
+                    firebase
+                        .auth()
+                        .currentUser.delete()
+                        .then(() => {})
+                        .catch((err) => {
+                            dispatch({
+                                type: "PROFILE_DELETE_ERROR",
+                                error: err.message,
+                            });
+                        });
+                }
             });
     };
 };
 
-export const updateAccount = ({ email, phone, name }) => {
-    alert("updating");
-    return (dispatch, getState, getFirebase) => {};
-};
 export const clearError = () => {
     return { type: "CLEAR_ERROR" };
 };

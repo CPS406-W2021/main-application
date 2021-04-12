@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import ProtectedRoute from "./Routes/ProtectedRoute";
+
 import Contact from "./pages/general/Contact";
 import Home from "./pages/general/Home";
 import PortalBase from "./pages/portal";
@@ -12,7 +14,7 @@ import Vote from "./pages/dashboard/Vote";
 import Survey from "./pages/general/Survey";
 import Settings from "./pages/account/ProfileInfo";
 import PastReports from "./pages/dashboard/PastReports";
-import ProtectedRoute from "./Routes/ProtectedRoute";
+import ProfileInfo from "./pages/account/ProfileInfo";
 // import ViewReports from "./pages/dashboard/ViewReports";
 
 require("dotenv").config();
@@ -27,9 +29,9 @@ export default class App extends Component {
                     <Route path="/register">
                         <Register />
                     </Route>
-                    <Route path="/profileinfo">
+                    <ProtectedRoute path="/profileinfo">
                         <Settings />
-                    </Route>
+                    </ProtectedRoute>
                     <ProtectedRoute path="/portal">
                         <PortalBase />
                     </ProtectedRoute>
