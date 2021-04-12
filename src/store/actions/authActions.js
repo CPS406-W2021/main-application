@@ -110,11 +110,21 @@ export const deleteAccount = () => {
         const firestore = firebase.firestore();
         const STATE = getState();
         if (STATE.auth.loggedin) {
-            firestore
-                .collection("users")
-                .doc(firebase.auth().currentUser.uid)
+            firebase
+                .auth()
+                .currentUser
                 .delete()
                 .then(() => {
+                    firestore
+                        .collection("users")
+                        .doc(firebase.auth().currentUser.uid)
+                        .delete()
+                        .catch((err) => {
+                            dispatch({
+                                type: "PROFILE_DELETE_ERROR",
+                                error: err.message,
+                            });
+                        });
                     dispatch({ type: "PROFILE_DELETE_SUCCESS" });
                 })
                 .catch((err) => {
