@@ -24,11 +24,13 @@ const reportReducer = (state = INIT_STATE, action) => {
                 ...INIT_STATE,
             };
         case "VOTE_SUCCESS":
+            // alert("W");
             return {
                 ...state,
                 error: "",
             };
         case "VOTE_ERROR":
+            alert(action.error);
             return {
                 ...state,
                 error: action.error,
@@ -58,22 +60,22 @@ const reportReducer = (state = INIT_STATE, action) => {
         case "REPORT_EDIT_SUCCESS":
             return {
                 ...state,
-                error: ""
+                error: "",
             };
         case "REPORT_EDIT_ERROR":
             return {
                 ...state,
-                error: action.error
+                error: action.error,
             };
         case "REPORT_DELETE_SUCCESS":
             return {
                 ...state,
-                error: ""
+                error: "",
             };
         case "REPORT_DELETE_ERROR":
             return {
                 ...state,
-                error: action.error
+                error: action.error,
             };
         default:
             return state;

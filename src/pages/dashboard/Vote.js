@@ -7,12 +7,17 @@ import ReactMapboxGl, { Marker } from "react-mapbox-gl";
 import blueMarker from "../../images/icons/blue.png";
 import greenMarker from "../../images/icons/green.png";
 import redMarker from "../../images/icons/red.png";
-
+import { Link } from "react-router-dom";
+import {
+    downVoteReport,
+    upVoteReport,
+} from "../../store/actions/reportActions";
 class Vote extends Component {
     constructor(props) {
         super(props);
         this.state = {
             Map: false,
+            sort: "recent",
         };
     }
     componentDidMount() {
@@ -23,39 +28,47 @@ class Vote extends Component {
         });
         this.setState({ Map: Map });
     }
+    renderList() {
+        function sortBy(field) {
+            return function (a, b) {
+                return (a[field] > b[field]) - (a[field] < b[field]);
+            };
+        }
+        if (this.state.sort === "recent") {
+            return this.props.reports;
+        } else {
+            return [...this.props.reports].sort(sortBy("votes")).reverse();
+        }
+    }
     render() {
-        const L = this.props.lang;
         return (
             <DashboarWrapper>
                 <div className="vot">
                     <div className="header">
-                        <h1>
-                            {L === "en"
-                                ? "Current Problems in Toronto"
-                                : "Problèmes actuels à Toronto"}
-                        </h1>
+                        <h1>Current Problems in Toronto</h1>
                         <div className="header-icons">
-                            <span className="horn">
+                            <span
+                                className="horn"
+                                onClick={() =>
+                                    this.setState({ sort: "relevant" })
+                                }
+                            >
                                 <i class="large bullhorn icon"></i>
-                                <strong>
-                                    {L === "en"
-                                        ? "Most Relevant"
-                                        : "Le plus pertinent"}
-                                </strong>
+                                <strong>Most Relevant</strong>
                             </span>
-                            <span className="clock">
+                            <span
+                                className="clock"
+                                onClick={() =>
+                                    this.setState({ sort: "recent" })
+                                }
+                            >
                                 <i class="large black clock outline icon"></i>
-                                <strong>
-                                    {L === "en"
-                                        ? "Most Recent"
-                                        : "Le plus récent"}
-                                </strong>{" "}
+                                <strong>Most Recent</strong>
                             </span>
                         </div>
                     </div>
-                    {this.props.reports.map(
-                        ({ title, name, uid, loc, selection }) => {
-                            console.log({ title, name, uid, selection });
+                    {this.renderList().map(
+                        ({ title, name, uid, loc, selection, key, votes }) => {
                             const selectionColor = {
                                 Other: 2,
                                 Pothole: 1,
@@ -64,10 +77,32 @@ class Vote extends Component {
                             return (
                                 <Fragment>
                                     <div className="container">
-                                        <div className="item-arrow">
-                                            <i class="arrow up icon"></i>
-                                            <div>76</div>
-                                            <i class="arrow down icon"></i>
+                                        <div className="item-arrow item-arrow__con">
+                                            <div
+                                                className="item-arrow__up"
+                                                onClick={() =>
+                                                    this.props.upVoteReport(
+                                                        key,
+                                                        uid
+                                                    )
+                                                }
+                                            >
+                                                <i class="arrow up icon"></i>
+                                            </div>
+                                            <div className="item-arrow__num">
+                                                {votes}
+                                            </div>
+                                            <div
+                                                className="item-arrow__down"
+                                                onClick={() =>
+                                                    this.props.downVoteReport(
+                                                        key,
+                                                        uid
+                                                    )
+                                                }
+                                            >
+                                                <i class="arrow down icon"></i>
+                                            </div>
                                         </div>
 
                                         <div className="map">
@@ -86,38 +121,38 @@ class Vote extends Component {
                                             </span>
                                             <br></br>
                                             <span className="info">
-                                                {L === "en"
-                                                    ? "Posted by"
-                                                    : "Posté par"}{" "}
+                                                Posted by{" "}
                                                 <span className="usr">
                                                     {uid}
-                                                </span>
-                                                {L === "en"
-                                                    ? " 13 hours ago"
-                                                    : " Il y a 13 heures"}
+                                                </span>{" "}
+                                                13 hours ago
                                             </span>
                                             <br></br>
                                             <span className="loc">
-                                                {L === "en"
-                                                    ? "Location: "
-                                                    : "Emplacement: "}
+                                                Location:{" "}
                                                 <span className="address">
                                                     {name}
                                                 </span>
                                             </span>
 
                                             <div className="report-icons">
-                                                <span className="open">
+                                                <Link
+                                                    to={`/report?report=${key}`}
+                                                    className="open"
+                                                >
                                                     <i class="grey folder open outline icon"></i>
-                                                    {L === "en"
-                                                        ? "View Full Report"
-                                                        : "Afficher le rapport complet"}
-                                                </span>
-                                                <span className="share">
+                                                    View Full Report
+                                                </Link>
+                                                <span
+                                                    className="share"
+                                                    onClick={() => {
+                                                        navigator.clipboard.writeText(
+                                                            `${window.location.origin}/report?report=${key}`
+                                                        );
+                                                    }}
+                                                >
                                                     <i class="grey share square outline icon"></i>
-                                                    {L === "en"
-                                                        ? "Share"
-                                                        : "Partager"}
+                                                    Share
                                                 </span>
                                             </div>
                                         </div>
@@ -148,9 +183,14 @@ const mapStateToProps = (state) => {
         reports: REPORTS,
     };
 };
-
+const mapDispatchToProps = (dispatch) => ({
+    downVoteReport: (rid, uid) =>
+        dispatch(downVoteReport({ reportId: rid, uid: uid })),
+    upVoteReport: (rid, uid) =>
+        dispatch(upVoteReport({ reportId: rid, uid: uid })),
+});
 export default compose(
-    connect(mapStateToProps, {}),
+    connect(mapStateToProps, mapDispatchToProps),
     firestoreConnect(() => {
         return [
             {

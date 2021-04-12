@@ -14,7 +14,7 @@ import Vote from "./pages/dashboard/Vote";
 import Survey from "./pages/general/Survey";
 import Settings from "./pages/account/ProfileInfo";
 import PastReports from "./pages/dashboard/PastReports";
-import ProfileInfo from "./pages/account/ProfileInfo";
+import { ReportRouter } from "./pages/dashboard/Report";
 // import ViewReports from "./pages/dashboard/ViewReports";
 
 require("dotenv").config();
@@ -23,6 +23,9 @@ export default class App extends Component {
         return (
             <Router>
                 <Switch>
+                    <Route path="/report">
+                        <ReportRouter />
+                    </Route>
                     <Route path="/login">
                         <Login />
                     </Route>
@@ -41,9 +44,9 @@ export default class App extends Component {
                     <ProtectedRoute exact path="/taf">
                         <TellAFriend />
                     </ProtectedRoute>
-                    <Route path="/vote">
+                    <ProtectedRoute path="/vote">
                         <Vote />
-                    </Route>
+                    </ProtectedRoute>
                     <Route path="/contact">
                         <Contact />
                     </Route>
