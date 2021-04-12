@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { loadReport } from "../../store/actions/reportActions";
 import Report from "./ViewReports";
-export class ReportRouter extends Component {
+class ReportRouter extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { loaded: false };
+    }
     render() {
         var queryDict = {};
         const params = window.location.search.substr(1);
@@ -11,6 +16,9 @@ export class ReportRouter extends Component {
         });
         if (queryDict["report"] === undefined) {
             return <Redirect to="/"></Redirect>;
+        } else if (!this.state.loaded) {
+            this.props.loadReport(queryDict["report"]);
+            this.setState({ loaded: true });
         }
         return <Report></Report>;
     }
@@ -18,6 +26,8 @@ export class ReportRouter extends Component {
 
 const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = (dispatch) => ({
+    loadReport: (r) => dispatch(loadReport(r)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReportRouter);

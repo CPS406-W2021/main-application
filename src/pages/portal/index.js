@@ -32,6 +32,7 @@ class PortalBase extends Component {
         const L = this.props.lang;
         return (
             <RenderMap
+                setupReport={this.props.setupReport}
                 loc={[-79.3788, 43.6577]}
                 Map={this.state.Map}
                 L={L}
@@ -159,6 +160,7 @@ class RenderMap extends Component {
                                             : `Confirmez votre point\nLAT:${long}\nLONG:${lat}\n${place_name}\n`
                                     )
                                 ) {
+                                    console.log("here");
                                     this.props.setupReport({
                                         lat,
                                         long,
