@@ -109,34 +109,35 @@ export const deleteAccount = () => {
         const firebase = getFirebase();
         const firestore = firebase.firestore();
         const STATE = getState();
-        const uid = firebase.auth().currentUser.uid
-        if (STATE.auth.loggedin) {
-            firebase
-                .auth()
-                .currentUser
-                .delete()
-                .then(() => {
-                    firestore
-                        .collection("users")
-                        .doc(uid)
+
+        firestore
+            .collection("users")
+            .doc(firebase.auth().currentUser.uid)
+            .delete()
+            .then(() => {
+                dispatch({ type: "PROFILE_DELETE_SUCCESS" });
+            })
+            .catch((err) => {
+                dispatch({
+                    type: "PROFILE_DELETE_ERROR",
+                    error: err.message,
+                });
+            }).then(() => {
+                if (STATE.auth.loggedin) {
+                    firebase
+                        .auth()
+                        .currentUser
                         .delete()
                         .then(() => {
-                            dispatch({ type: "PROFILE_DELETE_SUCCESS" });
                         })
                         .catch((err) => {
                             dispatch({
                                 type: "PROFILE_DELETE_ERROR",
                                 error: err.message,
                             });
-                        })
-                })
-                .catch((err) => {
-                    dispatch({
-                        type: "PROFILE_DELETE_ERROR",
-                        error: err.message,
-                    });
-                });
-        }
+                        });
+                }
+            })
     };
 };
 
