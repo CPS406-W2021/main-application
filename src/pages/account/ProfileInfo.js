@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import DashboarWrapper from "../../components/ThemeWrapper";
 import { connect } from "react-redux";
-import { resetPassword, deleteAccount } from "../../store/actions/authActions";
+import {
+    resetPassword,
+    deleteAccount,
+    updateAccount,
+} from "../../store/actions/authActions";
 class Settings extends Component {
     render() {
         return (
@@ -15,7 +19,10 @@ class Settings extends Component {
                             <h2>Edit Account</h2>
                             <div className="pro-sub">
                                 <div>Change your profile information.</div>
-                                <button class="ui green button">
+                                <button
+                                    class="ui green button"
+                                    onClick={this.props.updateInfo}
+                                >
                                     Save Changes
                                 </button>
                             </div>
@@ -92,6 +99,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     deleteAccount: () => dispatch(deleteAccount()),
     resetPassword: () => dispatch(resetPassword()),
+    updateInfo: () => dispatch(updateAccount()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

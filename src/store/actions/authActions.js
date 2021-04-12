@@ -78,6 +78,10 @@ export const deleteAccount = ({ uid }) => {
     };
 };
 
+export const updateAccount = ({ email, phone, name }) => {
+    alert("updating");
+    return (dispatch, getState, getFirebase) => {};
+};
 export const clearError = () => {
     return { type: "CLEAR_ERROR" };
 };
