@@ -109,6 +109,7 @@ export const deleteAccount = () => {
         const firebase = getFirebase();
         const firestore = firebase.firestore();
         const STATE = getState();
+        const uid = firebase.auth().currentUser.uid
         if (STATE.auth.loggedin) {
             firebase
                 .auth()
@@ -117,7 +118,7 @@ export const deleteAccount = () => {
                 .then(() => {
                     firestore
                         .collection("users")
-                        .doc(firebase.auth().currentUser.uid)
+                        .doc(uid)
                         .delete()
                         .catch((err) => {
                             dispatch({
