@@ -45,9 +45,9 @@ export default class App extends Component {
                     <ProtectedRoute exact path="/taf">
                         <TellAFriend />
                     </ProtectedRoute>
-                    <Route path="/vote">
+                    <ProtectedRoute path="/vote">
                         <Vote />
-                    </Route>
+                    </ProtectedRoute>
                     <Route path="/contact">
                         <Contact />
                     </Route>

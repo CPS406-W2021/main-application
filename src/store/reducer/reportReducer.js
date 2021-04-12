@@ -24,7 +24,7 @@ const reportReducer = (state = INIT_STATE, action) => {
                 ...INIT_STATE,
             };
         case "VOTE_SUCCESS":
-            alert("W");
+            // alert("W");
             return {
                 ...state,
                 error: "",

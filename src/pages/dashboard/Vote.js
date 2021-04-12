@@ -17,6 +17,7 @@ class Vote extends Component {
         super(props);
         this.state = {
             Map: false,
+            sort: "recent",
         };
     }
     componentDidMount() {
@@ -27,6 +28,18 @@ class Vote extends Component {
         });
         this.setState({ Map: Map });
     }
+    renderList() {
+        function sortBy(field) {
+            return function (a, b) {
+                return (a[field] > b[field]) - (a[field] < b[field]);
+            };
+        }
+        if (this.state.sort === "recent") {
+            return this.props.reports;
+        } else {
+            return [...this.props.reports].sort(sortBy("votes")).reverse();
+        }
+    }
     render() {
         return (
             <DashboarWrapper>
@@ -34,17 +47,27 @@ class Vote extends Component {
                     <div className="header">
                         <h1>Current Problems in Toronto</h1>
                         <div className="header-icons">
-                            <span className="horn">
+                            <span
+                                className="horn"
+                                onClick={() =>
+                                    this.setState({ sort: "relevant" })
+                                }
+                            >
                                 <i class="large bullhorn icon"></i>
                                 <strong>Most Relevant</strong>
                             </span>
-                            <span className="clock">
+                            <span
+                                className="clock"
+                                onClick={() =>
+                                    this.setState({ sort: "recent" })
+                                }
+                            >
                                 <i class="large black clock outline icon"></i>
-                                <strong>Most Recent</strong>{" "}
+                                <strong>Most Recent</strong>
                             </span>
                         </div>
                     </div>
-                    {this.props.reports.map(
+                    {this.renderList().map(
                         ({ title, name, uid, loc, selection, key, votes }) => {
                             const selectionColor = {
                                 Other: 2,
