@@ -70,9 +70,9 @@ export const upVoteReport = ({ reportId, uid }) => {
             .get()
             .then((doc) => {
                 if (doc.exists) {
-                    if (doc.data().vote == -1) {
+                    if (doc.data().vote === -1) {
                         voteVal = 2;
-                    } else if (doc.data().vote == 1) {
+                    } else if (doc.data().vote === 1) {
                         voteVal = 0;
                     }
                 } else {
@@ -136,9 +136,9 @@ export const downVoteReport = ({ reportId, uid }) => {
             .get()
             .then((doc) => {
                 if (doc.exists) {
-                    if (doc.data().vote == 1) {
+                    if (doc.data().vote === 1) {
                         voteVal = -2;
-                    } else if (doc.data().vote == -1) {
+                    } else if (doc.data().vote === -1) {
                         voteVal = 0;
                     }
                 } else {

@@ -190,7 +190,7 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(upVoteReport({ reportId: rid, uid: uid })),
 });
 export default compose(
-    connect(mapStateToProps, {}),
+    connect(mapStateToProps, mapDispatchToProps),
     firestoreConnect(() => {
         return [
             {
