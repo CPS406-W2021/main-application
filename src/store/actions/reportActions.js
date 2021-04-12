@@ -60,13 +60,14 @@ export const cancelReport = () => {
     return { type: "REPORT_CANCEL" };
 };
 
-export const upVoteReport = async ({ reportId, uid }) => {
+export const upVoteReport = ({ reportId, uid }) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase().firestore();
         let upVote = { vote: 1, reportId, uid };
-        let voteVal
+        let voteVal = 1
         firebase
-            .collection(`votes/${reportId}_${uid}`)
+            .collection(`votes/`)
+            .doc(`${reportId}_${uid}`)
             .get()
             .then((doc) => {
                 if (doc) {
@@ -78,7 +79,8 @@ export const upVoteReport = async ({ reportId, uid }) => {
 
                 //Update vote collection
                 firebase
-                    .collection(`votes/${reportId}_${uid}`)
+                    .collection(`votes`)
+                    .doc(`${reportId}_${uid}`)
                     .set(upVote)
                     .then(() => {
 
@@ -106,10 +108,11 @@ export const downVoteReport = ({ reportId, uid }) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase().firestore();
         let downVote = { vote: -1, reportId, uid };
-        let voteVal
+        let voteVal = -1
 
         firebase
-            .collection(`votes/${reportId}_${uid}`)
+            .collection(`votes`)
+            .doc(`${reportId}_${uid}`)
             .get()
             .then((doc) => {
                 if (doc) {
@@ -120,7 +123,8 @@ export const downVoteReport = ({ reportId, uid }) => {
                 }
                 //Update vote collection
                 firebase
-                    .collection(`votes/${reportId}_${uid}`)
+                    .collection(`votes`)
+                    .doc(`${reportId}_${uid}`)
                     .set(downVote)
                     .then(() => {
 
