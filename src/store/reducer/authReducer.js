@@ -1,82 +1,85 @@
-import { Redirect } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 
-const INIT_STATE = { loggedin: false, uid: '', error: '', registerredirect: '' };
+const INIT_STATE = {
+    loggedin: false,
+    uid: "",
+    error: "",
+    registerredirect: "",
+};
 const authReducer = (state = INIT_STATE, action) => {
     switch (action.type) {
-        case 'LOGIN_ERROR':
+        case "CLEAR_ERROR":
+            return { ...state, error: "", registerredirect: "" };
+        case "LOGIN_ERROR":
             return {
                 ...state,
                 loggedin: false,
-                uid: '',
+                uid: "",
                 error: action.error,
-                registerredirect: '',
+                registerredirect: "",
             };
-        case 'LOGIN_SUCCESS':
+        case "LOGIN_SUCCESS":
             return {
                 ...state,
                 loggedin: true,
                 uid: action.uid,
-                error: '',
-                registerredirect: '',
+                error: "",
+                registerredirect: "",
             };
 
-        case 'LOGOUT_SUCCESS':
+        case "LOGOUT_SUCCESS":
             return {
                 ...state,
                 loggedin: false,
-                uid: '',
-                error: '',
-                registerredirect: '',
+                uid: "",
+                error: "",
+                registerredirect: "",
             };
-        case 'LOGOUT_FAILURE':
+        case "LOGOUT_FAILURE":
             alert(action.error);
             return {
                 ...state,
                 loggedin: true,
                 error: action.error,
-                registerredirect: '',
+                registerredirect: "",
             };
-        case 'REGISTERATION_COMPLETE':
-            alert('Registration Successful!');
+        case "REGISTERATION_COMPLETE":
             return {
                 ...state,
-                error: '',
+                error: "",
                 registerredirect: <Redirect to="/login"></Redirect>,
             };
-        case 'REGISTERATION_ERROR':
-            alert('REGISTERATION_ERROR!');
+        case "REGISTERATION_ERROR":
             return {
                 ...state,
                 error: action.error,
-                registerredirect: '',
+                registerredirect: "",
             };
-        case 'RESET_PASS_SUCCESS':
-            alert('RESET_PASS_SUCCESS');
+        case "RESET_PASS_SUCCESS":
             return {
                 ...state,
-                error: '',
+                error: "",
                 registerredirect: <Redirect to="/"></Redirect>,
             };
-        case 'RESET_PASS_ERROR':
-            alert('RESET_PASS_ERROR');
+        case "RESET_PASS_ERROR":
             return {
                 ...state,
                 error: action.error,
-                registerredirect: '',
+                registerredirect: "",
             };
-        case 'ACCOUNT_DELETE_SUCCESS':
-            alert('ACCOUNT_DELETE_SUCCESS');
+        case "ACCOUNT_DELETE_SUCCESS":
+            alert("ACCOUNT_DELETE_SUCCESS");
             return {
                 ...state,
-                error: '',
+                error: "",
                 registerredirect: <Redirect to="/"></Redirect>,
             };
-        case 'ACCOUNT_DELETE_ERROR':
-            alert('ACCOUNT_DELETE_ERROR');
+        case "ACCOUNT_DELETE_ERROR":
+            alert("ACCOUNT_DELETE_ERROR");
             return {
                 ...state,
                 error: action.error,
-                registerredirect: '',
+                registerredirect: "",
             };
         default:
             return state;
