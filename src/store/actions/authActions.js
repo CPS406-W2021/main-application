@@ -47,70 +47,15 @@ export const register = ({ email, password, name, username }) => {
     };
 };
 
-export const resetPassword = ({ email }) => {
-    return (dispatch, getState, getFirebase) => {
-        const firebase = getFirebase();
-
-        firebase
-            .auth()
-            .sendPasswordResetEmail(email)
-            .then(() => {
-                dispatch({ type: "RESET_PASS_SUCCESS" });
-            })
-
-//userId and then a object of only changes.
-export const updateProfile = ({ userId, profileChanges }) => {
-    return (dispatch, getState, getFirebase) => {
-        const firebase = getFirebase().firestore()
-
-        firebase
-            .collection('users')
-            .doc(userId)
-            .set(profileChanges, { merge: true })
-            .then(() => {
-                dispatch({ type: "PROFILE_UPDATE_SUCCESS" });
-            })
-            .catch((err) => {
-                dispatch({ type: "PROFILE_UPDATE_ERROR", error: err.message });
-            });
-    }
-}
-
-export const deleteProfile = ({ userId }) => {
-    return (dispatch, getState, getFirebase) => {
-        const firebase = getFirebase().firestore()
-
-        firebase
-            .collection('users')
-            .doc(userId)
-            .delete()
-            .then(() => {
-                dispatch({ type: "PROFILE_DELETE_SUCCESS" });
-            })
-            .catch((err) => {
-                dispatch({ type: "PROFILE_DELETE_ERROR", error: err.message });
-            });
-    }
-}
-
-export const deleteAccount = ({ uid }) => {
-    return (dispatch, getState, getFirebase) => {
-        const firebase = getFirebase();
-        firebase
-            .auth()
-            .deleteUser(uid)
-            .then(() => {
-                dispatch({ type: "ACCOUNT_DELETE_SUCCESS" });
-            })
-            .catch((err) => {
-                dispatch({ type: "ACCOUNT_DELETE_ERROR", error: err.message });
-            });
-    };
+export const resetPassword = () => {
+    return {};
 };
 
-export const updateAccount = ({ email, phone, name }) => {
-    alert("updating");
-    return (dispatch, getState, getFirebase) => {};
+export const deleteAccount = () => {
+    return {};
+};
+export const updateAccount = () => {
+    return {};
 };
 export const clearError = () => {
     return { type: "CLEAR_ERROR" };

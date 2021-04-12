@@ -7,7 +7,11 @@ import ReactMapboxGl, { Marker } from "react-mapbox-gl";
 import blueMarker from "../../images/icons/blue.png";
 import greenMarker from "../../images/icons/green.png";
 import redMarker from "../../images/icons/red.png";
-
+import { Link } from "react-router-dom";
+import {
+    downVoteReport,
+    upVoteReport,
+} from "../../store/actions/reportActions";
 class Vote extends Component {
     constructor(props) {
         super(props);
@@ -41,7 +45,7 @@ class Vote extends Component {
                         </div>
                     </div>
                     {this.props.reports.map(
-                        ({ title, name, uid, loc, selection }) => {
+                        ({ title, name, uid, loc, selection, key, votes }) => {
                             const selectionColor = {
                                 Other: 2,
                                 Pothole: 1,
@@ -50,10 +54,32 @@ class Vote extends Component {
                             return (
                                 <Fragment>
                                     <div className="container">
-                                        <div className="item-arrow">
-                                            <i class="arrow up icon"></i>
-                                            <div>76</div>
-                                            <i class="arrow down icon"></i>
+                                        <div className="item-arrow item-arrow__con">
+                                            <div
+                                                className="item-arrow__up"
+                                                onClick={() =>
+                                                    this.props.upVoteReport(
+                                                        key,
+                                                        uid
+                                                    )
+                                                }
+                                            >
+                                                <i class="arrow up icon"></i>
+                                            </div>
+                                            <div className="item-arrow__num">
+                                                {votes}
+                                            </div>
+                                            <div
+                                                className="item-arrow__down"
+                                                onClick={() =>
+                                                    this.props.downVoteReport(
+                                                        key,
+                                                        uid
+                                                    )
+                                                }
+                                            >
+                                                <i class="arrow down icon"></i>
+                                            </div>
                                         </div>
 
                                         <div className="map">
@@ -87,11 +113,21 @@ class Vote extends Component {
                                             </span>
 
                                             <div className="report-icons">
-                                                <span className="open">
+                                                <Link
+                                                    to={`/report?report=${key}`}
+                                                    className="open"
+                                                >
                                                     <i class="grey folder open outline icon"></i>
                                                     View Full Report
-                                                </span>
-                                                <span className="share">
+                                                </Link>
+                                                <span
+                                                    className="share"
+                                                    onClick={() => {
+                                                        navigator.clipboard.writeText(
+                                                            `${window.location.origin}/report?report=${key}`
+                                                        );
+                                                    }}
+                                                >
                                                     <i class="grey share square outline icon"></i>
                                                     Share
                                                 </span>
@@ -124,9 +160,14 @@ const mapStateToProps = (state) => {
         reports: REPORTS,
     };
 };
-
+const mapDispatchToProps = (dispatch) => ({
+    downVoteReport: (rid, uid) =>
+        dispatch(downVoteReport({ reportId: rid, uid: uid })),
+    upVoteReport: (rid, uid) =>
+        dispatch(upVoteReport({ reportId: rid, uid: uid })),
+});
 export default compose(
-    connect(mapStateToProps, {}),
+    connect(mapStateToProps, mapDispatchToProps),
     firestoreConnect(() => {
         return [
             {
