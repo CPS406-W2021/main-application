@@ -46,9 +46,13 @@ export const register = ({ email, password, name, username }) => {
     }
 };
 
-export const resetPassword = ({ email }) => {
+export const resetPassword = ({ email = null }) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase();
+
+        if (email == null && firebase.auth().getInstance.currentUser()){
+            email = firebase.auth().getInstance.currentUser().email
+        }
 
         firebase
             .auth()
