@@ -36,7 +36,7 @@ export const register = ({ email, password, name, username }) => {
         const firebase = getFirebase();
 
         // Do registeration & generate profile
-        firebase.createUser({ email, password }, { name, username }) //Params login creds & profile info
+        firebase.createUser({ email, password }, { email, name, username }) //Params login creds & profile info
             .then((auth) => {
                 dispatch({ type: 'REGISTERATION_COMPLETE' })
             })
