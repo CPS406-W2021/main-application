@@ -24,14 +24,15 @@ class Vote extends Component {
         this.setState({ Map: Map });
     }
     render(){
+        const L = this.props.lang;
         console.log(this.props.reports)
         return <DashboarWrapper>
             <div className="vot">
                 <div className="header">
-                    <h1>Current Problems in Toronto</h1>
+                    <h1>{ L === "en" ? "Current Problems in Toronto" : "Problèmes actuels à Toronto" }</h1>
                     <div className ="header-icons">
-                        <span className="horn"><i class="large bullhorn icon"></i><strong>Most Relevant</strong></span>
-                        <span className="clock"><i class="large black clock outline icon" ></i><strong>Most Recent</strong> </span>
+                        <span className="horn"><i class="large bullhorn icon"></i><strong>{ L === "en" ? "Most Relevant" : "Le plus pertinent" }</strong></span>
+                        <span className="clock"><i class="large black clock outline icon" ></i><strong>{ L === "en" ? "Most Recent" : "Le plus récent" }</strong> </span>
                     </div>
                 </div>
                 {this.props.reports.map(({title,name,uid,loc,selection})=>{
@@ -55,12 +56,12 @@ class Vote extends Component {
                 
                             <div className = "item-desc">
                                 <span className="title">{title}</span><br></br>
-                                <span className="info">Posted by <span className ="usr">{uid}</span> 13 hours ago</span><br></br>
-                                <span className="loc">Location: <span className ="address">{name}</span></span>
+                                <span className="info">{ L === "en" ? "Posted by" : "Posté par" } <span className ="usr">{uid}</span>{ L === "en" ? " 13 hours ago" : " Il y a 13 heures" }</span><br></br>
+                                <span className="loc">{ L === "en" ? "Location: " : "Emplacement: " }<span className ="address">{name}</span></span>
 
                                 <div className="report-icons">
-                                    <span className = "open"><i class="grey folder open outline icon"></i>View Full Report</span> 
-                                    <span className = "share"><i class="grey share square outline icon"></i>Share</span>    
+                                    <span className = "open"><i class="grey folder open outline icon"></i>{ L === "en" ? "View Full Report" : "Afficher le rapport complet" }</span> 
+                                    <span className = "share"><i class="grey share square outline icon"></i>{ L === "en" ? "Share" : "Partager" }</span>    
                                 </div>
                             </div>
                         </div>
