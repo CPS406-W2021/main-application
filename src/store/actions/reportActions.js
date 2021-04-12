@@ -64,14 +64,19 @@ export const upVoteReport = ({ reportId, uid }) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase().firestore();
         let upVote = { vote: 1, reportId, uid };
-        let voteVal
+        let voteVal = 0
         firebase
             .collection(`votes`)
             .doc(`${reportId}_${uid}`)
             .get()
             .then((doc) => {
                 if (doc.exists) {
-                    voteVal = 2
+                    if (doc.data().vote == -1) {
+                        voteVal = 2
+                    }
+                    else if (doc.data().vote == 1) {
+                        voteVal = 0
+                    }
                 }
                 else {
                     voteVal = 1
@@ -83,21 +88,29 @@ export const upVoteReport = ({ reportId, uid }) => {
                     .doc(`${reportId}_${uid}`)
                     .set(upVote)
                     .then(() => {
-                        
+
                         //Aggregate Data
                         firebase
                             .collection('reports')
                             .doc(reportId)
-                            .update({
-                                votes: firebase.FieldValue.increment(voteVal)
+                            .get()
+                            .then((report) => {
+                                firebase
+                                    .collection('reports')
+                                    .doc(reportId)
+                                    .set({
+                                        votes: report.data().votes + voteVal
+                                    }, { merge: true }).catch((err) => {
+                                        dispatch({ type: "VOTE_ERROR", error: err.message });
+                                    });
                             }).catch((err) => {
-                                dispatch({ type: "VOTE_ERROR", error: "1 " + err.message });
+                                dispatch({ type: "VOTE_ERROR", error: err.message });
                             });
 
                         dispatch({ type: "VOTE_SUCCESS" });
                     })
                     .catch((err) => {
-                        dispatch({ type: "VOTE_ERROR", error: "2 " + err.message });
+                        dispatch({ type: "VOTE_ERROR", error: err.message });
                     });
             })
     };
@@ -116,11 +129,17 @@ export const downVoteReport = ({ reportId, uid }) => {
             .get()
             .then((doc) => {
                 if (doc.exists) {
-                    voteVal = -2
+                    if (doc.data().vote == 1) {
+                        voteVal = -2
+                    }
+                    else if (doc.data().vote == -1) {
+                        voteVal = 0
+                    }
                 }
                 else {
                     voteVal = -1
                 }
+
                 //Update vote collection
                 firebase
                     .collection(`votes`)
@@ -132,8 +151,16 @@ export const downVoteReport = ({ reportId, uid }) => {
                         firebase
                             .collection('reports')
                             .doc(reportId)
-                            .update({
-                                votes: firebase.FieldValue.increment(voteVal)
+                            .get()
+                            .then((report) => {
+                                firebase
+                                    .collection('reports')
+                                    .doc(reportId)
+                                    .set({
+                                        votes: report.data().votes + voteVal
+                                    }, { merge: true }).catch((err) => {
+                                        dispatch({ type: "VOTE_ERROR", error: err.message });
+                                    });
                             }).catch((err) => {
                                 dispatch({ type: "VOTE_ERROR", error: err.message });
                             });
