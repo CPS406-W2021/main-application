@@ -1,93 +1,132 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import DashboarWrapper from "../../components/ThemeWrapper";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { firestoreConnect } from "react-redux-firebase";
+import ReactMapboxGl, { Marker } from "react-mapbox-gl";
+import blueMarker from "../../images/icons/blue.png";
+import greenMarker from "../../images/icons/green.png";
+import redMarker from "../../images/icons/red.png";
 
-export default class Vote extends Component {
-    render() {
+class Vote extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            Map: false,
+        };
+    }    
+    componentDidMount() {
+        const Map = ReactMapboxGl({
+            accessToken:
+                "pk.eyJ1IjoiZmFyaGFuaG0iLCJhIjoiY2tuMTUxYjNnMHIyODJvbzJueDJzdWJmcCJ9.EIl7ZcqlshPyJxnxyGNGhg",
+            interactive: false,
+        });
+        this.setState({ Map: Map });
+    }
+    render(){
+        console.log(this.props.reports)
         return <DashboarWrapper>
-            <div className="rap-body">
-                <h1 className="rap-h1">Current Problems in Toronto</h1>
-                    <span class="vote">
-                        <svg width="36" height="36">
-                            <path d="M2 26h32L18 10z" fill="currentColor"></path> 
-                        </svg>
-                    </span>
-                    <br></br>
-                    076        
-                    <h4>Tree Collapse at 21 Lorem Ip. blocking cars from getting through.</h4>
-            <div class="a">
-                <img src="https://www.ctvnews.ca/polopoly_fs/1.1841069.1401235959!/httpImage/image.jpg_gen/derivatives/landscape_960/image.jpg" alt="ctvnew.ca" width="130" height="70"></img>
-            </div>  
-                    009
-                    <br></br>
-                    <span class="vote">
-                        <svg width="36" height="36">
-                            <path d="M2 10h32L18 26 2 10z" fill="currentColor"></path>
-                        </svg>
-                    </span>
-                    <br></br>
-                    <span class="vote">
-                        <svg width="36" height="36">
-                            <path d="M2 26h32L18 10z" fill="currentColor"></path>
-                        </svg>
-                    </span>
-                    <br></br>
-                    021
-                    <h4>Pothole at 123 Street St. potential danger</h4>
-            <div class="a">
-                <img src="https://images.squarespace-cdn.com/content/v1/56569c54e4b06edc0ac0c135/1519847973350-EUBV9HI0LQVGPXFVXEHZ/ke17ZwdGBToddI8pDm48kDHPSfPanjkWqhH6pl6g5ph7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0mwONMR1ELp49Lyc52iWr5dNb1QJw9casjKdtTg1_-y4jz4ptJBmI9gQmbjSQnNGng/Pothole+4.JPG" alt="images.squarespace-cdn.com" width="130" height="70"></img>
-            </div>
-                    003
-                    <br></br>
-                    <span class="vote">
-                        <svg width="36" height="36">
-                            <path d="M2 10h32L18 26 2 10z " fill="currentColor"></path>
-                        </svg>
-                    </span>
-                    <br></br>
-                    <span class="vote">
-                        <svg width="36" height="36">
-                            <path d="M2 26h32L18 10z" fill="currentColor"></path>
-                        </svg>
-                    </span>
-                    <br></br>
-                    010
-                    <h4>Garbage at 467 Avenue Av. blocking sidewalk</h4>
-            <div class="a">
-                <img src="https://bramptonist.com/wp-content/uploads/2017/04/peel-garbage-1280x720.png" alt="bramptonist.com" width="130" height="70"></img>
-            </div>
-                    002
-                    <br></br>
-                    <span class="vote">
-                        <svg width="36" height="36">
-                            <path d="M2 10h32L18 26 2 10z " fill="currentColor"></path>
-                        </svg>
-                    </span>
-                    <br></br>
-                    <span class="vote">
-                        <svg width="36" height="36">
-                            <path d="M2 26h32L18 10z" fill="currentColor"></path>
-                        </svg>
-                    </span>
-                    <br></br>
-                    054
-                    <h4>Vandalism at 102 Jarvis St.</h4>
-            <div class="a">
-                <img src="https://media.segd.org/s3fs-public/styles/galleryformatter_slide/public/new1_0.jpg?itok=gNMKqBeN" alt="media.segd.org" width="130" height="70"></img>
-            </div>
-                    023
-                    <br></br>
-                    <span class="vote">
-                        <svg width="36" height="36">
-                            <path d="M2 10h32L18 26 2 10z " fill="currentColor"></path>
-                        </svg>
-                    </span>
+            <div className="vot">
+                <div className="header">
+                    <h1>Current Problems in Toronto</h1>
+                    <div className ="header-icons">
+                        <span className="horn"><i class="large bullhorn icon"></i><strong>Most Relevant</strong></span>
+                        <span className="clock"><i class="large black clock outline icon" ></i><strong>Most Recent</strong> </span>
+                    </div>
                 </div>
+                {this.props.reports.map(({title,name,uid,loc,selection})=>{
+                    console.log({title,name,uid,selection})
+                    const selectionColor = {Other:2,Pothole:1,Tree:0}
+                    return(<Fragment>      
+                        <div className="container">
+                            <div className = "item-arrow">
+                                <i class="arrow up icon"></i>
+                                    <div>76</div>
+                                <i class="arrow down icon"></i>
+                            </div>
+                
+                            <div className="map">
+                                <RenderMap
+                                loc={loc}
+                                Map={this.state.Map}
+                                selection={selectionColor[selection]}
+                            ></RenderMap>                                
+                            </div>
+                
+                            <div className = "item-desc">
+                                <span className="title">{title}</span><br></br>
+                                <span className="info">Posted by <span className ="usr">{uid}</span> 13 hours ago</span><br></br>
+                                <span className="loc">Location: <span className ="address">{name}</span></span>
+
+                                <div className="report-icons">
+                                    <span className = "open"><i class="grey folder open outline icon"></i>View Full Report</span> 
+                                    <span className = "share"><i class="grey share square outline icon"></i>Share</span>    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui divider"></div> 
+                </Fragment>  
+
+                )})}
+            </div>
             </DashboarWrapper>;
     }
 }
 
-for (const btn of document.querySelectorAll('.vote')) {
-    btn.addEventListener('click', event => {
-      event.currentTarget.classList.toggle('on');
-    });
-  }
+const mapStateToProps = (state) => ({
+    ready: state.report.ready,
+    lang: state.lang.lang,
+    reports: state.firestore.data["reports"]
+        ? Object.values(state.firestore.data["reports"])
+        : [],
+});
+
+const mapDispatchToProps = (dispatch) => ({
+});
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    firestoreConnect(() => {
+        return [
+            {
+                collection: "reports",
+                orderBy: ["date", "desc"],
+                storeAs: "reports",
+            },
+        ];
+    })
+)(Vote);  
+
+class RenderMap extends Component {
+    render() {
+        const markerIcons = [blueMarker, greenMarker, redMarker];
+        const selection = this.props.selection;
+        if (this.props.Map) {
+            let Map = this.props.Map;
+            return (
+                <Map
+                    // eslint-disable-next-line
+                    style="mapbox://styles/mapbox/streets-v9"
+                    containerStyle={{
+                        flex: 1,
+                    }}
+                    center={this.props.loc}
+                    zoom={[13]}
+                >
+                    {selection >= 0 && (
+                        <Marker coordinates={this.props.loc} anchor="center">
+                            <img
+                                src={markerIcons[selection]}
+                                width="30px"
+                                height="30px"
+                                alt="marker"
+                            />
+                        </Marker>
+                    )}
+                </Map>
+            );
+        } else {
+            return <div>Loading Map</div>;
+        }
+    }
+}

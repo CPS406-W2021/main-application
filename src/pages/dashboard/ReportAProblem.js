@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { authIsReady } from "react-redux-firebase";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import DashboarWrapper from "../../components/ThemeWrapper";
 import { createReport } from "../../store/actions/reportActions";
 import ReactMapboxGl, { Marker } from "react-mapbox-gl";
@@ -17,22 +16,22 @@ class ReportAProblem extends Component {
             selection: -1,
             information: "",
             Map: false,
+            title: "",
         };
     }
     onSubmit = (e) => {
         e.preventDefault();
         const uid = this.props.uid;
-        const { checkUpdates, selection, information } = this.state;
+        const { selection, information, title } = this.state;
         const selectionType = ["Tree", "Pothole", "Other"];
-        const add = "123 St";
-        const latlong = [0, 0];
         this.props.createReport({
             uid,
-            checkUpdates,
             selection: selectionType[Number(selection)],
             information,
-            add,
-            latlong,
+            name: this.props.place,
+            loc: this.props.loc,
+            title,
+            date: new Date().toISOString(),
         });
     };
     componentDidMount() {
@@ -47,12 +46,12 @@ class ReportAProblem extends Component {
         if (!this.props.ready) {
             return <Redirect to="/portal"></Redirect>;
         }
-        let Map = this.state.Map;
         return (
             <DashboarWrapper currentPage={2}>
                 <div className="rap-con">
                     <div className="rap-map">
                         <RenderMap
+                            loc={this.props.loc}
                             Map={this.state.Map}
                             selection={this.state.selection}
                         ></RenderMap>
@@ -142,10 +141,11 @@ class ReportAProblem extends Component {
                                     Submit
                                 </button>
                                 <button
-                                    to="/portal"
                                     class="ui button"
-                                    type="submit"
-                                    onClick={this.cancelReport}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        this.props.cancelReport();
+                                    }}
                                 >
                                     Cancel
                                 </button>
@@ -173,10 +173,6 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(ReportAProblem);
 
 class RenderMap extends Component {
-    constructor(props) {
-        super(props);
-    }
-    renderMarker() {}
     render() {
         const markerIcons = [blueMarker, greenMarker, redMarker];
         const selection = this.props.selection;
@@ -184,23 +180,22 @@ class RenderMap extends Component {
             let Map = this.props.Map;
             return (
                 <Map
+                    // eslint-disable-next-line
                     style="mapbox://styles/mapbox/streets-v9"
                     containerStyle={{
                         flex: 1,
                         borderRadius: 35,
                     }}
-                    center={[-79.3788, 43.6577]}
+                    center={this.props.loc}
                     zoom={[17]}
                 >
                     {selection >= 0 && (
-                        <Marker
-                            coordinates={[-79.3788, 43.6577]}
-                            anchor="center"
-                        >
+                        <Marker coordinates={this.props.loc} anchor="center">
                             <img
                                 src={markerIcons[selection]}
                                 width="30px"
                                 height="30px"
+                                alt="marker"
                             />
                         </Marker>
                     )}

@@ -8,6 +8,8 @@ const INIT_STATE = {
 };
 const authReducer = (state = INIT_STATE, action) => {
     switch (action.type) {
+        case "CLEAR_ERROR":
+            return { ...state, error: "", registerredirect: "" };
         case "LOGIN_ERROR":
             return {
                 ...state,

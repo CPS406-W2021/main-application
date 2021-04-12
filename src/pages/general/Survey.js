@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import SingePageWrapper from "../../components/SinglePageWrapper";
-export default class Survey extends Component {
+import { connect } from "react-redux";
+import { enterSurvey } from "../../store/actions/surveyActions";
+
+class Survey extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,13 +19,25 @@ export default class Survey extends Component {
         this.setState({ answers });
     };
     onSubmit = () => {
+        const L = this.props.lang;
         const { answers } = this.state;
         if (answers.some((i) => i === -1)) {
-            alert("Please fill out all of the questions");
+            alert(
+                L === "en"
+                    ? "Please fill out all of the questions"
+                    : "Veuillez remplir toutes les questions"
+            );
+            return;
         }
-        console.log(this.state.answers);
+        alert("Thanks for filling out the survey!");
+        this.setState({ redirect: <Redirect to="/"></Redirect> });
+        this.props.enterSurvey(answers);
     };
     render() {
+        if (this.state.redirect) {
+            return this.state.redirect;
+        }
+        const L = this.props.lang;
         if (this.state.redirecToHome) {
             return <Redirect to="/"></Redirect>;
         }
@@ -30,21 +45,30 @@ export default class Survey extends Component {
             return (
                 <SingePageWrapper>
                     <div className="surveyC">
-                        <h1>User Survey</h1>
+                        <h1>
+                            {L === "en"
+                                ? "User Survey"
+                                : "Sondage auprès des utilisateurs"}
+                        </h1>
                         <p>
                             <strong>
-                                Would you like to part-take in a survey about
-                                the city?
+                                {L === "en"
+                                    ? "Would you like to part-take in a survey about the city?"
+                                    : "Souhaitez-vous participer à une enquête sur la ville?"}
                             </strong>
-                            <br></br> This Would take approximately
-                            <span>5 minutes </span>to complete
+                            <br></br>{" "}
+                            {L === "en"
+                                ? "This Would take approximately"
+                                : "Cela prendrait environ"}
+                            <span> 5 minutes </span>{" "}
+                            {L === "en" ? "to complete" : "compléter"}
                         </p>
 
                         <button
                             className="ui yellow button"
                             onClick={() => this.setState({ page: 1 })}
                         >
-                            Yes
+                            {L === "en" ? "Yes" : "Oui"}
                         </button>
                         <button
                             className="ui grey button"
@@ -52,7 +76,7 @@ export default class Survey extends Component {
                                 this.setState({ redirecToHome: true })
                             }
                         >
-                            No
+                            {L === "en" ? "No" : "Non"}
                         </button>
                     </div>
                 </SingePageWrapper>
@@ -61,32 +85,66 @@ export default class Survey extends Component {
         const surveyC = [
             {
                 q:
-                    " Toronto keeps residents informed about changes that affect them",
+                    L === "en"
+                        ? "Toronto keeps residents informed about changes that affect them"
+                        : "Toronto tient les résidents informés des changements qui les touchent",
             },
             {
                 q:
-                    "Toronto keeps resident's views in mind when making decisions",
-            },
-            {
-                q: "Toronto keeps up with regular maintenace about the city",
-            },
-            {
-                q:
-                    "I am satisfied with the services and facilities provided by Toronto",
+                    L === "en"
+                        ? "Toronto keeps resident's views in mind when making decisions"
+                        : "Toronto garde à l'esprit les opinions des résidents lors de la prise de décisions",
             },
             {
                 q:
-                    "Toronto's security and safety measures are up to date and I feel safe",
+                    L === "en"
+                        ? "Toronto keeps up with regular maintenace about the city"
+                        : "Toronto assure régulièrement l'entretien de la ville",
             },
             {
-                q: "I would recommend Toronto as a city to live in to others",
+                q:
+                    L === "en"
+                        ? "I am satisfied with the services and facilities provided by Toronto"
+                        : "Je suis satisfait des services et des installations fournis par Toronto",
+            },
+            {
+                q:
+                    L === "en"
+                        ? "Toronto's security and safety measures are up to date and I feel safe"
+                        : "Les mesures de sécurité et de sûreté de Toronto sont à jour et je me sens en sécurité",
+            },
+            {
+                q:
+                    L === "en"
+                        ? "I would recommend Toronto as a city to live in to others"
+                        : "Je recommanderais Toronto comme ville où vivre aux autres",
             },
         ];
         return (
             <SingePageWrapper>
                 <div className="survey ui form">
-                    <h1>User Survey</h1>
-                    <div className="options">No &nbsp; Somewhat &nbsp; Yes</div>
+                    <h1>
+                        {L === "en"
+                            ? "User Survey"
+                            : "Sondage auprès des utilisateurs"}
+                    </h1>
+                    <div class="fields survRow">
+                        <div className="survRow-text">
+                            {L === "en"
+                                ? "Do you agree with the following?"
+                                : "Êtes-vous d'accord avec ce qui suit?"}
+                        </div>
+                        <div class="field survRow-field">
+                            {L === "en" ? "No" : "Non"}
+                        </div>
+                        <div class="field survRow-field">
+                            {L === "en" ? "Somewhat" : "Quelque peu"}
+                        </div>
+                        <div class="field survRow-field">
+                            {L === "en" ? "Yes" : "Oui"}
+                        </div>
+                    </div>
+                    <hr style={{ marginBottom: 10 }}></hr>
                     {surveyC.map(({ q, a }, i) => (
                         <SurveryRow
                             text={q}
@@ -95,7 +153,7 @@ export default class Survey extends Component {
                         ></SurveryRow>
                     ))}
                     <button class="ui yellow button" onClick={this.onSubmit}>
-                        SUBMIT
+                        {L === "en" ? "SUBMIT" : "NOUS FAIRE PARVENIR"}
                     </button>
                 </div>
             </SingePageWrapper>
@@ -106,9 +164,9 @@ class SurveryRow extends Component {
     render() {
         const { i, text, changeInput } = this.props;
         return (
-            <div class="inline fields">
-                <label>{text}</label>
-                <div class="field">
+            <div class="fields survRow">
+                <div className="survRow-text">{text}</div>
+                <div class="field survRow-field">
                     <div class="ui radio checkbox">
                         <input
                             type="radio"
@@ -119,7 +177,7 @@ class SurveryRow extends Component {
                         <label></label>
                     </div>
                 </div>
-                <div class="field">
+                <div class="field survRow-field">
                     <div class="ui radio checkbox">
                         <input
                             type="radio"
@@ -130,7 +188,7 @@ class SurveryRow extends Component {
                         <label></label>
                     </div>
                 </div>
-                <div class="field">
+                <div class="field survRow-field">
                     <div class="ui radio checkbox">
                         <input
                             type="radio"
@@ -145,3 +203,11 @@ class SurveryRow extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    lang: state.lang.lang,
+});
+
+const mapDispatchToProps = { enterSurvey };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Survey);

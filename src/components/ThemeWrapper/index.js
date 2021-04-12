@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Image from "../../images/header.png";
 import { signIn, signOut } from "../../store/actions/authActions";
+import {
+    changeLangtoEng,
+    changeLangtoFr,
+} from "../../store/actions/langActions";
 class DashboarWrapper extends Component {
     renderAuthButton() {
         if (this.props.loggedin) {
@@ -22,13 +26,17 @@ class DashboarWrapper extends Component {
         );
     }
     render() {
-        let pages = [
+        const pages = [
             { text: "Home", route: "/" },
             { text: "Portal", route: "/portal" },
-            { text: "My Account", route: "/rap" },
+            { text: "My Account", route: "/profileinfo" },
+        ];
+        const subpages = [
+            { text: "Vote", route: "/vote" },
+            { text: "Tell a Friend", route: "/taf" },
+            { text: "My Past Reports", route: "/pastreports" },
             { text: "Contact", route: "/contact" },
         ];
-        let currentPage = this.props.currentPage || 0;
         return (
             <div className="wp-con">
                 <div className="wp-con__header">
@@ -39,7 +47,7 @@ class DashboarWrapper extends Component {
                                 <div>Cypress</div>
                             </div>
                             <div className="wp-header__titleSlogan">
-                                Cypress / {pages[currentPage]["text"]}
+                                Cypress / {this.props.text}
                             </div>
                         </div>
                         <div className="wp-header__pages">
@@ -50,7 +58,7 @@ class DashboarWrapper extends Component {
                                             key={text}
                                             to={route}
                                             className={`wp-header__nav-item ${
-                                                i === currentPage
+                                                i === window.location.pathname
                                                     ? "active"
                                                     : ""
                                             }`}
@@ -61,7 +69,18 @@ class DashboarWrapper extends Component {
                                 {this.renderAuthButton()}
                             </div>
                             {this.props.loggedin && (
-                                <div className="wp-header__subnav">subnav</div>
+                                <div className="wp-header__subnav">
+                                    {this.props.loggedin &&
+                                        subpages.map(({ text, route }, i) => (
+                                            <Link
+                                                key={text}
+                                                to={route}
+                                                className={`wp-header__subnav-item`}
+                                            >
+                                                {text}
+                                            </Link>
+                                        ))}
+                                </div>
                             )}
                         </div>
                     </div>
@@ -74,8 +93,18 @@ class DashboarWrapper extends Component {
                     {this.props.children}
                 </div>
                 <div className="wp-con__footer">
-                    <div className="active">English (En)</div>
-                    <div>Français (Fr)</div>
+                    <div
+                        className={this.props.lang === "en" ? "active" : ""}
+                        onClick={this.props.changeLangtoEng}
+                    >
+                        English (En)
+                    </div>
+                    <div
+                        className={this.props.lang === "fr" ? "active" : ""}
+                        onClick={this.props.changeLangtoFr}
+                    >
+                        Français (Fr)
+                    </div>
                 </div>
             </div>
         );
@@ -84,12 +113,15 @@ class DashboarWrapper extends Component {
 
 const mapStateToProps = (state) => ({
     loggedin: state.auth.loggedin,
+    lang: state.lang.lang,
 });
 
 const mapDispatchToProps = (dispatch) => {
     return {
         login: (creds) => dispatch(signIn(creds)),
         logout: () => dispatch(signOut()),
+        changeLangtoEng: () => dispatch(changeLangtoEng()),
+        changeLangtoFr: () => dispatch(changeLangtoFr()),
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(DashboarWrapper);
