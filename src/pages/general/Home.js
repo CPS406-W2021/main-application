@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DashboarWrapper from "../../components/ThemeWrapper";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+
 const FAQInfo = [
     {
         q: "What types of problems should I report to CyPress?",

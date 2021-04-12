@@ -1,5 +1,5 @@
 export const createReport = (report) => {
-    let updates = ["Request Recieved"];
+    // let updates = ["Request Recieved"];
     return (dispatch, getState, getFirebase) => {
         // make an entry for the report
         // ALSO make sure to associate the user, maybe firebase has a auth().getUser() or something...

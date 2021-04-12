@@ -128,27 +128,18 @@
         &__subnav {
             flex: 1;
             height: 35px;
-            min-height: 35px;
-            width: 100%;
             background-color: #fff;
-            padding: 10px;
             display: flex;
-            align-items: center;
-            & > * {
-                display: block;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                &,
-                &:active,
-                &:hover {
+            &-item {
+                &:visited {
+                    text-decoration: none;
                     color: black;
-                    font-weight: 500;
-
-                    text-transform: uppercase;
                 }
+                margin-left: 10px;
+                padding: 8px 10px;
+                transition: 0.2s;
                 &:hover {
-                    font-weight: 600;
+                    color: $accent;
                 }
             }
         }

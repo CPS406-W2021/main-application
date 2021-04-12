@@ -6,11 +6,13 @@ import Contact from "./pages/general/Contact";
 import Home from "./pages/general/Home";
 import PortalBase from "./pages/portal";
 import Login from "./pages/account/Login";
+import ResetPass from "./pages/account/ResetPass";
 import Register from "./pages/account/Register";
 import RAPBase from "./pages/dashboard/ReportAProblem";
 import TellAFriend from "./pages/dashboard/TellAFriend";
 import Vote from "./pages/dashboard/Vote";
 import Survey from "./pages/general/Survey";
+import Settings from "./pages/account/ProfileInfo";
 import PastReports from "./pages/dashboard/PastReports";
 import ProfileInfo from "./pages/account/ProfileInfo";
 // import ViewReports from "./pages/dashboard/ViewReports";
@@ -27,9 +29,9 @@ export default class App extends Component {
                     <Route path="/register">
                         <Register />
                     </Route>
-                    <ProtectedRoute path="/profileinfo">
-                        <ProfileInfo />
-                    </ProtectedRoute>
+                    <Route path="/profileinfo">
+                        <Settings />
+                    </Route>
                     <ProtectedRoute path="/portal">
                         <PortalBase />
                     </ProtectedRoute>
@@ -50,6 +52,9 @@ export default class App extends Component {
                     </ProtectedRoute>
                     <Route path="/Survey">
                         <Survey />
+                    </Route>
+                    <Route path="/resetPass">
+                        <ResetPass />
                     </Route>
                     <Route exact path="/">
                         <Home />

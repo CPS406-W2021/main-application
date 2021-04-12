@@ -6,13 +6,13 @@ export const signIn = (credentials) => {
             .signInWithEmailAndPassword(credentials.email, credentials.password)
             .then((info) => {
                 dispatch({
-                    type: 'LOGIN_SUCCESS',
-                    uid: info.user.uid
+                    type: "LOGIN_SUCCESS",
+                    uid: info.user.uid,
                 });
             })
             .catch((err) => {
                 dispatch({
-                    type: 'LOGIN_ERROR',
+                    type: "LOGIN_ERROR",
                     error: err.message,
                 });
             });
@@ -26,7 +26,7 @@ export const signOut = () => {
             .auth()
             .signOut()
             .then(() => {
-                dispatch({ type: 'LOGOUT_SUCCESS' });
+                dispatch({ type: "LOGOUT_SUCCESS" });
             });
     };
 };
@@ -36,23 +36,40 @@ export const register = ({ email, password, name, username }) => {
         const firebase = getFirebase();
 
         // Do registeration & generate profile
-        firebase.createUser({ email, password }, { email, name, username }) //Params login creds & profile info
+        firebase
+            .createUser({ email, password }, { email, name, username }) //Params login creds & profile info
             .then((auth) => {
-                dispatch({ type: 'REGISTERATION_COMPLETE' })
+                dispatch({ type: "REGISTERATION_COMPLETE" });
             })
             .catch((err) => {
-                dispatch({ type: 'REGISTERATION_ERROR', error: err.message, })
-            })
-    }
+                dispatch({ type: "REGISTERATION_ERROR", error: err.message });
+            });
+    };
+};
+
+export const resetPassword = (email = null) => {
+    return async (dispatch, getState, getFirebase) => {
+        const firebase = getFirebase();
+        const STATE = getState();
+        if (STATE.auth.loggedin) {
+            email = firebase.auth().currentUser.email;
+        }
+        firebase
+            .auth()
+            .sendPasswordResetEmail(email)
+            .then(() => {
+                dispatch({ type: "RESET_PASS_SUCCESS" });
+            });
+    };
 };
 
 //userId and then a object of only changes.
-export const updateProfile = ({ userId, profileChanges }) => {
+export const updateAccount = ({ userId, profileChanges }) => {
     return (dispatch, getState, getFirebase) => {
-        const firebase = getFirebase().firestore()
+        const firebase = getFirebase().firestore();
 
         firebase
-            .collection('users')
+            .collection("users")
             .doc(userId)
             .set(profileChanges, { merge: true })
             .then(() => {
@@ -61,15 +78,15 @@ export const updateProfile = ({ userId, profileChanges }) => {
             .catch((err) => {
                 dispatch({ type: "PROFILE_UPDATE_ERROR", error: err.message });
             });
-    }
-}
+    };
+};
 
-export const deleteProfile = () => {
+export const deleteAccount = () => {
     return (dispatch, getState, getFirebase) => {
-        const firebase = getFirebase().firestore()
+        const firebase = getFirebase().firestore();
 
         firebase
-            .collection('users')
+            .collection("users")
             .doc(getFirebase.auth().getInstance().currentUser.uid)
             .delete()
             .then(() => {
@@ -78,5 +95,9 @@ export const deleteProfile = () => {
             .catch((err) => {
                 dispatch({ type: "PROFILE_DELETE_ERROR", error: err.message });
             });
-    }
-}
+    };
+};
+
+export const clearError = () => {
+    return { type: "CLEAR_ERROR" };
+};
