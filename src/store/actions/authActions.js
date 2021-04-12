@@ -64,13 +64,13 @@ export const updateProfile = ({ userId, profileChanges }) => {
     }
 }
 
-export const deleteProfile = ({ userId }) => {
+export const deleteProfile = () => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase().firestore()
 
         firebase
             .collection('users')
-            .doc(userId)
+            .doc(getFirebase.auth().getInstance().currentUser.uid)
             .delete()
             .then(() => {
                 dispatch({ type: "PROFILE_DELETE_SUCCESS" });
