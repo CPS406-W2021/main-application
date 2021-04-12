@@ -14,7 +14,7 @@ import Vote from "./pages/dashboard/Vote";
 import Survey from "./pages/general/Survey";
 import Settings from "./pages/account/ProfileInfo";
 import PastReports from "./pages/dashboard/PastReports";
-import { ReportRouter } from "./pages/dashboard/Report";
+import ReportRouter from "./pages/dashboard/Report";
 // import ViewReports from "./pages/dashboard/ViewReports";
 
 require("dotenv").config();
