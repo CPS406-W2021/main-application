@@ -5,6 +5,7 @@ const INIT_STATE = {
     uid: "",
     error: "",
     registerredirect: "",
+    userData: {},
 };
 const authReducer = (state = INIT_STATE, action) => {
     switch (action.type) {
@@ -22,7 +23,7 @@ const authReducer = (state = INIT_STATE, action) => {
             return {
                 ...state,
                 loggedin: true,
-                uid: action.uid,
+                ...action.payload,
                 error: "",
                 registerredirect: "",
             };

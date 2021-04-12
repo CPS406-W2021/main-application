@@ -1,14 +1,28 @@
 export const signIn = (credentials) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase();
+        const firestore = firebase.firestore();
         firebase
             .auth()
             .signInWithEmailAndPassword(credentials.email, credentials.password)
             .then((info) => {
-                dispatch({
-                    type: "LOGIN_SUCCESS",
-                    uid: info.user.uid,
-                });
+                firestore
+                    .collection("users")
+                    .doc(info.user.uid)
+                    .get()
+                    .then((doc) => {
+                        const data = doc.data();
+                        dispatch({
+                            type: "LOGIN_SUCCESS",
+                            payload: { uid: info.user.uid, userData: data },
+                        });
+                    })
+                    .catch((err) => {
+                        dispatch({
+                            type: "LOGIN_ERROR",
+                            error: err.message,
+                        });
+                    });
             })
             .catch((err) => {
                 dispatch({
@@ -31,13 +45,17 @@ export const signOut = () => {
     };
 };
 
-export const register = ({ email, password, name, username }) => {
+export const register = ({ email, password, name, username, scq, sca }) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase();
-
+        console.log(scq);
+        console.log(sca);
         // Do registeration & generate profile
         firebase
-            .createUser({ email, password }, { email, name, username }) //Params login creds & profile info
+            .createUser(
+                { email, password },
+                { email, name, username, scq, sca }
+            ) //Params login creds & profile info
             .then((auth) => {
                 dispatch({ type: "REGISTERATION_COMPLETE" });
             })
