@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SingePageWrapper from "../../components/SinglePageWrapper";
 import { connect } from "react-redux";
-import { signIn } from "../../store/actions/authActions";
+import { clearError, signIn } from "../../store/actions/authActions";
 import { Link, Redirect } from "react-router-dom";
 
 class Login extends Component {
@@ -13,6 +13,9 @@ class Login extends Component {
         e.preventDefault();
         this.props.login({ ...this.state });
     };
+    componentDidMount() {
+        this.props.clearError();
+    }
 
     render() {
         const L = this.props.lang;
@@ -72,8 +75,14 @@ class Login extends Component {
                         </Link>
                     </p>
                     <p>
-                        Forgot your password?{" "}
-                        <Link to="/resetPass">Reset Now</Link>
+                        {L === "en"
+                            ? "Forgot your password?"
+                            : "Mot de passe oublié?"}{" "}
+                        <Link to="/resetPass">
+                            {L === "en"
+                                ? "Reset Now"
+                                : "Réinitialiser maintenant"}
+                        </Link>
                     </p>
                 </div>
             </SingePageWrapper>
@@ -83,6 +92,7 @@ class Login extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         login: (creds) => dispatch(signIn(creds)),
+        clearError: () => dispatch(clearError()),
     };
 };
 const mapStateToProps = (state) => {

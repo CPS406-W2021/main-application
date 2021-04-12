@@ -26,19 +26,17 @@ class DashboarWrapper extends Component {
         );
     }
     render() {
-        console.log(this.props);
         const pages = [
             { text: "Home", route: "/" },
             { text: "Portal", route: "/portal" },
             { text: "My Account", route: "/profileinfo" },
-            { text: "Contact", route: "/contact" },
         ];
         const subpages = [
             { text: "Vote", route: "/vote" },
             { text: "Tell a Friend", route: "/taf" },
             { text: "My Past Reports", route: "/pastreports" },
+            { text: "Contact", route: "/contact" },
         ];
-        let currentPage = this.props.currentPage || 0;
         return (
             <div className="wp-con">
                 <div className="wp-con__header">
@@ -49,7 +47,7 @@ class DashboarWrapper extends Component {
                                 <div>Cypress</div>
                             </div>
                             <div className="wp-header__titleSlogan">
-                                Cypress / {pages[currentPage]["text"]}
+                                Cypress / {this.props.text}
                             </div>
                         </div>
                         <div className="wp-header__pages">
@@ -60,7 +58,7 @@ class DashboarWrapper extends Component {
                                             key={text}
                                             to={route}
                                             className={`wp-header__nav-item ${
-                                                i === currentPage
+                                                i === window.location.pathname
                                                     ? "active"
                                                     : ""
                                             }`}
@@ -77,11 +75,7 @@ class DashboarWrapper extends Component {
                                             <Link
                                                 key={text}
                                                 to={route}
-                                                className={`wp-header__subnav-item ${
-                                                    i === currentPage
-                                                        ? "active"
-                                                        : ""
-                                                }`}
+                                                className={`wp-header__subnav-item`}
                                             >
                                                 {text}
                                             </Link>
@@ -100,13 +94,13 @@ class DashboarWrapper extends Component {
                 </div>
                 <div className="wp-con__footer">
                     <div
-                        className={this.props.lang === "en" && "active"}
+                        className={this.props.lang === "en" ? "active" : ""}
                         onClick={this.props.changeLangtoEng}
                     >
                         English (En)
                     </div>
                     <div
-                        className={this.props.lang === "fr" && "active"}
+                        className={this.props.lang === "fr" ? "active" : ""}
                         onClick={this.props.changeLangtoFr}
                     >
                         Français (Fr)

@@ -1,26 +1,33 @@
 import React, { Component } from "react";
 import SingePageWrapper from "../../components/SinglePageWrapper";
 import { connect } from "react-redux";
-import { resetPassword } from "../../store/actions/authActions";
+import { clearError, resetPassword } from "../../store/actions/authActions";
 import { Link, Redirect } from "react-router-dom";
-
 class Reset extends Component {
     state = {
-        email: ""
+        email: "",
     };
 
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.resetPass({ ...this.state });
     };
+    componentDidMount() {
+        this.props.clearError();
+    }
     render() {
+        const L = this.props.lang;
         if (this.props.loggedin) {
             return <Redirect to="/"></Redirect>;
         }
         return (
             <SingePageWrapper>
                 <div className="login-form ui small form">
-                    <h1>Reset Password</h1>
+                    <h1>
+                        {L === "en"
+                            ? "Reset Password"
+                            : "Réinitialiser le mot de passe"}
+                    </h1>
                     <label for="email">Email</label>
                     <input
                         type="text"
@@ -40,11 +47,17 @@ class Reset extends Component {
                         class="ui yellow button"
                         onClick={this.handleSubmit}
                     >
-                        Reset Password
+                        {L === "en"
+                            ? "Reset Password"
+                            : "Réinitialiser maintenant"}
                     </button>
                     <p>
-                        Go back to Login?{" "}
-                        <Link to="/login">Login</Link>
+                        {L === "en"
+                            ? "Go back to Login?"
+                            : "Revenir à la connexion?"}{" "}
+                        <Link to="/login">
+                            {L === "en" ? "Login" : "Connexion"}
+                        </Link>
                     </p>
                 </div>
             </SingePageWrapper>
@@ -54,12 +67,13 @@ class Reset extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         resetPass: (creds) => dispatch(resetPassword(creds)),
+        clearError: () => dispatch(clearError()),
     };
 };
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         error: state.auth.error,
+        lang: state.lang.lang,
     };
 };
 
