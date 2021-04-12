@@ -83,13 +83,13 @@ class TellAFriend extends Component {
 
                                         if (this.state.text === "") {
                                             window.open(
-                                                `mailto:${this.state.add}?subject=Cypress%20-%20your%20opinion%20is%20Toronto's%20number%20%231%20priority&body=Dear%20Recipient%2C%0D%0A%0D%0AYou%20have%20been%20invited%20to%20join%20Cypress!%20Cypress%20is%20designed%20to%20allow%20our%20citizens%20to%20report%20problems%20the%20concerns%20they%20have%20noticed%20on%20the%20the%20street%20in%20Toronto.%20Along%20with%20that%2C%20our%20citizens%20are%20able%20to%20track%20the%20progress%20of%20their%20reports%20from%20when%20it%20is%20first%20reported%20and%20until%20a%20solution%20is%20found.%20We%20value%20%20our%20citizen's%20input%2C%20and%20we%20want%20our%20citizens'%20voice%20heard.%0D%0A%0D%0A%0D%0A%0D%0AJoin%20us%20today! ${window.location.hostname}%0D%0A%0D%0ATruly%20yours%2C%0D%0AThe%20Cypress%20Team`
+                                                `mailto:${this.state.add}?subject=Join%20Cypress%20-%20your%20opinion%20is%20Toronto's%20number%20%231%20priority&body=Dear%20Recipient%2C%0D%0A%0D%0AYou%20have%20been%20invited%20to%20join%20Cypress!%20Cypress%20is%20designed%20to%20allow%20our%20citizens%20to%20report%20problems%20the%20concerns%20they%20have%20noticed%20on%20the%20the%20street%20in%20Toronto.%20Along%20with%20that%2C%20our%20citizens%20are%20able%20to%20track%20the%20progress%20of%20their%20reports%20from%20when%20it%20is%20first%20reported%20and%20until%20a%20solution%20is%20found.%20We%20value%20%20our%20citizen's%20input%2C%20and%20we%20want%20our%20citizens'%20voice%20heard.%0D%0A%0D%0AJoin%20us%20today! ${window.location.hostname}%0D%0A%0D%0ATruly%20yours%2C%0D%0AThe%20Cypress%20Team`
                                             );
                                         } else {
                                             window.open(
                                                 `mailto:${
                                                     this.state.add
-                                                }?subject=Join%20Cypress&body=${this.state.text
+                                                }?subject=Join%20Cypress%20-%20your%20opinion%20is%20Toronto's%20number%20%231%20priority&body=${this.state.text
                                                     .split()
                                                     .join(
                                                         "%20"
