@@ -120,13 +120,15 @@ export const deleteAccount = () => {
                         .collection("users")
                         .doc(uid)
                         .delete()
+                        .then(() => {
+                            dispatch({ type: "PROFILE_DELETE_SUCCESS" });
+                        })
                         .catch((err) => {
                             dispatch({
                                 type: "PROFILE_DELETE_ERROR",
                                 error: err.message,
                             });
-                        });
-                    dispatch({ type: "PROFILE_DELETE_SUCCESS" });
+                        })
                 })
                 .catch((err) => {
                     dispatch({
