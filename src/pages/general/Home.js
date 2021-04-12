@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DashboarWrapper from "../../components/ThemeWrapper";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 const FAQInfo = [
     {
         q: "What types of problems should I report to CyPress?",
@@ -128,11 +129,12 @@ class Home extends Component {
                     {L === "en"
                         ? "We take feedback from our users seriously. This survey will allow us tocontinously improve our system according to our users needs. This will take approximately 5 minutes to complete."
                         : "Nous prenons au sérieux les commentaires de nos utilisateurs. Cette enquête nous permettra d'améliorer continuellement notre système en fonction des besoins de nos utilisateurs. Cela prendra environ 5 minutes."}
-                    <a href="/survey">
+
+                    <Link to="/survey">
                         {L === "en"
                             ? " Take Survey "
                             : " Participer à l'enquête "}
-                    </a>
+                    </Link>
                 </p>
             </div>
         );

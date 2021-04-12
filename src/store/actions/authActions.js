@@ -6,13 +6,13 @@ export const signIn = (credentials) => {
             .signInWithEmailAndPassword(credentials.email, credentials.password)
             .then((info) => {
                 dispatch({
-                    type: 'LOGIN_SUCCESS',
-                    uid: info.user.uid
+                    type: "LOGIN_SUCCESS",
+                    uid: info.user.uid,
                 });
             })
             .catch((err) => {
                 dispatch({
-                    type: 'LOGIN_ERROR',
+                    type: "LOGIN_ERROR",
                     error: err.message,
                 });
             });
@@ -26,7 +26,7 @@ export const signOut = () => {
             .auth()
             .signOut()
             .then(() => {
-                dispatch({ type: 'LOGOUT_SUCCESS' });
+                dispatch({ type: "LOGOUT_SUCCESS" });
             });
     };
 };
@@ -36,15 +36,27 @@ export const register = ({ email, password, name, username }) => {
         const firebase = getFirebase();
 
         // Do registeration & generate profile
-        firebase.createUser({ email, password }, { name, username }) //Params login creds & profile info
+        firebase
+            .createUser({ email, password }, { name, username }) //Params login creds & profile info
             .then((auth) => {
-                dispatch({ type: 'REGISTERATION_COMPLETE' })
+                dispatch({ type: "REGISTERATION_COMPLETE" });
             })
             .catch((err) => {
-                dispatch({ type: 'REGISTERATION_ERROR', error: err.message, })
-            })
-    }
+                dispatch({ type: "REGISTERATION_ERROR", error: err.message });
+            });
+    };
 };
+
+export const resetPassword = ({ email }) => {
+    return (dispatch, getState, getFirebase) => {
+        const firebase = getFirebase();
+
+        firebase
+            .auth()
+            .sendPasswordResetEmail(email)
+            .then(() => {
+                dispatch({ type: "RESET_PASS_SUCCESS" });
+            })
 
 //userId and then a object of only changes.
 export const updateProfile = ({ userId, profileChanges }) => {
@@ -80,3 +92,26 @@ export const deleteProfile = ({ userId }) => {
             });
     }
 }
+
+export const deleteAccount = ({ uid }) => {
+    return (dispatch, getState, getFirebase) => {
+        const firebase = getFirebase();
+        firebase
+            .auth()
+            .deleteUser(uid)
+            .then(() => {
+                dispatch({ type: "ACCOUNT_DELETE_SUCCESS" });
+            })
+            .catch((err) => {
+                dispatch({ type: "ACCOUNT_DELETE_ERROR", error: err.message });
+            });
+    };
+};
+
+export const updateAccount = ({ email, phone, name }) => {
+    alert("updating");
+    return (dispatch, getState, getFirebase) => {};
+};
+export const clearError = () => {
+    return { type: "CLEAR_ERROR" };
+};

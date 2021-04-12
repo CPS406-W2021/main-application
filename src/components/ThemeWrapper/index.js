@@ -30,9 +30,13 @@ class DashboarWrapper extends Component {
             { text: "Home", route: "/" },
             { text: "Portal", route: "/portal" },
             { text: "My Account", route: "/profileinfo" },
+        ];
+        const subpages = [
+            { text: "Vote", route: "/vote" },
+            { text: "Tell a Friend", route: "/taf" },
+            { text: "My Past Reports", route: "/pastreports" },
             { text: "Contact", route: "/contact" },
         ];
-        let currentPage = this.props.currentPage || 0;
         return (
             <div className="wp-con">
                 <div className="wp-con__header">
@@ -43,7 +47,7 @@ class DashboarWrapper extends Component {
                                 <div>Cypress</div>
                             </div>
                             <div className="wp-header__titleSlogan">
-                                Cypress / {pages[currentPage]["text"]}
+                                Cypress / {this.props.text}
                             </div>
                         </div>
                         <div className="wp-header__pages">
@@ -54,7 +58,7 @@ class DashboarWrapper extends Component {
                                             key={text}
                                             to={route}
                                             className={`wp-header__nav-item ${
-                                                i === currentPage
+                                                i === window.location.pathname
                                                     ? "active"
                                                     : ""
                                             }`}
@@ -66,12 +70,16 @@ class DashboarWrapper extends Component {
                             </div>
                             {this.props.loggedin && (
                                 <div className="wp-header__subnav">
-                                    {this.props.subnav &&
-                                        this.props.subnav.map(
-                                            ({ title, to }) => (
-                                                <Link to={to}>{title}</Link>
-                                            )
-                                        )}
+                                    {this.props.loggedin &&
+                                        subpages.map(({ text, route }, i) => (
+                                            <Link
+                                                key={text}
+                                                to={route}
+                                                className={`wp-header__subnav-item`}
+                                            >
+                                                {text}
+                                            </Link>
+                                        ))}
                                 </div>
                             )}
                         </div>
@@ -86,13 +94,13 @@ class DashboarWrapper extends Component {
                 </div>
                 <div className="wp-con__footer">
                     <div
-                        className={this.props.lang === "en" && "active"}
+                        className={this.props.lang === "en" ? "active" : ""}
                         onClick={this.props.changeLangtoEng}
                     >
                         English (En)
                     </div>
                     <div
-                        className={this.props.lang === "fr" && "active"}
+                        className={this.props.lang === "fr" ? "active" : ""}
                         onClick={this.props.changeLangtoFr}
                     >
                         Français (Fr)
