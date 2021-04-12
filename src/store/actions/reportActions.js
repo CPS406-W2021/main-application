@@ -64,13 +64,13 @@ export const upVoteReport = ({ reportId, uid }) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase().firestore();
         let upVote = { vote: 1, reportId, uid };
-        let voteVal = 1
+        let voteVal
         firebase
-            .collection(`votes/`)
+            .collection(`votes`)
             .doc(`${reportId}_${uid}`)
             .get()
             .then((doc) => {
-                if (doc) {
+                if (doc.exists) {
                     voteVal = 2
                 }
                 else {
@@ -83,7 +83,7 @@ export const upVoteReport = ({ reportId, uid }) => {
                     .doc(`${reportId}_${uid}`)
                     .set(upVote)
                     .then(() => {
-
+                        
                         //Aggregate Data
                         firebase
                             .collection('reports')
@@ -91,13 +91,13 @@ export const upVoteReport = ({ reportId, uid }) => {
                             .update({
                                 votes: firebase.FieldValue.increment(voteVal)
                             }).catch((err) => {
-                                dispatch({ type: "VOTE_ERROR", error: err.message });
+                                dispatch({ type: "VOTE_ERROR", error: "1 " + err.message });
                             });
 
                         dispatch({ type: "VOTE_SUCCESS" });
                     })
                     .catch((err) => {
-                        dispatch({ type: "VOTE_ERROR", error: err.message });
+                        dispatch({ type: "VOTE_ERROR", error: "2 " + err.message });
                     });
             })
     };
@@ -108,14 +108,14 @@ export const downVoteReport = ({ reportId, uid }) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase().firestore();
         let downVote = { vote: -1, reportId, uid };
-        let voteVal = -1
+        let voteVal
 
         firebase
             .collection(`votes`)
             .doc(`${reportId}_${uid}`)
             .get()
             .then((doc) => {
-                if (doc) {
+                if (doc.exists) {
                     voteVal = -2
                 }
                 else {

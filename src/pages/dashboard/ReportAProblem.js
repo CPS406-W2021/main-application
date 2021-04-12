@@ -32,6 +32,7 @@ class ReportAProblem extends Component {
             loc: this.props.loc,
             title,
             date: new Date().toISOString(),
+            votes: 0,
         });
     };
     componentDidMount() {
