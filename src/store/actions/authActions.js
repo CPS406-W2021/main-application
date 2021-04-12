@@ -64,20 +64,43 @@ export const resetPassword = (email = null) => {
 };
 
 //userId and then a object of only changes.
-export const updateAccount = ({ userId, profileChanges }) => {
+export const updateAccount = (profileChanges) => {
     return (dispatch, getState, getFirebase) => {
-        const firebase = getFirebase().firestore();
-
-        firebase
-            .collection("users")
-            .doc(userId)
-            .set(profileChanges, { merge: true })
-            .then(() => {
-                dispatch({ type: "PROFILE_UPDATE_SUCCESS" });
-            })
-            .catch((err) => {
-                dispatch({ type: "PROFILE_UPDATE_ERROR", error: err.message });
-            });
+        const firebase = getFirebase();
+        const firestore = firebase.firestore();
+        const STATE = getState();
+        function validateEmail(email) {
+            const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+        if (
+            profileChanges["email"] === "" ||
+            !validateEmail(profileChanges["email"])
+        ) {
+            delete profileChanges["email"];
+        }
+        if (profileChanges["name"] === "") {
+            delete profileChanges["name"];
+        }
+        if (profileChanges["address"] === "") {
+            delete profileChanges["address"];
+        }
+        alert(JSON.stringify(`NEW UPDATE:${profileChanges}`));
+        if (STATE.auth.loggedin) {
+            firestore
+                .collection("users")
+                .doc(firebase.auth().currentUser.uid)
+                .set(profileChanges, { merge: true })
+                .then(() => {
+                    dispatch({ type: "PROFILE_UPDATE_SUCCESS" });
+                })
+                .catch((err) => {
+                    dispatch({
+                        type: "PROFILE_UPDATE_ERROR",
+                        error: err.message,
+                    });
+                });
+        }
     };
 };
 
@@ -87,7 +110,6 @@ export const deleteAccount = () => {
         const firestore = firebase.firestore();
         const STATE = getState();
         if (STATE.auth.loggedin) {
-            console.log(firebase.auth().currentUser.uid);
             firestore
                 .collection("users")
                 .doc(firebase.auth().currentUser.uid)

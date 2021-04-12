@@ -7,6 +7,14 @@ import {
     updateAccount,
 } from "../../store/actions/authActions";
 class Settings extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: "",
+            name: "",
+            address: "",
+        };
+    }
     render() {
         return (
             <DashboarWrapper currentPage={2}>
@@ -21,7 +29,18 @@ class Settings extends Component {
                                 <div>Change your profile information.</div>
                                 <button
                                     class="ui green button"
-                                    onClick={this.props.updateInfo}
+                                    onClick={() => {
+                                        this.props.updateInfo({
+                                            email: this.state.email,
+                                            name: this.state.name,
+                                            address: this.state.address,
+                                        });
+                                        this.setState({
+                                            email: "",
+                                            name: "",
+                                            address: "",
+                                        });
+                                    }}
                                 >
                                     Save Changes
                                 </button>
@@ -33,6 +52,12 @@ class Settings extends Component {
                                 <div class="field">
                                     <label>Name</label>
                                     <input
+                                        value={this.state.name}
+                                        onChange={(e) => {
+                                            this.setState({
+                                                name: e.target.value,
+                                            });
+                                        }}
                                         type="text"
                                         id="name"
                                         name="name"
@@ -42,6 +67,12 @@ class Settings extends Component {
                                 <div class="field">
                                     <label>Email</label>
                                     <input
+                                        value={this.state.email}
+                                        onChange={(e) => {
+                                            this.setState({
+                                                email: e.target.value,
+                                            });
+                                        }}
                                         type="text"
                                         id="email"
                                         name="email"
@@ -49,8 +80,14 @@ class Settings extends Component {
                                 </div>
                             </div>
                             <div class="field">
-                                <label>Phone Number</label>
+                                <label>Address</label>
                                 <input
+                                    value={this.state.address}
+                                    onChange={(e) => {
+                                        this.setState({
+                                            address: e.target.value,
+                                        });
+                                    }}
                                     type="text"
                                     id="phone"
                                     name="phone"
@@ -99,7 +136,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     deleteAccount: () => dispatch(deleteAccount()),
     resetPassword: () => dispatch(resetPassword()),
-    updateInfo: () => dispatch(updateAccount()),
+    updateInfo: (info) => dispatch(updateAccount(info)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);
