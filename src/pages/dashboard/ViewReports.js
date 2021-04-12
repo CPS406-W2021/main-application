@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import DashboarWrapper from "../../components/ThemeWrapper";
 import { connect } from "react-redux";
-import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
+import ReactMapboxGl from "react-mapbox-gl";
 const updates = [
     {
         type: "s",
@@ -67,6 +67,7 @@ class ViewReports extends Component {
                 <div className="view-con">
                     <div className="view-map">
                         <Map
+                            // eslint-disable-next-line
                             style="mapbox://styles/mapbox/streets-v9"
                             containerStyle={{
                                 flex: 1,

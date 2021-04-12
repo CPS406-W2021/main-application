@@ -83,18 +83,25 @@ export const updateAccount = ({ userId, profileChanges }) => {
 
 export const deleteAccount = () => {
     return (dispatch, getState, getFirebase) => {
-        const firebase = getFirebase().firestore();
-
-        firebase
-            .collection("users")
-            .doc(getFirebase.auth().getInstance().currentUser.uid)
-            .delete()
-            .then(() => {
-                dispatch({ type: "PROFILE_DELETE_SUCCESS" });
-            })
-            .catch((err) => {
-                dispatch({ type: "PROFILE_DELETE_ERROR", error: err.message });
-            });
+        const firebase = getFirebase();
+        const firestore = firebase.firestore();
+        const STATE = getState();
+        if (STATE.auth.loggedin) {
+            console.log(firebase.auth().currentUser.uid);
+            firestore
+                .collection("users")
+                .doc(firebase.auth().currentUser.uid)
+                .delete()
+                .then(() => {
+                    dispatch({ type: "PROFILE_DELETE_SUCCESS" });
+                })
+                .catch((err) => {
+                    dispatch({
+                        type: "PROFILE_DELETE_ERROR",
+                        error: err.message,
+                    });
+                });
+        }
     };
 };
 

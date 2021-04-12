@@ -87,27 +87,29 @@ const authReducer = (state = INIT_STATE, action) => {
                 error: action.error,
                 registerredirect: "",
             };
-        case 'PROFILE_UPDATE_SUCCESS':
+        case "PROFILE_UPDATE_SUCCESS":
             return {
                 ...state,
                 error: action.error,
             };
-        case 'PROFILE_UPDATE_ERROR':
+        case "PROFILE_UPDATE_ERROR":
             return {
                 ...state,
                 error: action.error,
             };
-        case 'PROFILE_DELETE_SUCCESS':
+        case "PROFILE_DELETE_SUCCESS":
+            alert("User Successfully Deleted");
             return {
                 ...state,
-                error: '',
+                error: "",
                 registerredirect: <Redirect to="/"></Redirect>,
             };
-        case 'PROFILE_DELETE_SUCCESS':
+        case "PROFILE_DELETE_ERROR":
+            alert(`User Not Deleted:${action.error}`);
             return {
                 ...state,
                 error: action.error,
-                registerredirect: '',
+                registerredirect: "",
             };
         default:
             return state;
