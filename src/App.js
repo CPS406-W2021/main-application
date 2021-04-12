@@ -29,9 +29,9 @@ export default class App extends Component {
                     <Route path="/register">
                         <Register />
                     </Route>
-                    <Route path="/profileinfo">
+                    <ProtectedRoute path="/profileinfo">
                         <Settings />
-                    </Route>
+                    </ProtectedRoute>
                     <ProtectedRoute path="/portal">
                         <PortalBase />
                     </ProtectedRoute>

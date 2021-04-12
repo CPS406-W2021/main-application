@@ -102,6 +102,7 @@ const authReducer = (state = INIT_STATE, action) => {
             return {
                 ...state,
                 error: "",
+                loggedin: false,
                 registerredirect: <Redirect to="/"></Redirect>,
             };
         case "PROFILE_DELETE_ERROR":

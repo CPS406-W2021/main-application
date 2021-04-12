@@ -85,7 +85,6 @@ export const updateAccount = (profileChanges) => {
         if (profileChanges["address"] === "") {
             delete profileChanges["address"];
         }
-        alert(JSON.stringify(`NEW UPDATE:${profileChanges}`));
         if (STATE.auth.loggedin) {
             firestore
                 .collection("users")
@@ -122,14 +121,13 @@ export const deleteAccount = () => {
                     type: "PROFILE_DELETE_ERROR",
                     error: err.message,
                 });
-            }).then(() => {
+            })
+            .then(() => {
                 if (STATE.auth.loggedin) {
                     firebase
                         .auth()
-                        .currentUser
-                        .delete()
-                        .then(() => {
-                        })
+                        .currentUser.delete()
+                        .then(() => {})
                         .catch((err) => {
                             dispatch({
                                 type: "PROFILE_DELETE_ERROR",
@@ -137,7 +135,7 @@ export const deleteAccount = () => {
                             });
                         });
                 }
-            })
+            });
     };
 };
 
