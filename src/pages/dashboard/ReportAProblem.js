@@ -43,6 +43,7 @@ class ReportAProblem extends Component {
         this.setState({ Map: Map });
     }
     render() {
+        const L = this.props.lang;
         if (!this.props.ready) {
             return <Redirect to="/portal"></Redirect>;
         }
@@ -57,12 +58,12 @@ class ReportAProblem extends Component {
                         ></RenderMap>
                     </div>
                     <div className="rap-body">
-                        <h1 className="rap-h1">Report a Problem</h1>
-                        <div className="rap-sub">at {this.props.place}</div>
+                        <h1 className="rap-h1">{ L === "en" ? "Report a Problem" : "Signaler un problème" }</h1>
+                        <div className="rap-sub">{ L === "en" ? "at" : "à" } {this.props.place}</div>
 
                         <form class="ui form">
                             <div class="field">
-                                <label>Report Title</label>
+                                <label>{ L === "en" ? "Report Title" : "Titre du rapport" }</label>
                                 <div className="reports-search__con ui input">
                                     <input
                                         onChange={(e) => {
@@ -79,7 +80,7 @@ class ReportAProblem extends Component {
                                 </div>
                             </div>
                             <div class="field">
-                                <label>Problem at Site</label>
+                                <label>{ L === "en" ? "Problem at Site" : "Problème sur le site" }</label>
                                 <div class="ui form">
                                     <div class="field">
                                         <select
@@ -91,11 +92,11 @@ class ReportAProblem extends Component {
                                             val={this.state.selection}
                                         >
                                             <option value="-1">
-                                                Select an Issue
+                                            { L === "en" ? "Select an Issue" : "Sélectionnez un problème" }
                                             </option>
-                                            <option value="0">Tree</option>
-                                            <option value="1">Pothole</option>
-                                            <option value="2">Other</option>
+                                            <option value="0">{ L === "en" ? "Tree" : "Sélectionnez un problème" }</option>
+                                            <option value="1">{ L === "en" ? "Pothole" : "Sélectionnez un problème" }</option>
+                                            <option value="2">{ L === "en" ? "Other" : "Sélectionnez un problème" }</option>
                                         </select>
                                     </div>
                                 </div>
@@ -117,12 +118,12 @@ class ReportAProblem extends Component {
                                         checked={this.state.checkUpdates}
                                     />
                                     <label>
-                                        I want to receive updates on this report
+                                    { L === "en" ? "I want to receive updates on this report" : "Je souhaite recevoir des mises à jour sur ce rapport" }
                                     </label>
                                 </div>
                             </div>
                             <div class="field">
-                                <label>Enter more information:</label>
+                                <label>{ L === "en" ? "Enter more information:" : "Entrez plus d'informations:" }</label>
                                 <textarea
                                     val={this.state.information}
                                     onChange={(e) => {
@@ -138,7 +139,7 @@ class ReportAProblem extends Component {
                                     class="ui green button"
                                     onClick={this.onSubmit}
                                 >
-                                    Submit
+                                   { L === "en" ? "Submit" : "Soumettre" }
                                 </button>
                                 <button
                                     class="ui button"
@@ -147,7 +148,7 @@ class ReportAProblem extends Component {
                                         this.props.cancelReport();
                                     }}
                                 >
-                                    Cancel
+                                    { L === "en" ? "Cancel" : "Annuler" }
                                 </button>
                             </div>
                         </form>

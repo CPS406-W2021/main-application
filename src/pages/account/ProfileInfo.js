@@ -16,17 +16,30 @@ class Settings extends Component {
         };
     }
     render() {
+        const L = this.props.lang;
         return (
             <DashboarWrapper currentPage={2}>
                 <div className="pro-con">
                     <div className="pro-nav">
-                        <h1>Account Setting</h1>
+                        <h1>
+                            {L === "en"
+                                ? "Account Setting"
+                                : "Paramètre du compte"}
+                        </h1>
                     </div>
                     <div className="pro-body">
                         <div>
-                            <h2>Edit Account</h2>
+                            <h2>
+                                {L === "en"
+                                    ? "Edit Account"
+                                    : "Modifier le compte"}
+                            </h2>
                             <div className="pro-sub">
-                                <div>Change your profile information.</div>
+                                <div>
+                                    {L === "en"
+                                        ? "Change your profile information."
+                                        : "Modifiez les informations de votre profil."}
+                                </div>
                                 <button
                                     class="ui green button"
                                     onClick={() => {
@@ -42,7 +55,9 @@ class Settings extends Component {
                                         });
                                     }}
                                 >
-                                    Save Changes
+                                    {L === "en"
+                                        ? "Save Changes"
+                                        : "Sauvegarder les modifications"}
                                 </button>
                             </div>
                         </div>
@@ -50,7 +65,7 @@ class Settings extends Component {
                         <div className="profile-form ui small form">
                             <div class="two fields">
                                 <div class="field">
-                                    <label>Name</label>
+                                    <label>{L === "en" ? "Name" : "Nom"}</label>
                                     <input
                                         value={this.state.name}
                                         onChange={(e) => {
@@ -65,7 +80,11 @@ class Settings extends Component {
                                 </div>
 
                                 <div class="field">
-                                    <label>Email</label>
+                                    <label>
+                                        <label>
+                                            {L === "en" ? "Email" : "E-mail"}
+                                        </label>
+                                    </label>
                                     <input
                                         value={this.state.email}
                                         onChange={(e) => {
@@ -80,7 +99,11 @@ class Settings extends Component {
                                 </div>
                             </div>
                             <div class="field">
-                                <label>Address</label>
+                                <label>
+                                    {L === "en"
+                                        ? "Phone Number"
+                                        : "Numéro de téléphone"}
+                                </label>
                                 <input
                                     value={this.state.address}
                                     onChange={(e) => {
@@ -96,29 +119,46 @@ class Settings extends Component {
                         </div>
                         <div class="ui divider"></div>
                         <div>
-                            <h2>Reset Password</h2>
+                            <h2>
+                                {L === "en"
+                                    ? "Reset Password"
+                                    : "Réinitialiser le mot de passe"}
+                            </h2>
                             <div className="pro-sub">
                                 <div>
-                                    The link to reset your password will be sent
-                                    to your email
+                                    {L === "en"
+                                        ? "The link to reset your password will be sent to your email"
+                                        : "Le lien pour réinitialiser votre mot de passe sera envoyé à votre adresse e-mail"}
                                 </div>
                                 <button
                                     class="ui red button"
                                     onClick={this.props.resetPassword}
                                 >
-                                    Reset Password
+                                    {L === "en"
+                                        ? "Reset Password"
+                                        : "Réinitialiser le mot de passe"}
                                 </button>
                             </div>
                         </div>
                         <div>
-                            <h2>Delete Account</h2>
+                            <h2>
+                                {L === "en"
+                                    ? "Delete Account"
+                                    : "Supprimer le compte"}{" "}
+                            </h2>
                             <div className="pro-sub">
-                                <div>This action cannot be undone.</div>
+                                <div>
+                                    {L === "en"
+                                        ? "This action cannot be undone."
+                                        : "Cette action ne peut pas être annulée."}
+                                </div>
                                 <button
                                     class="ui red button"
                                     onClick={this.props.deleteAccount}
                                 >
-                                    Delete Account
+                                    {L === "en"
+                                        ? "Delete Account"
+                                        : "Supprimer le compte"}
                                 </button>
                             </div>
                         </div>
