@@ -1,70 +1,44 @@
-# Getting Started with Create React App
+# [Toronto CYPRESS](https://cypressw2021.netlify.app/)
+![logo](https://user-images.githubusercontent.com/72548456/114451620-716fe600-9ba5-11eb-87e3-27c81cd03b7b.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
+**CYPRESS** (City of Toronto Problem Reporting and Solution System) is designed to allow citizens to report problems that concern them about their city. Problems that can be reported to CYPRESS are any real events that involves property damage to the City of Toronto such as **utility failures, tree collapse, flooded streets, property vandalism, mould and spore growth, eroded streets and garbage/ road obstructions**. CYPRESS' mission is to make the City of Toronto a better and safer environment.
 
-## Available Scripts
+## Application Features
 
-In the project directory, you can run:
+### 1. Home Page
+Login, FAQ, Survey
 
-### `npm start`
+### 2. User Account
+Login, Register, My Account (Edit Account Information, Reset Password, Delete Account)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 3. Report a Problem
+We used the [Mapbox GL JS API](https://docs.mapbox.com/mapbox-gl-js/api/) to provide a user friendly map that allows the user to pinpoint the exact location of the problem that they are reporting, hence making it easier for the city workers to fix the problem as soon as possible. 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 4. My Past Reports
+View, Edit, and Delete Reports
+<!---
+CYPRESS will also make sure to notify the user when the city has received their report and as well if steps have been taken to solve the problem. 
+-->
 
-### `npm test`
+### 5. Vote
+View and Share Reports
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 7. Tell a Friend
+Send an email to a friend regarding CYPRESS
 
-### `npm run build`
+### 8. Contact City Offcials
+Access contact information of city offcials.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## How to Run
+In the project directory, run:
+```
+$ npm i 
+$ npm i node-sass@4.14.1
+$ npm run start 
+```
+Then, open http://localhost:3000 to view it in the browser.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Acknowledgements
+This project was assigned by Dr. Mišić and created for CPS406 Introduction to Software Engineering W2021.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

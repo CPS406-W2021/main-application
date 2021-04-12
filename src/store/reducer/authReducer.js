@@ -44,24 +44,30 @@ const authReducer = (state = INIT_STATE, action) => {
                 registerredirect: "",
             };
         case "REGISTERATION_COMPLETE":
+            alert("Registration Successful!");
             return {
                 ...state,
                 error: "",
                 registerredirect: <Redirect to="/login"></Redirect>,
             };
         case "REGISTERATION_ERROR":
+            alert("REGISTERATION_ERROR!");
             return {
                 ...state,
                 error: action.error,
                 registerredirect: "",
             };
         case "RESET_PASS_SUCCESS":
+            alert("Password Reset Link Sucessfully Sent!");
             return {
                 ...state,
                 error: "",
                 registerredirect: <Redirect to="/"></Redirect>,
             };
         case "RESET_PASS_ERROR":
+            alert(
+                `Errorsending Password Reset Link Sucessfully Sent!${action.error}`
+            );
             return {
                 ...state,
                 error: action.error,
@@ -81,27 +87,30 @@ const authReducer = (state = INIT_STATE, action) => {
                 error: action.error,
                 registerredirect: "",
             };
-        case 'PROFILE_UPDATE_SUCCESS':
+        case "PROFILE_UPDATE_SUCCESS":
             return {
                 ...state,
                 error: action.error,
             };
-        case 'PROFILE_UPDATE_ERROR':
+        case "PROFILE_UPDATE_ERROR":
             return {
                 ...state,
                 error: action.error,
             };
-        case 'PROFILE_DELETE_SUCCESS':
+        case "PROFILE_DELETE_SUCCESS":
+            alert("User Successfully Deleted");
             return {
                 ...state,
-                error: '',
+                error: "",
+                loggedin: false,
                 registerredirect: <Redirect to="/"></Redirect>,
             };
-        case 'PROFILE_DELETE_SUCCESS':
+        case "PROFILE_DELETE_ERROR":
+            alert(`User Not Deleted:${action.error}`);
             return {
                 ...state,
                 error: action.error,
-                registerredirect: '',
+                registerredirect: "",
             };
         default:
             return state;
