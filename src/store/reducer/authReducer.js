@@ -44,24 +44,30 @@ const authReducer = (state = INIT_STATE, action) => {
                 registerredirect: "",
             };
         case "REGISTERATION_COMPLETE":
+            alert("Registration Successful!");
             return {
                 ...state,
                 error: "",
                 registerredirect: <Redirect to="/login"></Redirect>,
             };
         case "REGISTERATION_ERROR":
+            alert("REGISTERATION_ERROR!");
             return {
                 ...state,
                 error: action.error,
                 registerredirect: "",
             };
         case "RESET_PASS_SUCCESS":
+            alert("Password Reset Link Sucessfully Sent!");
             return {
                 ...state,
                 error: "",
                 registerredirect: <Redirect to="/"></Redirect>,
             };
         case "RESET_PASS_ERROR":
+            alert(
+                `Errorsending Password Reset Link Sucessfully Sent!${action.error}`
+            );
             return {
                 ...state,
                 error: action.error,

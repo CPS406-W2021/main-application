@@ -47,10 +47,13 @@ export const register = ({ email, password, name, username }) => {
     };
 };
 
-export const resetPassword = ({ email }) => {
-    return (dispatch, getState, getFirebase) => {
+export const resetPassword = (email = null) => {
+    return async (dispatch, getState, getFirebase) => {
         const firebase = getFirebase();
-
+        const STATE = getState();
+        if (STATE.auth.loggedin) {
+            email = firebase.auth().currentUser.email;
+        }
         firebase
             .auth()
             .sendPasswordResetEmail(email)
