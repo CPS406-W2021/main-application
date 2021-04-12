@@ -84,10 +84,6 @@ class Login extends Component {
                                 : "Réinitialiser maintenant"}
                         </Link>
                     </p>
-                    <p>
-                        Forgot your password?{" "}
-                        <Link to="/resetPass">Reset Now</Link>
-                    </p>
                 </div>
             </SingePageWrapper>
         );

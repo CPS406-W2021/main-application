@@ -10,7 +10,7 @@ class Reset extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.resetPass({ ...this.state });
+        this.props.resetPass(this.state.email);
     };
     componentDidMount() {
         this.props.clearError();
