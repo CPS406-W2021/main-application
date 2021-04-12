@@ -20,9 +20,11 @@ To access the features of CYPRESS, a user must register for an account by fillin
 ![image](https://user-images.githubusercontent.com/72548456/114468454-86ef0b00-9bb9-11eb-8aef-1d37b2a27fba.png)
 
 ### 3. Report a Problem
-We used the [Mapbox GL JS API](https://docs.mapbox.com/mapbox-gl-js/api/) to provide a user friendly map that allows the user to pinpoint the exact location of the problem that they are reporting, hence making it easier for the city workers to fix the problem as soon as possible. Reports are shown in the map using markers (Red, Blue, Green) as well as a side bar that displays recent reports along with the report type, location, and date/time it was reported. When the user clicks on **```"Click to Add a Report!"```** , they are directed to a page where they can select the type of problem, enter more information, as well as choose if they want to receive updates on the report.
+We used the [Mapbox GL JS API](https://docs.mapbox.com/mapbox-gl-js/api/) to provide a user friendly map that allows the user to pinpoint the exact location of the problem that they are reporting, hence making it easier for the city workers to fix the problem as soon as possible. Reports are shown in the map using markers (Red, Blue, Green) as well as a side bar that displays recent reports along with the report type, location, and date/time it was reported. When the user clicks on a location on the map and the **```"Click to Add a Report!"```** button , they are prompted to confirm their location then directed to a page where they can select the type of problem, enter more information, as well as choose if they want to receive updates on the report.
 
 ![image](https://user-images.githubusercontent.com/72548456/114469810-d0d8f080-9bbb-11eb-959e-f755c6372509.png)
+![image](https://user-images.githubusercontent.com/72548456/114472869-1b10a080-9bc1-11eb-80ab-d95d41993eaa.png)
+
 
 ### 4. My Past Reports
 This page displays a list of all the problems that the user has reported. The user is able to do the following:
@@ -37,8 +39,8 @@ This page displays a list of all the problems that the user has reported. The us
 In the vote page, users can upvote and downvote based on the urgency, importance, or relevance of the problem. Additionally, users can also view the full report details, as well as share the report via link. Sorting by Most Recent and Most Relevant are currently not implemented, but might be implemented in a future sprint.
 ![image](https://user-images.githubusercontent.com/72548456/114469881-ee0dbf00-9bbb-11eb-88c0-8aac4fe29d27.png)
 
-### 7. Contact City Offcials
-The contact page displays a table of Toronto's City Council along with their contact information (e-mail and telephone number), easily accessible for users who wish to speak to them directly. Users can also use the search feature and sort the table by Ward or Counsellor Name. 
+### 7. Contact City Officials
+The contact page displays a table of Toronto's City Council along with their contact information (e-mail and telephone number), easily accessible for users who wish to speak to them directly. Users can also use the search feature and sort the table by Ward or Councillor Name. 
 
 ![image](https://user-images.githubusercontent.com/72548456/114465789-953b2800-9bb5-11eb-9666-262842aa0ebf.png)
 
