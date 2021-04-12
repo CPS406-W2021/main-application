@@ -44,7 +44,6 @@ class ReportAProblem extends Component {
         this.setState({ Map: Map });
     }
     render() {
-        console.log(this.props.user);
         const L = this.props.lang;
         if (!this.props.ready) {
             return <Redirect to="/portal"></Redirect>;
@@ -200,7 +199,7 @@ const mapStateToProps = (state) => ({
     place: state.report.setupreport["name"],
     loc: [state.report.setupreport["long"], state.report.setupreport["lat"]],
     ready: state.report.ready,
-    user: state.auth.userData,
+    lang: state.lang.lang,
 });
 
 const mapDispatchToProps = (dispatch) => ({

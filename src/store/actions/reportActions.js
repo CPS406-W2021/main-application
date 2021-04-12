@@ -223,3 +223,24 @@ export const getVotes = ({ reportId }) => {
             });
     };
 };
+
+export const loadReport = (rid) => {
+    return (dispatch, getState, getFirebase) => {
+        const firebase = getFirebase().firestore();
+
+        firebase
+            .collection("reports")
+            .doc(rid)
+            .get()
+            .then((r) => {
+                dispatch({
+                    type: "REPORT_LOADED",
+                    payload: { ...r.data(), loaded: true },
+                });
+            })
+            .catch((err) => {
+                alert(err.message);
+                dispatch({ type: "REPORT_LOAD_ERROR", error: err.message });
+            });
+    };
+};

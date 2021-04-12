@@ -56,12 +56,19 @@ class Updates extends Component {
     }
 }
 class ViewReports extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
     render() {
         const Map = ReactMapboxGl({
             accessToken:
                 "pk.eyJ1IjoiZmFyaGFuaG0iLCJhIjoiY2tuMTUxYjNnMHIyODJvbzJueDJzdWJmcCJ9.EIl7ZcqlshPyJxnxyGNGhg",
             interactive: false,
         });
+        const { report } = this.props;
+        console.log(report);
+        const rdate = new Date(report.date);
         return (
             <DashboarWrapper>
                 <div className="view-con">
@@ -72,49 +79,43 @@ class ViewReports extends Component {
                             containerStyle={{
                                 flex: 1,
                             }}
-                            center={[-79.3788, 43.6577]}
+                            center={report.loc}
                             zoom={[17]}
                         ></Map>
                     </div>
                     <div className="view-body">
-                        <h1 className="view-h1">Tree Collapse</h1>
+                        <h1 className="view-h1">{report.title}</h1>
                         <div className="view-sub">
-                            <span class="address">
-                                at 123 St. Street St. Toronto, ON. Canada
-                            </span>
+                            <span className="address">at {report.name}</span>
                         </div>
                         <div className="view-progress">
                             <ul>
                                 {updates.map(({ type, q, a }) => {
-                                    return <Updates q={q} a={a} type={type} />;
+                                    return (
+                                        <Updates
+                                            key={q}
+                                            q={q}
+                                            a={a}
+                                            type={type}
+                                        />
+                                    );
                                 })}
                             </ul>
                         </div>
                         <div className="view-descr">
                             <label className="descr">Description:</label>
-                            <div className="text">
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut
-                                enim ad minim veniam, q uis nostrud exercitation
-                                ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in
-                                reprehenderit in voluptate velit esse cillum
-                                dolore eu fugiat nulla pariatur. Excepteur sint
-                                occaecat cupidatat non proident, sunt in culpa
-                                qui officia deserunt mollit anim id est laborum.
-                            </div>
+                            <div className="text">{report.information}</div>
                         </div>
                         <div className="view-by">
                             <div className="view-by__icon">
-                                <i class="user circle icon"></i>
+                                <i className="user circle icon"></i>
                             </div>
                             <div className="view-by__body">
                                 <div className="view-by__body-time">
-                                    3 days ago
+                                    {rdate.toLocaleDateString()}
                                 </div>
                                 <div className="view-by__body-posted">
-                                    <strong>Posted by:</strong> Farhan Mohammed
+                                    <strong>Posted by:</strong> {report.uid}
                                 </div>
                             </div>
                         </div>
@@ -125,7 +126,9 @@ class ViewReports extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => {
+    return { report: state.report.loadedreport };
+};
 
 const mapDispatchToProps = {};
 
