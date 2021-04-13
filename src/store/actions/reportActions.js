@@ -6,7 +6,6 @@ export const createReport = (report) => {
         // Associate the id of the username from the database, dont care about the custom username.
         const firebase = getFirebase().firestore();
         // let f = "titleOneX";
-        console.log(report);
         report["updates"] = [
             {
                 type: "s",
@@ -33,7 +32,6 @@ export const createReport = (report) => {
 export const editReport = (reportId, reportChanges) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase().firestore();
-        console.log(reportChanges);
         firebase
             .collection(`reports/`)
             .doc(reportId)
@@ -67,13 +65,12 @@ export const setupReport = (report) => {
     return { type: "REPORT_SETUP", payload: report };
 };
 export const cancelReport = () => {
-    console.log("cancellign report");
+    console.log("cancelling report");
     return { type: "REPORT_CANCEL" };
 };
 
 export const upVoteReport = ({ reportId, uid }) => {
-    // console.log(reportId)
-    // console.log(uid)
+
 
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase().firestore();
