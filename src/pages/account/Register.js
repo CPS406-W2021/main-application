@@ -19,7 +19,6 @@ class Register extends Component {
     handleSubmission = (e) => {
         e.preventDefault();
         let { email, username, password, name, scq, sca } = this.state;
-        console.log(this.state)
         this.props.register({ email, username, password, name, scq, sca });
     };
     componentDidMount() {

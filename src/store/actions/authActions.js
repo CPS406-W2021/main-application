@@ -41,10 +41,8 @@ export const register = ({ email, username, password, name, scq, sca }) => {
             email,
             scq,
             sca,
-            // 'securityQ': scq,
-            // 'securityA': sca,
         }
-        console.log(profile)
+
         // Do registeration & generate profile
         firebase
             .createUser({ email, password }, profile) //Params login creds & profile info
