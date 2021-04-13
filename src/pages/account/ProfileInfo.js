@@ -19,7 +19,7 @@ class Settings extends Component {
     clickSave = () => {
         if (this.state.email === "" || this.state.name === "") {
             alert("please fill out all the text fields");
-        } else if (window.prompt(this.props.user.scq) === this.props.user.sca) {
+        } else {
             this.props.updateInfo(this.state.email, this.state.name);
             this.setState({ edit: false });
         }
