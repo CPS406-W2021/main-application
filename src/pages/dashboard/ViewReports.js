@@ -32,6 +32,30 @@ const updates = [
         a: "Resolved : Road has been cleared.",
     },
 ];
+
+const updatesFr = [
+    {
+        type: "s",
+        a: "Demande reçue.",
+    },
+    {
+        type: "a",
+        a: "Demande approuvée.",
+    },
+    {
+        type: "u",
+        a:
+            "Mise à jour 1: La ville de Toronto prend des mesures pour dégager l'arbre tombé.",
+    },
+    {
+        type: "u",
+        a: "Mise à jour 2: problèmes inattendus entraînant un retard.",
+    },
+    {
+        type: "r",
+        a: "Résolu: la route a été dégagée.",
+    },
+];
 class Updates extends Component {
     constructor(props) {
         super(props);
@@ -159,6 +183,7 @@ class ViewReports extends Component {
         }
     };
     render() {
+        const L = this.props.lang;
         const Map = ReactMapboxGl({
             accessToken:
                 "pk.eyJ1IjoiZmFyaGFuaG0iLCJhIjoiY2tuMTUxYjNnMHIyODJvbzJueDJzdWJmcCJ9.EIl7ZcqlshPyJxnxyGNGhg",
@@ -206,21 +231,17 @@ class ViewReports extends Component {
                         </div>
                         <div className="view-progress">
                             <ul>
-                                {updates.map(({ type, q, a }) => {
-                                    return (
-                                        <Updates
-                                            key={q}
-                                            q={q}
-                                            a={a}
-                                            type={type}
-                                        />
-                                    );
+                                {L === "en" ? updates.map(({ type, q, a }) => {
+                                    return (<Updates key={q} q={q} a={a} type={type} /> );
+                                })
+                                    : updatesFr.map(({ type, q, a }) =>{
+                                    return (<Updates key={q} q={q} a={a} type={type} /> );
                                 })}
                             </ul>
                         </div>
                         {this.renderToolbar(owner)}
                         <div className="view-descr">
-                            <label className="descr">Description:</label>
+                            <label className="descr">{L === "en" ? "Description:" : "La description"}</label>
                             {this.renderDesc(owner)}
                         </div>
                         <div className="view-by">
@@ -232,7 +253,7 @@ class ViewReports extends Component {
                                     {rdate.toLocaleDateString()}
                                 </div>
                                 <div className="view-by__body-posted">
-                                    <strong>Posted by:</strong>{" "}
+                                    <strong>{L === "en" ? "Posted by: " : "Posté par: "}</strong>{" "}
                                     {curReport.username}
                                 </div>
                             </div>
@@ -245,6 +266,8 @@ class ViewReports extends Component {
     }
 }
 
+
+
 const mapStateToProps = (state, props) => {
     let curReport = {};
     if (state.firestore.data.reports) {
@@ -256,7 +279,10 @@ const mapStateToProps = (state, props) => {
         loggedin: state.auth.loggedin,
         uid: state.auth.uid,
         user: state.auth.userData,
+        lang: state.lang.lang,
+        redirect: state.redirect,
     };
+    
 };
 
 const mapDispatchToProps = (dispatch) => ({
