@@ -91,7 +91,7 @@ class ReportAProblem extends Component {
                                         val={this.state.title}
                                         className="reports-search "
                                         type="text"
-                                        placeholder="Rat Cleanup at Aisle 7"
+                                        placeholder="Car crash in the middle of the intersection"
                                     ></input>
                                 </div>
                             </div>
