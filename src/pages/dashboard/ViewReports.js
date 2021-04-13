@@ -115,7 +115,8 @@ class ViewReports extends Component {
                                     {rdate.toLocaleDateString()}
                                 </div>
                                 <div className="view-by__body-posted">
-                                    <strong>Posted by:</strong> {report.uid}
+                                    <strong>Posted by:</strong>{" "}
+                                    {report.username}
                                 </div>
                             </div>
                         </div>

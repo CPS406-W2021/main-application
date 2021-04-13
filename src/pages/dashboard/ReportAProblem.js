@@ -33,6 +33,7 @@ class ReportAProblem extends Component {
             title,
             date: new Date().toISOString(),
             votes: 0,
+            username: this.props.user.name,
         });
     };
     componentDidMount() {
@@ -44,6 +45,7 @@ class ReportAProblem extends Component {
         this.setState({ Map: Map });
     }
     render() {
+        console.log(this.props.user);
         const L = this.props.lang;
         if (!this.props.ready) {
             return <Redirect to="/portal"></Redirect>;
@@ -200,6 +202,7 @@ const mapStateToProps = (state) => ({
     loc: [state.report.setupreport["long"], state.report.setupreport["lat"]],
     ready: state.report.ready,
     lang: state.lang.lang,
+    user: state.auth.userData,
 });
 
 const mapDispatchToProps = (dispatch) => ({

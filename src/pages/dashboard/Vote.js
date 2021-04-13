@@ -68,7 +68,16 @@ class Vote extends Component {
                         </div>
                     </div>
                     {this.renderList().map(
-                        ({ title, name, uid, loc, selection, key, votes }) => {
+                        ({
+                            title,
+                            name,
+                            username,
+                            loc,
+                            selection,
+                            key,
+                            uid,
+                            votes,
+                        }) => {
                             const selectionColor = {
                                 Other: 2,
                                 Pothole: 1,
@@ -123,7 +132,7 @@ class Vote extends Component {
                                             <span className="info">
                                                 Posted by{" "}
                                                 <span className="usr">
-                                                    {uid}
+                                                    {username}
                                                 </span>{" "}
                                                 13 hours ago
                                             </span>
