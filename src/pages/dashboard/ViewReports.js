@@ -191,6 +191,7 @@ class ViewReports extends Component {
         const owner = this.props.loggedin && this.props.uid === curReport.uid;
         const markerIcons = [blueMarker, greenMarker, redMarker];
         const rdate = new Date(curReport.date);
+        const L = this.props.lang;
         return (
             <DashboarWrapper>
                 <div className="view-con">
@@ -238,7 +239,9 @@ class ViewReports extends Component {
                         </div>
                         {this.renderToolbar(owner)}
                         <div className="view-descr">
-                            <label className="descr">Description:</label>
+                            <label className="descr">
+                                {L === "en" ? "Description" : "La description:"}
+                            </label>
                             {this.renderDesc(owner)}
                         </div>
                         <div className="view-by">
@@ -250,7 +253,11 @@ class ViewReports extends Component {
                                     {rdate.toLocaleDateString()}
                                 </div>
                                 <div className="view-by__body-posted">
-                                    <strong>Posted by:</strong>{" "}
+                                    <strong>
+                                        {L === "en"
+                                            ? "Posted by:"
+                                            : "Posté par:"}
+                                    </strong>{" "}
                                     {curReport.username}
                                 </div>
                             </div>
