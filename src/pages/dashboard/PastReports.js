@@ -8,7 +8,8 @@ import { deleteReport } from "../../store/actions/reportActions";
 
 class PastReports extends Component {
     deleteReport = (title, rid) => {
-        if (window.confirm(`Are you sure you want to delete ${title}?`)) {
+        const L = this.props.lang;
+        if (window.confirm(L === "en" ? `Are you sure you want to delete ${title}?` : `Etes-vous sûr que vous voulez supprimer ${title}?`)) {
             this.props.deleteReport(rid);
         }
     };
