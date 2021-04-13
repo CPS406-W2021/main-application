@@ -23,10 +23,10 @@ class ReportAProblem extends Component {
         e.preventDefault();
         const uid = this.props.uid;
         const { selection, information, title } = this.state;
-        const selectionType = ["Tree", "Pothole", "Other"];
+        // const selectionType = ["Maintainence", "Incident", "Other"];
         this.props.createReport({
             uid,
-            selection: selectionType[Number(selection)],
+            selection: selection,
             information,
             name: this.props.place,
             loc: this.props.loc,
@@ -45,7 +45,6 @@ class ReportAProblem extends Component {
         this.setState({ Map: Map });
     }
     render() {
-        console.log(this.props.user);
         const L = this.props.lang;
         if (!this.props.ready) {
             return <Redirect to="/portal"></Redirect>;
@@ -115,18 +114,16 @@ class ReportAProblem extends Component {
                                             </option>
                                             <option value="0">
                                                 {L === "en"
-                                                    ? "Tree"
-                                                    : "Sélectionnez un problème"}
+                                                    ? "Maintenance"
+                                                    : "Maintenance"}
                                             </option>
                                             <option value="1">
                                                 {L === "en"
-                                                    ? "Pothole"
-                                                    : "Sélectionnez un problème"}
+                                                    ? "Incident"
+                                                    : "Incidente"}
                                             </option>
                                             <option value="2">
-                                                {L === "en"
-                                                    ? "Other"
-                                                    : "Sélectionnez un problème"}
+                                                {L === "en" ? "Other" : "Autre"}
                                             </option>
                                         </select>
                                     </div>

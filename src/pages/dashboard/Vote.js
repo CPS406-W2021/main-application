@@ -78,11 +78,6 @@ class Vote extends Component {
                             uid,
                             votes,
                         }) => {
-                            const selectionColor = {
-                                Other: 2,
-                                Pothole: 1,
-                                Tree: 0,
-                            };
                             return (
                                 <Fragment>
                                     <div className="container">
@@ -118,9 +113,7 @@ class Vote extends Component {
                                             <RenderMap
                                                 loc={loc}
                                                 Map={this.state.Map}
-                                                selection={
-                                                    selectionColor[selection]
-                                                }
+                                                selection={selection}
                                             ></RenderMap>
                                         </div>
 

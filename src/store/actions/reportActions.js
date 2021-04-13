@@ -4,7 +4,7 @@ export const createReport = (report) => {
         // make an entry for the report
         // ALSO make sure to associate the user, maybe firebase has a auth().getUser() or something...
         // Associate the id of the username from the database, dont care about the custom username.
-        const firebase = getFirebase().getfirestore();
+        const firebase = getFirebase().firestore();
         // let f = "titleOneX";
         const STATE = getState();
         if (STATE.auth.loggedin) {

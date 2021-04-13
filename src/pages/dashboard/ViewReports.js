@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import DashboarWrapper from "../../components/ThemeWrapper";
 import { connect } from "react-redux";
-import ReactMapboxGl from "react-mapbox-gl";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { deleteReport, editReport } from "../../store/actions/reportActions";
+
+import ReactMapboxGl, { Marker } from "react-mapbox-gl";
+import blueMarker from "../../images/icons/blue.png";
+import greenMarker from "../../images/icons/green.png";
+import redMarker from "../../images/icons/red.png";
 const updates = [
     {
         type: "s",
@@ -70,7 +74,6 @@ class ViewReports extends Component {
                 <i
                     class="edit icon"
                     onClick={(e) => {
-                        console.log(this.props);
                         this.setState({
                             editMode: true,
                             title: this.props.curReport.title,
@@ -117,7 +120,6 @@ class ViewReports extends Component {
         }
     }
     renderTitle(owner) {
-        console.log(this.state);
         if (owner && this.state.editMode) {
             return (
                 <div class="ui input">
@@ -172,6 +174,7 @@ class ViewReports extends Component {
             );
         }
         const owner = this.props.loggedin && this.props.uid === curReport.uid;
+        const markerIcons = [blueMarker, greenMarker, redMarker];
         const rdate = new Date(curReport.date);
         return (
             <DashboarWrapper>
@@ -185,7 +188,17 @@ class ViewReports extends Component {
                             }}
                             center={curReport.loc}
                             zoom={[17]}
-                        ></Map>
+                        >
+                            {" "}
+                            <Marker coordinates={curReport.loc} anchor="center">
+                                <img
+                                    src={markerIcons[curReport.selection]}
+                                    width="30px"
+                                    height="30px"
+                                    alt="marker"
+                                />
+                            </Marker>
+                        </Map>
                     </div>
                     <div className="view-body">
                         {this.renderTitle(owner)}
