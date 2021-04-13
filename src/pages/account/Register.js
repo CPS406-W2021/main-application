@@ -156,7 +156,8 @@ class Register extends Component {
                             <a
                                 rel="noreferrer"
                                 target="_blank"
-                                href="https://docs.google.com/document/d/1vnp4yYsQDO7hXwNwgmb-j_ZmkGpOdOZekaEjykxtMnQ/edit?usp=sharing"
+                                href={L === "en" ? "https://docs.google.com/document/d/1vnp4yYsQDO7hXwNwgmb-j_ZmkGpOdOZekaEjykxtMnQ/edit?usp=sharing"
+                                                 : "https://docs.google.com/document/d/1kDLebIrJ6t5oOicPg_T2XEGEYUCbICw-k0XsCpOoK0w/edit?usp=sharing"}
                             >
                                 {L === "en" ? "Terms of Service" : "Conditions d'utilisation"}
                             </a>
