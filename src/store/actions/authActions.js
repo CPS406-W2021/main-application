@@ -31,13 +31,23 @@ export const signOut = () => {
     };
 };
 
-export const register = ({ email, password, name, username }) => {
+export const register = ({ email, username, password, name, scq, sca }) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase();
 
+        let profile = {
+            name,
+            username,
+            email,
+            scq,
+            sca,
+            // 'securityQ': scq,
+            // 'securityA': sca,
+        }
+        console.log(profile)
         // Do registeration & generate profile
         firebase
-            .createUser({ email, password }, { name, username }) //Params login creds & profile info
+            .createUser({ email, password }, profile) //Params login creds & profile info
             .then((auth) => {
                 dispatch({ type: "REGISTERATION_COMPLETE" });
             })
@@ -83,7 +93,7 @@ export const deleteAccount = ({ uid }) => {
 
 export const updateAccount = ({ email, phone, name }) => {
     alert("updating");
-    return (dispatch, getState, getFirebase) => {};
+    return (dispatch, getState, getFirebase) => { };
 };
 export const clearError = () => {
     return { type: "CLEAR_ERROR" };

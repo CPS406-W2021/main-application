@@ -12,12 +12,15 @@ class Register extends Component {
             email: "",
             password: "",
             confpassword: "",
+            scq: "",
+            sca: "",
         };
     }
     handleSubmission = (e) => {
         e.preventDefault();
-        let { email, username, password, name } = this.state;
-        this.props.register({ email, username, password, name });
+        let { email, username, password, name, scq, sca } = this.state;
+        console.log(this.state)
+        this.props.register({ email, username, password, name, scq, sca });
     };
     componentDidMount() {
         this.props.clearError();
@@ -159,8 +162,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    register: ({ email, username, password, name }) =>
-        dispatch(register({ email, username, password, name })),
+    register: ({ email, username, password, name, scq, sca }) =>
+        dispatch(register({ email, username, password, name, scq, sca })),
     clearError: () => dispatch(clearError()),
 });
 
