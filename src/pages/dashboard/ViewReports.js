@@ -9,6 +9,7 @@ import ReactMapboxGl, { Marker } from "react-mapbox-gl";
 import blueMarker from "../../images/icons/blue.png";
 import greenMarker from "../../images/icons/green.png";
 import redMarker from "../../images/icons/red.png";
+import { Redirect } from "react-router-dom";
 // const updates = [
 //     {
 //         type: "s",
@@ -35,7 +36,12 @@ import redMarker from "../../images/icons/red.png";
 class Updates extends Component {
     constructor(props) {
         super(props);
-        this.state = { open: false, information: "", title: "" };
+        this.state = {
+            open: false,
+            information: "",
+            title: "",
+            redirectToPastPages: false,
+        };
     }
     renderTitle() {
         switch (this.props.type) {
@@ -92,13 +98,16 @@ class ViewReports extends Component {
             )
         ) {
             this.props.deleteReport(this.props.rid);
+            this.setState({
+                redirectToPastPages: <Redirect to="/pastreports"></Redirect>,
+            });
         }
     };
     OnClickSave = () => {
         if (this.state.title === "") {
             alert("Missing field: Title cannot be empty");
         } else if (this.state.information === "") {
-            alert("Missing field: Dedscription cannot be empty");
+            alert("Missing field: Description cannot be empty");
         } else {
             this.props.updateReport(
                 this.props.rid,
@@ -168,6 +177,9 @@ class ViewReports extends Component {
                 "pk.eyJ1IjoiZmFyaGFuaG0iLCJhIjoiY2tuMTUxYjNnMHIyODJvbzJueDJzdWJmcCJ9.EIl7ZcqlshPyJxnxyGNGhg",
             interactive: false,
         });
+        if (this.state.redirectToPastPages) {
+            return this.state.redirectToPastPages;
+        }
         const { curReport } = this.props;
         if (curReport === {} || curReport === null) {
             return (
