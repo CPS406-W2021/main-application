@@ -152,7 +152,11 @@ class Register extends Component {
                         />
                         <label>
                             I agree to the{" "}
-                            <a target="_blank" href="https://docs.google.com/document/d/1vnp4yYsQDO7hXwNwgmb-j_ZmkGpOdOZekaEjykxtMnQ/edit?usp=sharing">
+                            <a
+                                rel="noreferrer"
+                                target="_blank"
+                                href="https://docs.google.com/document/d/1vnp4yYsQDO7hXwNwgmb-j_ZmkGpOdOZekaEjykxtMnQ/edit?usp=sharing"
+                            >
                                 Terms of Service
                             </a>
                         </label>
