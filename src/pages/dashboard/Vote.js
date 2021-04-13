@@ -41,11 +41,12 @@ class Vote extends Component {
         }
     }
     render() {
+        const L = this.props.lang;
         return (
             <DashboarWrapper>
                 <div className="vot">
                     <div className="header">
-                        <h1>Current Problems in Toronto</h1>
+                        <h1>{ L === "en" ? "Current Problems in Toronto" : "Problèmes actuels à Toronto" }</h1>
                         <div className="header-icons">
                             <span
                                 className="horn"
@@ -54,7 +55,7 @@ class Vote extends Component {
                                 }
                             >
                                 <i class="large bullhorn icon"></i>
-                                <strong>Most Relevant</strong>
+                                <strong>{ L === "en" ? "Most Relevant" : "Le plus pertinent" }</strong>
                             </span>
                             <span
                                 className="clock"
@@ -63,7 +64,7 @@ class Vote extends Component {
                                 }
                             >
                                 <i class="large black clock outline icon"></i>
-                                <strong>Most Recent</strong>
+                                <strong>{ L === "en" ? "Most Recent" : "Le plus récent" }</strong>
                             </span>
                         </div>
                     </div>
@@ -121,15 +122,15 @@ class Vote extends Component {
                                             </span>
                                             <br></br>
                                             <span className="info">
-                                                Posted by{" "}
+                                            { L === "en" ? "Posted by" : "Posté par" }{" "}
                                                 <span className="usr">
                                                     {uid}
                                                 </span>{" "}
-                                                13 hours ago
+                                                { L === "en" ? " 13 hours ago" : " Il y a 13 heures" }
                                             </span>
                                             <br></br>
                                             <span className="loc">
-                                                Location:{" "}
+                                            { L === "en" ? "Location: " : "Emplacement: " }{" "}
                                                 <span className="address">
                                                     {name}
                                                 </span>
@@ -141,7 +142,7 @@ class Vote extends Component {
                                                     className="open"
                                                 >
                                                     <i class="grey folder open outline icon"></i>
-                                                    View Full Report
+                                                    { L === "en" ? "View Full Report" : "Afficher le rapport complet" }
                                                 </Link>
                                                 <span
                                                     className="share"
@@ -152,7 +153,7 @@ class Vote extends Component {
                                                     }}
                                                 >
                                                     <i class="grey share square outline icon"></i>
-                                                    Share
+                                                    { L === "en" ? "Share" : "Partager" }
                                                 </span>
                                             </div>
                                         </div>
