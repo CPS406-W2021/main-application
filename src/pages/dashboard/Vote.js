@@ -68,12 +68,16 @@ class Vote extends Component {
                         </div>
                     </div>
                     {this.renderList().map(
-                        ({ title, name, uid, loc, selection, key, votes }) => {
-                            const selectionColor = {
-                                Other: 2,
-                                Pothole: 1,
-                                Tree: 0,
-                            };
+                        ({
+                            title,
+                            name,
+                            username,
+                            loc,
+                            selection,
+                            key,
+                            uid,
+                            votes,
+                        }) => {
                             return (
                                 <Fragment>
                                     <div className="container">
@@ -109,9 +113,7 @@ class Vote extends Component {
                                             <RenderMap
                                                 loc={loc}
                                                 Map={this.state.Map}
-                                                selection={
-                                                    selectionColor[selection]
-                                                }
+                                                selection={selection}
                                             ></RenderMap>
                                         </div>
 
@@ -123,7 +125,7 @@ class Vote extends Component {
                                             <span className="info">
                                                 Posted by{" "}
                                                 <span className="usr">
-                                                    {uid}
+                                                    {username}
                                                 </span>{" "}
                                                 13 hours ago
                                             </span>

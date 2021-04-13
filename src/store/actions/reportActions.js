@@ -6,22 +6,27 @@ export const createReport = (report) => {
         // Associate the id of the username from the database, dont care about the custom username.
         const firebase = getFirebase().firestore();
         // let f = "titleOneX";
-        firebase
-            .collection(`reports/`)
-            .add(report)
-            .then(() => {
-                dispatch({ type: "REPORT_CANCEL" });
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        console.log(report)
+        const STATE = getState();
+        if (STATE.auth.loggedin) {
+            firebase
+                .collection(`reports/`)
+                .add(report)
+                .then(() => {
+                    dispatch({ type: "REPORT_CANCEL" });
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
     };
 };
 
 //Report changes as json object with the correct labels within firebase
-export const editReport = ({ reportId, reportChanges }) => {
+export const editReport = (reportId, reportChanges) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase().firestore();
+        console.log(reportChanges)
         firebase
             .collection(`reports/`)
             .doc(reportId)
@@ -223,11 +228,9 @@ export const getVotes = ({ reportId }) => {
             });
     };
 };
-
 export const loadReport = (rid) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase().firestore();
-
         firebase
             .collection("reports")
             .doc(rid)
