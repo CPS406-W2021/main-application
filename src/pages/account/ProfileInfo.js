@@ -167,7 +167,14 @@ class Settings extends Component {
                                 </div>
                                 <button
                                     class="ui red button"
-                                    onClick={this.props.resetPassword}
+                                    onClick={() => {
+                                        if (
+                                            window.prompt(
+                                                this.props.user.scq
+                                            ) === this.props.user.sca
+                                        )
+                                            this.props.resetPassword();
+                                    }}
                                 >
                                     {L === "en"
                                         ? "Reset Password"
@@ -189,7 +196,14 @@ class Settings extends Component {
                                 </div>
                                 <button
                                     class="ui red button"
-                                    onClick={this.props.deleteAccount}
+                                    onClick={() => {
+                                        if (
+                                            window.prompt(
+                                                this.props.user.scq
+                                            ) === this.props.user.sca
+                                        )
+                                            this.props.deleteAccount();
+                                    }}
                                 >
                                     {L === "en"
                                         ? "Delete Account"
