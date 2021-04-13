@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import DashboarWrapper from "../../components/ThemeWrapper";
 import { connect } from "react-redux";
-import ReactMapboxGl from "react-mapbox-gl";
+import { compose } from "redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { deleteReport, editReport } from "../../store/actions/reportActions";
+
+import ReactMapboxGl, { Marker } from "react-mapbox-gl";
+import blueMarker from "../../images/icons/blue.png";
+import greenMarker from "../../images/icons/green.png";
+import redMarker from "../../images/icons/red.png";
 const updates = [
     {
         type: "s",
@@ -58,17 +65,116 @@ class Updates extends Component {
 class ViewReports extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = { editMode: false, title: "", information: "" };
     }
+    renderToolbar = (owner) => {
+        if (!owner || this.state.editMode) return;
+        return (
+            <div className="view-toolbar__con">
+                <i
+                    class="edit icon"
+                    onClick={(e) => {
+                        this.setState({
+                            editMode: true,
+                            title: this.props.curReport.title,
+                            desc: this.props.curReport.information,
+                        });
+                    }}
+                ></i>
+                <i class="trash alternate icon" onClick={this.onDelete}></i>
+            </div>
+        );
+    };
+    onDelete = () => {
+        if (window.prompt(this.props.user.scq) === this.props.user.sca) {
+            this.props.deleteReport(this.props.rid);
+        }
+    };
+    OnClickSave = () => {
+        if (this.state.text === "" && this.state.information === "") {
+            alert("please enter a new title or description");
+        } else if (window.prompt(this.props.user.scq) === this.props.user.sca) {
+            this.props.updateReport(
+                this.props.rid,
+                this.state.title,
+                this.state.information
+            );
+            this.setState({ editMode: false });
+        }
+    };
+    renderFooter() {
+        if (this.state.editMode) {
+            return (
+                <div className="view-toolbar__footer">
+                    <button class="ui button green" onClick={this.OnClickSave}>
+                        Save
+                    </button>
+                    <div
+                        class="ui button"
+                        onClick={(e) => this.setState({ editMode: false })}
+                    >
+                        Cancel
+                    </div>
+                </div>
+            );
+        }
+    }
+    renderTitle(owner) {
+        if (owner && this.state.editMode) {
+            return (
+                <div class="ui input">
+                    <input
+                        type="text"
+                        value={this.state.title}
+                        onChange={(e) =>
+                            this.setState({ title: e.target.value })
+                        }
+                    />
+                </div>
+            );
+        } else {
+            return <h1 className="view-h1">{this.props.curReport.title}</h1>;
+        }
+    }
+    renderDesc = (owner) => {
+        if (owner && this.state.editMode) {
+            return (
+                <div
+                    class="ui input"
+                    style={{ width: "100%", display: "block" }}
+                >
+                    <textarea
+                        type="text"
+                        value={this.state.information}
+                        onChange={(e) =>
+                            this.setState({ information: e.target.value })
+                        }
+                    />
+                </div>
+            );
+        } else {
+            return (
+                <div className="text">{this.props.curReport.information}</div>
+            );
+        }
+    };
     render() {
         const Map = ReactMapboxGl({
             accessToken:
                 "pk.eyJ1IjoiZmFyaGFuaG0iLCJhIjoiY2tuMTUxYjNnMHIyODJvbzJueDJzdWJmcCJ9.EIl7ZcqlshPyJxnxyGNGhg",
             interactive: false,
         });
-        const { report } = this.props;
-        console.log(report);
-        const rdate = new Date(report.date);
+        const { curReport } = this.props;
+        if (curReport === {} || curReport === null) {
+            return (
+                <DashboarWrapper>
+                    Either the report is loading or has been deleted.
+                </DashboarWrapper>
+            );
+        }
+        const owner = this.props.loggedin && this.props.uid === curReport.uid;
+        const markerIcons = [blueMarker, greenMarker, redMarker];
+        const rdate = new Date(curReport.date);
         return (
             <DashboarWrapper>
                 <div className="view-con">
@@ -79,14 +185,24 @@ class ViewReports extends Component {
                             containerStyle={{
                                 flex: 1,
                             }}
-                            center={report.loc}
+                            center={curReport.loc}
                             zoom={[17]}
-                        ></Map>
+                        >
+                            {" "}
+                            <Marker coordinates={curReport.loc} anchor="center">
+                                <img
+                                    src={markerIcons[curReport.selection]}
+                                    width="30px"
+                                    height="30px"
+                                    alt="marker"
+                                />
+                            </Marker>
+                        </Map>
                     </div>
                     <div className="view-body">
-                        <h1 className="view-h1">{report.title}</h1>
+                        {this.renderTitle(owner)}
                         <div className="view-sub">
-                            <span className="address">at {report.name}</span>
+                            <span className="address">at {curReport.name}</span>
                         </div>
                         <div className="view-progress">
                             <ul>
@@ -102,9 +218,10 @@ class ViewReports extends Component {
                                 })}
                             </ul>
                         </div>
+                        {this.renderToolbar(owner)}
                         <div className="view-descr">
                             <label className="descr">Description:</label>
-                            <div className="text">{report.information}</div>
+                            {this.renderDesc(owner)}
                         </div>
                         <div className="view-by">
                             <div className="view-by__icon">
@@ -115,10 +232,12 @@ class ViewReports extends Component {
                                     {rdate.toLocaleDateString()}
                                 </div>
                                 <div className="view-by__body-posted">
-                                    <strong>Posted by:</strong> {report.uid}
+                                    <strong>Posted by:</strong>{" "}
+                                    {curReport.username}
                                 </div>
                             </div>
                         </div>
+                        {this.renderFooter()}
                     </div>
                 </div>
             </DashboarWrapper>
@@ -126,10 +245,29 @@ class ViewReports extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return { report: state.report.loadedreport };
+const mapStateToProps = (state, props) => {
+    let curReport = {};
+    if (state.firestore.data.reports) {
+        curReport = state.firestore.data.reports[props.rid];
+    }
+    return {
+        curReport,
+        report: state.report.loadedreport,
+        loggedin: state.auth.loggedin,
+        uid: state.auth.uid,
+        user: state.auth.userData,
+    };
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = (dispatch) => ({
+    deleteReport: (rid) => dispatch(deleteReport(rid)),
+    updateReport: (rid, title, info) =>
+        dispatch(editReport(rid, { title, information: info })),
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewReports);
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    firestoreConnect((props) => {
+        return [`reports/${props.rid}`];
+    })
+)(ViewReports);
