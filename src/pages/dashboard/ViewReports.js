@@ -92,9 +92,10 @@ class ViewReports extends Component {
         );
     };
     onDelete = () => {
+        const L = this.props.lang;
         if (
             window.confirm(
-                `Are you sure you want to delete ${this.props.curReport.title}?`
+                L === "en" ? `Are you sure you want to delete ${this.props.curReport.title}?` : `Etes-vous sûr que vous voulez supprimer ${this.props.curReport.title}?`
             )
         ) {
             this.props.deleteReport(this.props.rid);
