@@ -21,6 +21,7 @@ class Settings extends Component {
             alert("please fill out all the text fields");
         } else if (window.prompt(this.props.user.scq) === this.props.user.sca) {
             this.props.updateInfo(this.state.email, this.state.name);
+            this.setState({ edit: false });
         }
     };
     renderEditFooter = () => {

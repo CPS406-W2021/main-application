@@ -94,7 +94,17 @@ export const updateAccount = (email, name) => {
                 .doc(firebase.auth().currentUser.uid)
                 .set({ email, name }, { merge: true })
                 .then(() => {
-                    dispatch({ type: "PROFILE_UPDATE_SUCCESS" });
+                    console.log("updated the user...");
+                    firebase
+                        .auth()
+                        .currentUser.updateEmail(email)
+                        .then(() => {
+                            console.log("updated the user info");
+                            dispatch({
+                                type: "PROFILE_UPDATE_SUCCESS",
+                                payload: { email, name },
+                            });
+                        });
                 })
                 .catch((err) => {
                     dispatch({
