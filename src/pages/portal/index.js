@@ -44,6 +44,7 @@ class PortalBase extends Component {
     render() {
         let { reports } = this.props;
         const L = this.props.lang;
+        const s = ["Maintenece", "Incident", "Other Issue"];
         return (
             <DashboarWrapper
                 currentPage={1}
@@ -72,7 +73,7 @@ class PortalBase extends Component {
                             {reports.map(({ selection, name, date, title }) => (
                                 <div className="portal-search__issue">
                                     <div>
-                                        <span>{selection}</span>
+                                        <span>{s[selection]}</span>
                                         <span>
                                             {L === "en" ? "at " : "à "}{" "}
                                         </span>
@@ -125,11 +126,7 @@ export default compose(
 
 class RenderMap extends Component {
     render() {
-        const markerIcons = {
-            Tree: blueMarker,
-            Pothole: greenMarker,
-            Other: redMarker,
-        };
+        const markerIcons = [blueMarker, greenMarker, redMarker];
         if (this.props.Map) {
             let Map = this.props.Map;
             const { L, reports } = this.props;
@@ -174,6 +171,7 @@ class RenderMap extends Component {
                     }}
                 >
                     {reports.map(({ loc, selection }) => {
+                        console.log(selection);
                         return (
                             <Marker coordinates={loc} anchor="center">
                                 <img
