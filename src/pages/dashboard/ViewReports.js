@@ -192,7 +192,6 @@ class ViewReports extends Component {
         const owner = this.props.loggedin && this.props.uid === curReport.uid;
         const markerIcons = [blueMarker, greenMarker, redMarker];
         const rdate = new Date(curReport.date);
-        const L = this.props.lang;
         return (
             <DashboarWrapper>
                 <div className="view-con">
