@@ -16,6 +16,7 @@ class Register extends Component {
         };
     }
     handleSubmission = (e) => {
+        const L = this.props.lang;
         let {
             email,
             username,
@@ -28,10 +29,10 @@ class Register extends Component {
         e.preventDefault();
         console.log(this.state);
         if (!this.state.ac) {
-            alert("You have to agree to the TOS to sign up!");
+            alert(L === "en" ? "You have to agree to the TOS to sign up!" : "Vous devez accepter les TOS pour vous inscrire!");
             return;
         } else if (password !== confpassword) {
-            alert("passwords do not match");
+            alert(L === "en" ? "passwords do not match": "Les mots de passe ne correspondent pas");
             return;
         }
         this.props.register({ email, username, password, name, sca, scq });
@@ -151,13 +152,14 @@ class Register extends Component {
                             }
                         />
                         <label>
-                            I agree to the{" "}
+                        {L === "en" ? "I agree to the" : "Je suis d'accord avec le"}{" "}
                             <a
                                 rel="noreferrer"
                                 target="_blank"
-                                href="https://docs.google.com/document/d/1vnp4yYsQDO7hXwNwgmb-j_ZmkGpOdOZekaEjykxtMnQ/edit?usp=sharing"
+                                href={L === "en" ? "https://docs.google.com/document/d/1vnp4yYsQDO7hXwNwgmb-j_ZmkGpOdOZekaEjykxtMnQ/edit?usp=sharing"
+                                                 : "https://docs.google.com/document/d/1kDLebIrJ6t5oOicPg_T2XEGEYUCbICw-k0XsCpOoK0w/edit?usp=sharing"}
                             >
-                                Terms of Service
+                                {L === "en" ? "Terms of Service" : "Conditions d'utilisation"}
                             </a>
                         </label>
                     </div>

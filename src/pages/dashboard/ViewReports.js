@@ -172,6 +172,7 @@ class ViewReports extends Component {
         }
     };
     render() {
+        const L = this.props.lang;
         const Map = ReactMapboxGl({
             accessToken:
                 "pk.eyJ1IjoiZmFyaGFuaG0iLCJhIjoiY2tuMTUxYjNnMHIyODJvbzJueDJzdWJmcCJ9.EIl7ZcqlshPyJxnxyGNGhg",
@@ -191,7 +192,6 @@ class ViewReports extends Component {
         const owner = this.props.loggedin && this.props.uid === curReport.uid;
         const markerIcons = [blueMarker, greenMarker, redMarker];
         const rdate = new Date(curReport.date);
-        const L = this.props.lang;
         return (
             <DashboarWrapper>
                 <div className="view-con">
@@ -270,6 +270,8 @@ class ViewReports extends Component {
     }
 }
 
+
+
 const mapStateToProps = (state, props) => {
     let curReport = {};
     if (state.firestore.data.reports) {
@@ -281,7 +283,10 @@ const mapStateToProps = (state, props) => {
         loggedin: state.auth.loggedin,
         uid: state.auth.uid,
         user: state.auth.userData,
+        lang: state.lang.lang,
+        redirect: state.redirect,
     };
+    
 };
 
 const mapDispatchToProps = (dispatch) => ({

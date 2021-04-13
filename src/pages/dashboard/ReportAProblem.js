@@ -20,11 +20,12 @@ class ReportAProblem extends Component {
         };
     }
     onSubmit = (e) => {
+        const L = this.props.lang;
         e.preventDefault();
         const uid = this.props.uid;
         const { selection, information, title } = this.state;
         if (selection === -1 || information === "" || title === "") {
-            alert("Please fill out all the fields");
+            alert(L === "en" ? "Please fill out all the fields" : "Veuillez remplir tous les champs");
             return;
         }
         // const selectionType = ["Maintainence", "Incident", "Other"];
@@ -91,7 +92,7 @@ class ReportAProblem extends Component {
                                         val={this.state.title}
                                         className="reports-search "
                                         type="text"
-                                        placeholder="Car crash in the middle of the intersection"
+                                        placeholder={ L === "en" ? "Car crash in the middle of the intersection" : "Accident de voiture au milieu de l'intersection" }
                                     ></input>
                                 </div>
                             </div>
