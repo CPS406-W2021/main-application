@@ -23,8 +23,7 @@ const authReducer = (state = INIT_STATE, action) => {
             return {
                 ...state,
                 loggedin: true,
-                uid: action.uid,
-                userData: action.userData,
+                ...action.payload,
                 error: "",
                 registerredirect: "",
             };

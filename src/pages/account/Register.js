@@ -12,12 +12,29 @@ class Register extends Component {
             email: "",
             password: "",
             confpassword: "",
+            ac: false,
         };
     }
     handleSubmission = (e) => {
+        let {
+            email,
+            username,
+            password,
+            confpassword,
+            name,
+            sca,
+            scq,
+        } = this.state;
         e.preventDefault();
-        let { email, username, password, name } = this.state;
-        this.props.register({ email, username, password, name });
+        console.log(this.state);
+        if (!this.state.ac) {
+            alert("You have to agree to the TOS to sign up!");
+            return;
+        } else if (password !== confpassword) {
+            alert("passwords do not match");
+            return;
+        }
+        this.props.register({ email, username, password, name, sca, scq });
     };
     componentDidMount() {
         this.props.clearError();
@@ -124,17 +141,28 @@ class Register extends Component {
                         name="sca"
                         onChange={(e) => this.setState({ sca: e.target.value })}
                     ></input>
+                    <br></br>
+                    <div class="ui checked checkbox">
+                        <input
+                            type="checkbox"
+                            checked={this.state.ac}
+                            onChange={() =>
+                                this.setState({ ac: !this.state.ac })
+                            }
+                        />
+                        <label>
+                            I agree to the{" "}
+                            <a target="_blank" href="https://docs.google.com/document/d/1vnp4yYsQDO7hXwNwgmb-j_ZmkGpOdOZekaEjykxtMnQ/edit?usp=sharing">
+                                Terms of Service
+                            </a>
+                        </label>
+                    </div>
                     {this.props.error ? (
                         <div class="ui red message">{this.props.error}</div>
                     ) : (
                         ""
                     )}
                     <br></br>
-                    {this.props.error ? (
-                        <div class="ui red message">{this.props.error}</div>
-                    ) : (
-                        ""
-                    )}
                     <button
                         class="ui yellow button"
                         onClick={this.handleSubmission}
@@ -159,8 +187,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    register: ({ email, username, password, name }) =>
-        dispatch(register({ email, username, password, name })),
+    register: ({ email, username, password, name, scq, sca }) =>
+        dispatch(register({ email, username, password, name, scq, sca })),
     clearError: () => dispatch(clearError()),
 });
 
