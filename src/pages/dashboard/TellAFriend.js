@@ -44,7 +44,7 @@ class TellAFriend extends Component {
                                         }
                                         className="reports-search "
                                         type="text"
-                                        placeholder="imafriend@ryerson.ca"
+                                        placeholder={L === "en" ? "imafriend@ryerson.ca" : "jesuisunami@ryerson.ca"}
                                     ></input>
                                 </div>
                             </div>
