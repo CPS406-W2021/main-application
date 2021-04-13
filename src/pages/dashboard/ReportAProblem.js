@@ -23,6 +23,10 @@ class ReportAProblem extends Component {
         e.preventDefault();
         const uid = this.props.uid;
         const { selection, information, title } = this.state;
+        if (selection === -1 || information === "" || title === "") {
+            alert("Please fill out all the fields");
+            return;
+        }
         // const selectionType = ["Maintainence", "Incident", "Other"];
         this.props.createReport({
             uid,
@@ -107,22 +111,22 @@ class ReportAProblem extends Component {
                                             }}
                                             val={this.state.selection}
                                         >
-                                            <option value="-1">
+                                            <option value={-1}>
                                                 {L === "en"
                                                     ? "Select an Issue"
                                                     : "Sélectionnez un problème"}
                                             </option>
-                                            <option value="0">
+                                            <option value={0}>
                                                 {L === "en"
                                                     ? "Maintenance"
                                                     : "Maintenance"}
                                             </option>
-                                            <option value="1">
+                                            <option value={1}>
                                                 {L === "en"
                                                     ? "Incident"
                                                     : "Incidente"}
                                             </option>
-                                            <option value="2">
+                                            <option value={2}>
                                                 {L === "en" ? "Other" : "Autre"}
                                             </option>
                                         </select>
