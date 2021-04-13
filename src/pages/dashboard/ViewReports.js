@@ -70,7 +70,6 @@ class ViewReports extends Component {
                 <i
                     class="edit icon"
                     onClick={(e) => {
-                        console.log(this.props);
                         this.setState({
                             editMode: true,
                             title: this.props.curReport.title,
@@ -117,7 +116,6 @@ class ViewReports extends Component {
         }
     }
     renderTitle(owner) {
-        console.log(this.state);
         if (owner && this.state.editMode) {
             return (
                 <div class="ui input">
@@ -143,9 +141,9 @@ class ViewReports extends Component {
                 >
                     <textarea
                         type="text"
-                        value={this.state.desc}
+                        value={this.state.information}
                         onChange={(e) =>
-                            this.setState({ desc: e.target.value })
+                            this.setState({ information: e.target.value })
                         }
                     />
                 </div>
@@ -163,7 +161,6 @@ class ViewReports extends Component {
             interactive: false,
         });
         const { curReport } = this.props;
-        console.log(curReport);
         if (curReport === {} || curReport === null) {
             return (
                 <DashboarWrapper>
