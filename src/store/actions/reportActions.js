@@ -6,11 +6,18 @@ export const createReport = (report) => {
         // Associate the id of the username from the database, dont care about the custom username.
         const firebase = getFirebase().firestore();
         // let f = "titleOneX";
-        console.log(report)
+        console.log(report);
+        report["updates"] = [
+            {
+                type: "s",
+                a: "Request received.",
+                date: new Date().toISOString(),
+            },
+        ];
         const STATE = getState();
         if (STATE.auth.loggedin) {
             firebase
-                .collection(`reports/`)
+                .collection(`reports`)
                 .add(report)
                 .then(() => {
                     dispatch({ type: "REPORT_CANCEL" });
@@ -26,7 +33,7 @@ export const createReport = (report) => {
 export const editReport = (reportId, reportChanges) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase().firestore();
-        console.log(reportChanges)
+        console.log(reportChanges);
         firebase
             .collection(`reports/`)
             .doc(reportId)

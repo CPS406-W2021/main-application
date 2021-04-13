@@ -33,15 +33,15 @@ $yellow: #ffedcb;
         font-family: Open Sans;
         font-size: 32px;
     }
-    &-Select{
+    &-Select {
         font-family: Open Sans;
         font-size: 15px;
         margin-right: 10px;
     }
 
-    &-Period{
-        flex:1;
-        margin-right:10px;   
+    &-Period {
+        flex: 1;
+        margin-right: 10px;
     }
 
     &-Sort {
@@ -51,7 +51,7 @@ $yellow: #ffedcb;
     }
     &-By {
         flex: 1;
-        margin-right:10px;
+        margin-right: 10px;
     }
 }
 
@@ -87,62 +87,63 @@ $yellow: #ffedcb;
     td:nth-child(1) {
         font-weight: bold;
     }
-    &-body__con{
+    &-body__con {
         tr {
             border-bottom: 1px solid #dddddd;
         }
         tr:nth-child(even) {
             background-color: $yellow;
         }
-       .bell {
-           color:rgb(196, 158, 75);
-           .bell:hover{
-                color:rgb(230, 188, 84);
-           }
-       }
-       .edit {
-           color:rgb(32, 120, 202);
-           .edit:hover {
-                color:rgb(51, 166, 243);
-           }
-       }
-       .trash {
-           color: rgb(94, 168, 86);
-           .trash:hover{
-                color:rgb(128, 204, 97);
-           }
-       }
+        .bell {
+            color: rgb(196, 158, 75);
+            .bell:hover {
+                color: rgb(230, 188, 84);
+            }
+        }
+        .edit {
+            cursor: pointer;
+            color: rgb(32, 120, 202);
+            .edit:hover {
+                color: rgb(51, 166, 243);
+            }
+        }
+        .trash {
+            cursor: pointer;
+            color: rgb(94, 168, 86);
+            .trash:hover {
+                color: rgb(128, 204, 97);
+            }
+        }
     }
     i.icon {
         font-size: 1.3em;
-        width:2.2em;
+        width: 2.2em;
     }
-    .ui.progress .bar{
+    .ui.progress .bar {
         width: 100%;
         height: 1.3em;
-        
     }
-    .ui.green.progress .bar{
+    .ui.green.progress .bar {
         background-color: rgb(61, 206, 85);
     }
-    
-    .ui.brown.progress .bar{
-        background-color: #DEA01E;
+
+    .ui.brown.progress .bar {
+        background-color: #dea01e;
     }
-    
-    .ui.red.progress .bar{
-        background-color: #FF5E5E;
+
+    .ui.red.progress .bar {
+        background-color: #ff5e5e;
     }
     .ui.progress {
         max-width: 50%;
     }
     thead tr {
         display: flex;
-            & > * {
-                flex: 1;
-            }
+        & > * {
+            flex: 1;
         }
-    
+    }
+
     tbody {
         & > tr {
             display: flex;
@@ -152,6 +153,3 @@ $yellow: #ffedcb;
         }
     }
 }
-
-
-

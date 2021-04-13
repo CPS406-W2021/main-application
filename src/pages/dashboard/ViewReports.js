@@ -9,33 +9,33 @@ import ReactMapboxGl, { Marker } from "react-mapbox-gl";
 import blueMarker from "../../images/icons/blue.png";
 import greenMarker from "../../images/icons/green.png";
 import redMarker from "../../images/icons/red.png";
-const updates = [
-    {
-        type: "s",
-        a: "Request received.",
-    },
-    {
-        type: "a",
-        a: "Request Approved.",
-    },
-    {
-        type: "u",
-        a:
-            "Update 1 : City of Toronto is taking action to clear the fallen tree.",
-    },
-    {
-        type: "u",
-        a: "Update 2 : Unexpected Problems causing delay.",
-    },
-    {
-        type: "r",
-        a: "Resolved : Road has been cleared.",
-    },
-];
+// const updates = [
+//     {
+//         type: "s",
+//         a: "Request received.",
+//     },
+//     {
+//         type: "a",
+//         a: "Request Approved.",
+//     },
+//     {
+//         type: "u",
+//         a:
+//             "Update 1 : City of Toronto is taking action to clear the fallen tree.",
+//     },
+//     {
+//         type: "u",
+//         a: "Update 2 : Unexpected Problems causing delay.",
+//     },
+//     {
+//         type: "r",
+//         a: "Resolved : Road has been cleared.",
+//     },
+// ];
 class Updates extends Component {
     constructor(props) {
         super(props);
-        this.state = { open: false };
+        this.state = { open: false, information: "", title: "" };
     }
     renderTitle() {
         switch (this.props.type) {
@@ -77,7 +77,7 @@ class ViewReports extends Component {
                         this.setState({
                             editMode: true,
                             title: this.props.curReport.title,
-                            desc: this.props.curReport.information,
+                            information: this.props.curReport.information,
                         });
                     }}
                 ></i>
@@ -86,14 +86,20 @@ class ViewReports extends Component {
         );
     };
     onDelete = () => {
-        if (window.prompt(this.props.user.scq) === this.props.user.sca) {
+        if (
+            window.confirm(
+                `Are you sure you want to delete ${this.props.curReport.title}?`
+            )
+        ) {
             this.props.deleteReport(this.props.rid);
         }
     };
     OnClickSave = () => {
-        if (this.state.text === "" && this.state.information === "") {
-            alert("please enter a new title or description");
-        } else if (window.prompt(this.props.user.scq) === this.props.user.sca) {
+        if (this.state.title === "") {
+            alert("Missing field: Title cannot be empty");
+        } else if (this.state.information === "") {
+            alert("Missing field: Dedscription cannot be empty");
+        } else {
             this.props.updateReport(
                 this.props.rid,
                 this.state.title,
@@ -139,11 +145,9 @@ class ViewReports extends Component {
     renderDesc = (owner) => {
         if (owner && this.state.editMode) {
             return (
-                <div
-                    class="ui input"
-                    style={{ width: "100%", display: "block" }}
-                >
+                <div class="ui input" style={{ width: "100%" }}>
                     <textarea
+                        style={{ width: "100%" }}
                         type="text"
                         value={this.state.information}
                         onChange={(e) =>
@@ -206,7 +210,7 @@ class ViewReports extends Component {
                         </div>
                         <div className="view-progress">
                             <ul>
-                                {updates.map(({ type, q, a }) => {
+                                {curReport.updates.map(({ type, q, a }) => {
                                     return (
                                         <Updates
                                             key={q}
