@@ -222,16 +222,18 @@ class ViewReports extends Component {
                         </div>
                         <div className="view-progress">
                             <ul>
-                                {curReport.updates.map(({ type, q, a }) => {
-                                    return (
-                                        <Updates
-                                            key={q}
-                                            q={q}
-                                            a={a}
-                                            type={type}
-                                        />
-                                    );
-                                })}
+                                {(curReport.updates || []).map(
+                                    ({ type, q, a }) => {
+                                        return (
+                                            <Updates
+                                                key={q}
+                                                q={q}
+                                                a={a}
+                                                type={type}
+                                            />
+                                        );
+                                    }
+                                )}
                             </ul>
                         </div>
                         {this.renderToolbar(owner)}
