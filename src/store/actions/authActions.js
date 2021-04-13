@@ -122,13 +122,14 @@ export const deleteAccount = () => {
         const firestore = firebase.firestore();
         const STATE = getState();
 
+        //delete user profile
         firestore
             .collection("users")
             .doc(firebase.auth().currentUser.uid)
             .delete()
-            .then(() => {
-                dispatch({ type: "PROFILE_DELETE_SUCCESS" });
-            })
+            // .then(() => {
+            //     dispatch({ type: "PROFILE_DELETE_SUCCESS" });
+            // })
             .catch((err) => {
                 dispatch({
                     type: "PROFILE_DELETE_ERROR",
@@ -136,18 +137,43 @@ export const deleteAccount = () => {
                 });
             })
             .then(() => {
-                if (STATE.auth.loggedin) {
-                    firebase
-                        .auth()
-                        .currentUser.delete()
-                        .then(() => {})
-                        .catch((err) => {
-                            dispatch({
-                                type: "PROFILE_DELETE_ERROR",
-                                error: err.message,
-                            });
+
+                //delete all reports by user
+                firestore
+                    .collection('reports')
+                    .where('uid', '==', firebase.auth().currentUser.uid)
+                    .get()
+                    .then((reports) => {
+                        var batch = firestore.batch()
+
+                        reports.forEach(report => {
+                            batch.delete(report.ref)
                         });
-                }
+
+                        return batch.commit();
+                    })
+                    .catch((err) => {
+                        dispatch({
+                            type: "PROFILE_DELETE_ERROR",
+                            error: err.message,
+                        });
+                    })
+                    .then(() => {
+                        //delete user
+                        if (STATE.auth.loggedin) {
+                            firebase
+                                .auth()
+                                .currentUser.delete()
+                                .then(() => { })
+                                .catch((err) => {
+                                    dispatch({
+                                        type: "PROFILE_DELETE_ERROR",
+                                        error: err.message,
+                                    });
+                                });
+                        }
+                        dispatch({ type: "PROFILE_DELETE_SUCCESS" });
+                    })
             });
     };
 };

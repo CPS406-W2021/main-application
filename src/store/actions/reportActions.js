@@ -65,6 +65,9 @@ export const cancelReport = () => {
 };
 
 export const upVoteReport = ({ reportId, uid }) => {
+    // console.log(reportId)
+    // console.log(uid)
+
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase().firestore();
         let upVote = { vote: 1, reportId, uid };
@@ -83,7 +86,6 @@ export const upVoteReport = ({ reportId, uid }) => {
                 } else {
                     voteVal = 1;
                 }
-
                 //Update vote collection
                 firebase
                     .collection(`votes`)

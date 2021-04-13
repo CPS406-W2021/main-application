@@ -88,7 +88,7 @@ class Vote extends Component {
                                                 onClick={() =>
                                                     this.props.upVoteReport(
                                                         key,
-                                                        uid
+                                                        this.props.currUser
                                                     )
                                                 }
                                             >
@@ -102,7 +102,7 @@ class Vote extends Component {
                                                 onClick={() =>
                                                     this.props.downVoteReport(
                                                         key,
-                                                        uid
+                                                        this.props.currUser
                                                     )
                                                 }
                                             >
@@ -172,7 +172,7 @@ class Vote extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state.auth.uid);
+    // console.log(state.auth.uid);
     const REPORTS = state.firestore.data["reports"]
         ? Object.keys(state.firestore.data["reports"]).map((k) => ({
               key: k,
@@ -184,6 +184,7 @@ const mapStateToProps = (state) => {
         ready: state.report.ready,
         lang: state.lang.lang,
         reports: REPORTS,
+        currUser: state.auth.uid,
     };
 };
 const mapDispatchToProps = (dispatch) => ({
