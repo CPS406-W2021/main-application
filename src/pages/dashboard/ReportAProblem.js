@@ -91,7 +91,7 @@ class ReportAProblem extends Component {
                                         val={this.state.title}
                                         className="reports-search "
                                         type="text"
-                                        placeholder="Car crash in the middle of the intersection"
+                                        placeholder={ L === "en" ? "Car crash in the middle of the intersection" : "Accident de voiture au milieu de l'intersection" }
                                     ></input>
                                 </div>
                             </div>
