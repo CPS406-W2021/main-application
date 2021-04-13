@@ -9,33 +9,35 @@ import {
 } from "../../store/actions/langActions";
 class DashboarWrapper extends Component {
     renderAuthButton() {
+        const L = this.props.lang;
         if (this.props.loggedin) {
             return (
                 <div
                     className="wp-header__nav-login"
                     onClick={this.props.logout}
                 >
-                    LOGOUT
+                    {L === "en" ? "LOGOUT" : "SE DÉCONNECTER"} 
                 </div>
             );
         }
         return (
             <Link to="/login" className="wp-header__nav-login">
-                LOGIN
+                {L === "en" ? "LOGIN" : "CONNEXION"} 
             </Link>
         );
     }
     render() {
+        const L = this.props.lang;
         const pages = [
-            { text: "Home", route: "/" },
-            { text: "Portal", route: "/portal" },
-            { text: "My Account", route: "/profileinfo" },
+            { text: L === "en" ? "Home" : "Domicile" , route: "/" },
+            { text: L === "en" ? "Portal" : "Portail", route: "/portal" },
+            { text: L === "en" ? "My Account" : "Mon compte", route: "/profileinfo" },
         ];
         const subpages = [
             { text: "Vote", route: "/vote" },
-            { text: "Tell a Friend", route: "/taf" },
-            { text: "My Past Reports", route: "/pastreports" },
-            { text: "Contact", route: "/contact" },
+            { text: L === "en" ? "Tell a Friend" : "Dire à un ami", route: "/taf" },
+            { text: L === "en" ? "My Past Reports" : "Mes rapports passés", route: "/pastreports" },
+            { text: L === "en" ? "Contact" : "Contacter", route: "/contact" },
         ];
         return (
             <div className="wp-con">
