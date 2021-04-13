@@ -75,7 +75,7 @@ class TellAFriend extends Component {
                                         }
                                         if (!validateEmail(this.state.add)) {
                                             alert(
-                                                "Please Enter a valid email address"
+                                                L === "en" ? "Please Enter a valid email address": "S'il vous plaît, mettez une adresse email valide"
                                             );
                                             return;
                                         }
