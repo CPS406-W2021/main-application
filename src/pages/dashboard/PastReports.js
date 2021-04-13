@@ -42,7 +42,7 @@ class PastReports extends Component {
         // );
 
         const status = newEntry;
-        const problem = ["Maintenence", "Incident", "Other"];
+        const problem = [L === "en" ? "Maintenence" : "Maintenance", L === "en" ? "Incident" : "Incident(e)", L === "en" ? "Other" : "Autre"];
         return (
             <table className="content">
                 <thead className="content-header__con">
