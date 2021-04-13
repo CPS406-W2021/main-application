@@ -5,10 +5,19 @@ export const signIn = (credentials) => {
             .auth()
             .signInWithEmailAndPassword(credentials.email, credentials.password)
             .then((info) => {
-                dispatch({
-                    type: "LOGIN_SUCCESS",
-                    uid: info.user.uid,
-                });
+                console.log(info.user);
+                firebase
+                    .firestore()
+                    .collection("users")
+                    .doc(info.user.uid)
+                    .get()
+                    .then((doc) => {
+                        dispatch({
+                            type: "LOGIN_SUCCESS",
+                            uid: info.user.uid,
+                            userData: doc.data(),
+                        });
+                    });
             })
             .catch((err) => {
                 dispatch({

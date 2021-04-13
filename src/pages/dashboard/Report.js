@@ -20,7 +20,7 @@ class ReportRouter extends Component {
             this.props.loadReport(queryDict["report"]);
             this.setState({ loaded: true });
         }
-        return <Report></Report>;
+        return <Report rid={queryDict["report"]}></Report>;
     }
 }
 

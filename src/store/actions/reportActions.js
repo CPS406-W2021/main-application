@@ -4,7 +4,7 @@ export const createReport = (report) => {
         // make an entry for the report
         // ALSO make sure to associate the user, maybe firebase has a auth().getUser() or something...
         // Associate the id of the username from the database, dont care about the custom username.
-        const firebase = getFirebase().firestore();
+        const firebase = getFirebase().getfirestore();
         // let f = "titleOneX";
         const STATE = getState();
         if (STATE.auth.loggedin) {
@@ -22,7 +22,7 @@ export const createReport = (report) => {
 };
 
 //Report changes as json object with the correct labels within firebase
-export const editReport = ({ reportId, reportChanges }) => {
+export const editReport = (reportId, reportChanges) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase().firestore();
         firebase
@@ -229,7 +229,6 @@ export const getVotes = ({ reportId }) => {
 export const loadReport = (rid) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase().firestore();
-
         firebase
             .collection("reports")
             .doc(rid)

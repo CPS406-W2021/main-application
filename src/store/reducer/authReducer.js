@@ -5,6 +5,7 @@ const INIT_STATE = {
     uid: "",
     error: "",
     registerredirect: "",
+    userData: {},
 };
 const authReducer = (state = INIT_STATE, action) => {
     switch (action.type) {
@@ -23,6 +24,7 @@ const authReducer = (state = INIT_STATE, action) => {
                 ...state,
                 loggedin: true,
                 uid: action.uid,
+                userData: action.userData,
                 error: "",
                 registerredirect: "",
             };
@@ -33,6 +35,7 @@ const authReducer = (state = INIT_STATE, action) => {
                 loggedin: false,
                 uid: "",
                 error: "",
+                useData: {},
                 registerredirect: "",
             };
         case "LOGOUT_FAILURE":
