@@ -7,17 +7,17 @@ const FAQInfo = [
     {
         q: "What types of problems should I report to CyPress?",
         a:
-            '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
+            '"Cypress is committed to providing their users with an effective resource to share their concerns to improve their quality of life and protect the health of our planet. Cypress is designed to primarily receive reports with concerns and issues to environmental damage, biohazards, property damage and by-law violations that are designated in each users area code. However, we are open to hearing other concerns and innovations our user’s may suggest."',
     },
     {
         q: "How long does reported problems usually take to be resolved?",
         a:
-            '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
+            '"Cypress processes its reports immediately and redirects the reports to a specific queue depending on what type of problem was reported. Higher volume of reports of similar cases can often be recognized and enforce the report to take priority. Cypress has an average response time within 24hrs of the report. Prolonged response time may be a result of investigation to claims made from a report to determine whether some of these reports are legitimate."',
     },
     {
         q: "How can I directly contact city officials about my problem?",
         a:
-            '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
+            '"Cypress extends all of Toronto and each area code has its designated official. Please visit https://www.toronto.ca/city-government/council/members-of-council/ and find your councillor representing your region. The toronto website provides the necessary contact information for each official to address your report to."',
     },
 ];
 
