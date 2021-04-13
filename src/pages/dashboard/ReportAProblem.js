@@ -23,16 +23,21 @@ class ReportAProblem extends Component {
         e.preventDefault();
         const uid = this.props.uid;
         const { selection, information, title } = this.state;
-        const selectionType = ["Tree", "Pothole", "Other"];
+        if (selection === -1 || information === "" || title === "") {
+            alert("Please fill out all the fields");
+            return;
+        }
+        // const selectionType = ["Maintainence", "Incident", "Other"];
         this.props.createReport({
             uid,
-            selection: selectionType[Number(selection)],
+            selection: selection,
             information,
             name: this.props.place,
             loc: this.props.loc,
             title,
             date: new Date().toISOString(),
             votes: 0,
+            username: this.props.user.name,
         });
     };
     componentDidMount() {
@@ -86,7 +91,7 @@ class ReportAProblem extends Component {
                                         val={this.state.title}
                                         className="reports-search "
                                         type="text"
-                                        placeholder="Rat Cleanup at Aisle 7"
+                                        placeholder="Car crash in the middle of the intersection"
                                     ></input>
                                 </div>
                             </div>
@@ -106,25 +111,23 @@ class ReportAProblem extends Component {
                                             }}
                                             val={this.state.selection}
                                         >
-                                            <option value="-1">
+                                            <option value={-1}>
                                                 {L === "en"
                                                     ? "Select an Issue"
                                                     : "Sélectionnez un problème"}
                                             </option>
-                                            <option value="0">
+                                            <option value={0}>
                                                 {L === "en"
-                                                    ? "Tree"
-                                                    : "Sélectionnez un problème"}
+                                                    ? "Maintenance"
+                                                    : "Maintenance"}
                                             </option>
-                                            <option value="1">
+                                            <option value={1}>
                                                 {L === "en"
-                                                    ? "Pothole"
-                                                    : "Sélectionnez un problème"}
+                                                    ? "Incident"
+                                                    : "Incidente"}
                                             </option>
-                                            <option value="2">
-                                                {L === "en"
-                                                    ? "Other"
-                                                    : "Sélectionnez un problème"}
+                                            <option value={2}>
+                                                {L === "en" ? "Other" : "Autre"}
                                             </option>
                                         </select>
                                     </div>
@@ -200,6 +203,7 @@ const mapStateToProps = (state) => ({
     loc: [state.report.setupreport["long"], state.report.setupreport["lat"]],
     ready: state.report.ready,
     lang: state.lang.lang,
+    user: state.auth.userData,
 });
 
 const mapDispatchToProps = (dispatch) => ({

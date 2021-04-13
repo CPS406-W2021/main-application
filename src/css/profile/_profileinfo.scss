@@ -1,4 +1,8 @@
 .pro {
+    &-editbar {
+        display: flex;
+        justify-content: flex-end;
+    }
     &-con {
         display: flex;
         flex: 1;

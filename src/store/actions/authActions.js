@@ -82,34 +82,29 @@ export const resetPassword = (email = null) => {
 };
 
 //userId and then a object of only changes.
-export const updateAccount = (profileChanges) => {
+export const updateAccount = (email, name) => {
     return (dispatch, getState, getFirebase) => {
         const firebase = getFirebase();
         const firestore = firebase.firestore();
         const STATE = getState();
-        function validateEmail(email) {
-            const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return re.test(String(email).toLowerCase());
-        }
-        if (
-            profileChanges["email"] === "" ||
-            !validateEmail(profileChanges["email"])
-        ) {
-            delete profileChanges["email"];
-        }
-        if (profileChanges["name"] === "") {
-            delete profileChanges["name"];
-        }
-        if (profileChanges["address"] === "") {
-            delete profileChanges["address"];
-        }
+
         if (STATE.auth.loggedin) {
             firestore
                 .collection("users")
                 .doc(firebase.auth().currentUser.uid)
-                .set(profileChanges, { merge: true })
+                .set({ email, name }, { merge: true })
                 .then(() => {
-                    dispatch({ type: "PROFILE_UPDATE_SUCCESS" });
+                    console.log("updated the user...");
+                    firebase
+                        .auth()
+                        .currentUser.updateEmail(email)
+                        .then(() => {
+                            console.log("updated the user info");
+                            dispatch({
+                                type: "PROFILE_UPDATE_SUCCESS",
+                                payload: { email, name },
+                            });
+                        });
                 })
                 .catch((err) => {
                     dispatch({

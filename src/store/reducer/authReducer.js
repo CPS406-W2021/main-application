@@ -34,6 +34,7 @@ const authReducer = (state = INIT_STATE, action) => {
                 loggedin: false,
                 uid: "",
                 error: "",
+                useData: {},
                 registerredirect: "",
             };
         case "LOGOUT_FAILURE":
@@ -92,8 +93,10 @@ const authReducer = (state = INIT_STATE, action) => {
             return {
                 ...state,
                 error: action.error,
+                userData: { ...state["userData"], ...action.payload },
             };
         case "PROFILE_UPDATE_ERROR":
+            alert(action.error);
             return {
                 ...state,
                 error: action.error,
