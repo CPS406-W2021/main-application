@@ -7,17 +7,17 @@ const FAQInfo = [
     {
         q: "What types of problems should I report to CyPress?",
         a:
-            '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
+            "Cypress is committed to providing their users with an effective resource to share their concerns to improve their quality of life and protect the health of our planet. Cypress is designed to primarily receive reports with concerns and issues to environmental damage, biohazards, property damage and by-law violations that are designated in each users area code. However, we are open to hearing other concerns and innovations our user’s may suggest.",
     },
     {
         q: "How long does reported problems usually take to be resolved?",
         a:
-            '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
+            "Cypress processes its reports immediately and redirects the reports to a specific queue depending on what type of problem was reported. Higher volume of reports of similar cases can often be recognized and enforce the report to take priority. Cypress has an average response time within 24hrs of the report. Prolonged response time may be a result of investigation to claims made from a report to determine whether some of these reports are legitimate.",
     },
     {
         q: "How can I directly contact city officials about my problem?",
         a:
-            '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
+            "Cypress extends all of Toronto and each area code has its designated official. Please visit the contact page and find your councillor representing your region. The toronto website provides the necessary contact information for each official to address your report to.",
     },
 ];
 
@@ -25,19 +25,19 @@ const FAQInfoFr = [
     {
         q: "Quels types de problèmes dois-je signaler à CyPress?",
         a:
-            '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
+            "Cypress s'engage à fournir à ses utilisateurs une ressource efficace pour partager leurs préoccupations pour améliorer leur qualité de vie et protéger la santé de notre planète. Cypress est principalement conçu pour recevoir des rapports sur les préoccupations et les problèmes liés aux dommages environnementaux, aux risques biologiques, aux dommages matériels et aux violations des règlements qui sont indiqués dans chaque indicatif régional des utilisateurs. Cependant, nous sommes prêts à entendre d’autres préoccupations et innovations que nos utilisateurs pourraient suggérer.",
     },
     {
         q:
             "Combien de temps faut-il généralement pour résoudre les problèmes signalés?",
         a:
-            '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
+            "Cypress traite ses rapports immédiatement et les redirige vers une file d'attente spécifique en fonction du type de problème signalé. Un volume plus élevé de rapports de cas similaires peut souvent être reconnu et faire en sorte que le rapport soit prioritaire. Cypress a un temps de réponse moyen dans les 24 heures suivant le rapport. Un temps de réponse prolongé peut résulter d'une enquête sur les réclamations faites à partir d'un rapport pour déterminer si certains de ces rapports sont légitimes.",
     },
     {
         q:
             "Comment puis-je contacter directement les autorités municipales à propos de mon problème?",
         a:
-            '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
+            "Cypress étend tout Toronto et chaque indicatif régional a son représentant désigné. Veuillez visiter la page de contact et trouvez votre conseiller représentant votre région. Le site Web de Toronto fournit les coordonnées nécessaires pour que chaque fonctionnaire adresse votre rapport.",
     },
 ];
 
