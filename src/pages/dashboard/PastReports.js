@@ -1,8 +1,107 @@
 import React, { Component } from "react";
 import DashboarWrapper from "../../components/ThemeWrapper";
 import { connect } from "react-redux";
+import { compose } from "redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { Link } from "react-router-dom";
+import { deleteReport } from "../../store/actions/reportActions";
 
 class PastReports extends Component {
+    deleteReport = (title, rid) => {
+        if (window.confirm(`Are you sure you want to delete ${title}?`)) {
+            this.props.deleteReport(rid);
+        }
+    };
+    renderReports = () => {
+        const L = this.props.lang;
+        // const success = (
+        //     <div className="ui green progress">
+        //         <div className="bar"></div>
+        //         <div className="label">
+        //             {L === "en" ? "Successful" : "Réussi"}{" "}
+        //         </div>
+        //     </div>
+        // );
+
+        const newEntry = (
+            <div className="ui brown progress">
+                <div className="bar"></div>
+                <div className="label">
+                    {L === "en" ? "New entry" : "Nouvelle entrée"}{" "}
+                </div>
+            </div>
+        );
+
+        // const pending = (
+        //     <div className="ui red progress">
+        //         <div className="bar"></div>
+        //         <div className="label">
+        //             {L === "en" ? "Pending" : "En attente"}
+        //         </div>
+        //     </div>
+        // );
+
+        const status = newEntry;
+        const problem = ["Maintenence", "Incident", "Other"];
+        return (
+            <table className="content">
+                <thead className="content-header__con">
+                    <tr>
+                        <th>{L === "en" ? "PROBLEM" : "PROBLÈME"}</th>
+                        <th>{L === "en" ? "ADDRESS" : "ADRESSE"}</th>
+                        <th>{L === "en" ? "DATE CREATED" : "DATE CRÉÉE"}</th>
+                        <th>{L === "en" ? "STATUS" : "STATUT"}</th>
+                        <th>{L === "en" ? "ACTION" : "ACTION"}</th>
+                    </tr>
+                </thead>
+
+                <tbody className="content-body__con">
+                    {this.props.reports.map(
+                        ({ selection, name, location, date, key, title }) => {
+                            return (
+                                <tr>
+                                    <td>{problem[selection]}</td>
+                                    <td>{name}</td>
+                                    <td>
+                                        {date.split("T").map((i) => (
+                                            <div>{i}</div>
+                                        ))}
+                                    </td>
+                                    <td>{status}</td>
+                                    <td>
+                                        {
+                                            <div>
+                                                {/* <a href="/" className="bell">
+                                                    <i className="bell icon"></i>
+                                                </a> */}
+                                                <Link
+                                                    to={`/report?report=${key}`}
+                                                    className="edit"
+                                                >
+                                                    <i className="edit icon"></i>{" "}
+                                                </Link>
+                                                <span
+                                                    className="trash"
+                                                    onClick={() =>
+                                                        this.deleteReport(
+                                                            title,
+                                                            key
+                                                        )
+                                                    }
+                                                >
+                                                    <i className="trash alternate icon"></i>
+                                                </span>
+                                            </div>
+                                        }
+                                    </td>
+                                </tr>
+                            );
+                        }
+                    )}
+                </tbody>
+            </table>
+        );
+    };
     render() {
         const L = this.props.lang;
         function Header() {
@@ -50,181 +149,58 @@ class PastReports extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <label className="reports-Sort" for="user">
-                                {L === "en" ? "Sort By" : "Trier par"}
-                            </label>
-                            <div className="reports-By">
-                                <div className="ui form fluid">
-                                    <div>
-                                        <select>
-                                            <option value="-1">
-                                                {L === "en"
-                                                    ? "Ward Name"
-                                                    : "Nom du quartier"}
-                                            </option>
-                                            <option value="0">
-                                                {L === "en"
-                                                    ? "Councillor"
-                                                    : "Conseillère/Conseiller"}
-                                            </option>
-                                            <option value="1">
-                                                {L === "en"
-                                                    ? "Female"
-                                                    : "Femelle"}
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             );
         }
-        function Table() {
-            const success = [
-                <div className="ui green progress">
-                    <div className="bar"></div>
-                    <div className="label">
-                        {L === "en" ? "Successful" : "Réussi"}{" "}
-                    </div>
-                </div>,
-            ];
 
-            const newEntry = [
-                <div className="ui brown progress">
-                    <div className="bar"></div>
-                    <div className="label">
-                        {L === "en" ? "New entry" : "Nouvelle entrée"}{" "}
-                    </div>
-                </div>,
-            ];
-
-            const pending = [
-                <div className="ui red progress">
-                    <div className="bar"></div>
-                    <div className="label">
-                        {L === "en" ? "Pending" : "En attente"}
-                    </div>
-                </div>,
-            ];
-
-            const information = [
-                {
-                    name: L === "en" ? "Potholes" : "Nids-de-poule",
-                    location: "123 Street Ave.",
-                    date: "MM/DD/YYY",
-                    status: success,
-                },
-                {
-                    name: L === "en" ? "Eroded Streets" : "Rues érodées",
-                    location: "456 Road Rd.",
-                    date: "MM/DD/YYY",
-                    status: newEntry,
-                },
-                {
-                    name: L === "en" ? "Garbage" : "Des ordures",
-                    location: "789 Lorem Lp.",
-                    date: "MM/DD/YYY",
-                    status: pending,
-                },
-                {
-                    name:
-                        L === "en"
-                            ? "Utility Failures"
-                            : "Pannes de l'utilitaire",
-                    location: "102 Jarvis St.",
-                    date: "MM/DD/YYY",
-                    status: success,
-                },
-                {
-                    name: "Ralph Liton",
-                    location: "789 Lorem Lp.",
-                    date: "MM/DD/YYY",
-                    status: success,
-                },
-                {
-                    name: "Ralph Liton",
-                    location: "123 Street Ave.",
-                    date: "MM/DD/YYY",
-                    status: success,
-                },
-                {
-                    name: L === "en" ? "Garbage" : "Des ordures",
-                    location: "789 Lorem Lp.",
-                    date: "MM/DD/YYY",
-                    status: pending,
-                },
-                {
-                    name: L === "en" ? "Garbage" : "Des ordures",
-                    location: "789 Lorem Lp.",
-                    date: "MM/DD/YYY",
-                    status: pending,
-                },
-            ];
-            return (
-                <table className="content">
-                    <thead className="content-header__con">
-                        <tr>
-                            <th>{L === "en" ? "PROBLEM" : "PROBLÈME"}</th>
-                            <th>{L === "en" ? "ADDRESS" : "ADRESSE"}</th>
-                            <th>
-                                {L === "en" ? "DATE CREATED" : "DATE CRÉÉE"}
-                            </th>
-                            <th>{L === "en" ? "STATUS" : "STATUT"}</th>
-                            <th>{L === "en" ? "ACTION" : "ACTION"}</th>
-                        </tr>
-                    </thead>
-
-                    <tbody className="content-body__con">
-                        {information.map(({ name, location, date, status }) => {
-                            return (
-                                <tr>
-                                    <td>{name}</td>
-                                    <td>{location}</td>
-                                    <td>{date}</td>
-                                    <td>{status}</td>
-                                    <td>
-                                        {
-                                            <div>
-                                                <a href="/" className="bell">
-                                                    <i className="bell icon"></i>
-                                                </a>
-                                                <a href="/" className="edit">
-                                                    <i className="edit icon"></i>{" "}
-                                                </a>
-                                                <a href="/" className="trash">
-                                                    <i className="trash alternate icon"></i>
-                                                </a>
-                                            </div>
-                                        }
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-            );
-        }
+        console.log(this.props);
         return (
             <DashboarWrapper>
                 <div className="content__con">
                     <div className="content-header">
                         <Header />
                     </div>
-                    <div className="content-table">
-                        <Table />
-                    </div>
+                    <div className="content-table">{this.renderReports()}</div>
                 </div>
             </DashboarWrapper>
         );
     }
 }
 
-const mapStateToProps = (state) => ({
-    lang: state.lang.lang,
-});
+const mapStateToProps = (state) => {
+    const REPORTS = state.firestore.data["reports"]
+        ? Object.keys(state.firestore.data["reports"])
+              .map((k) => ({
+                  key: k,
+                  ...state.firestore.data["reports"][k],
+              }))
+              .filter(({ uid }) => uid === state.auth.uid)
+        : [];
 
-const mapDispatchToProps = {};
+    return {
+        reports: REPORTS,
+        lang: state.lang.lang,
+        uid: state.auth.uid,
+        user: state.auth.user,
+    };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(PastReports);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deleteReport: (rid) => dispatch(deleteReport(rid)),
+    };
+};
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    firestoreConnect(() => {
+        return [
+            {
+                collection: "reports",
+                orderBy: ["date", "desc"],
+                storeAs: "reports",
+            },
+        ];
+    })
+)(PastReports);

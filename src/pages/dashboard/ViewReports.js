@@ -9,57 +9,39 @@ import ReactMapboxGl, { Marker } from "react-mapbox-gl";
 import blueMarker from "../../images/icons/blue.png";
 import greenMarker from "../../images/icons/green.png";
 import redMarker from "../../images/icons/red.png";
-const updates = [
-    {
-        type: "s",
-        a: "Request received.",
-    },
-    {
-        type: "a",
-        a: "Request Approved.",
-    },
-    {
-        type: "u",
-        a:
-            "Update 1 : City of Toronto is taking action to clear the fallen tree.",
-    },
-    {
-        type: "u",
-        a: "Update 2 : Unexpected Problems causing delay.",
-    },
-    {
-        type: "r",
-        a: "Resolved : Road has been cleared.",
-    },
-];
-
-const updatesFr = [
-    {
-        type: "s",
-        a: "Demande reçue.",
-    },
-    {
-        type: "a",
-        a: "Demande approuvée.",
-    },
-    {
-        type: "u",
-        a:
-            "Mise à jour 1: La ville de Toronto prend des mesures pour dégager l'arbre tombé.",
-    },
-    {
-        type: "u",
-        a: "Mise à jour 2: problèmes inattendus entraînant un retard.",
-    },
-    {
-        type: "r",
-        a: "Résolu: la route a été dégagée.",
-    },
-];
+import { Redirect } from "react-router-dom";
+// const updates = [
+//     {
+//         type: "s",
+//         a: "Request received.",
+//     },
+//     {
+//         type: "a",
+//         a: "Request Approved.",
+//     },
+//     {
+//         type: "u",
+//         a:
+//             "Update 1 : City of Toronto is taking action to clear the fallen tree.",
+//     },
+//     {
+//         type: "u",
+//         a: "Update 2 : Unexpected Problems causing delay.",
+//     },
+//     {
+//         type: "r",
+//         a: "Resolved : Road has been cleared.",
+//     },
+// ];
 class Updates extends Component {
     constructor(props) {
         super(props);
-        this.state = { open: false };
+        this.state = {
+            open: false,
+            information: "",
+            title: "",
+            redirectToPastPages: false,
+        };
     }
     renderTitle() {
         switch (this.props.type) {
@@ -101,7 +83,7 @@ class ViewReports extends Component {
                         this.setState({
                             editMode: true,
                             title: this.props.curReport.title,
-                            desc: this.props.curReport.information,
+                            information: this.props.curReport.information,
                         });
                     }}
                 ></i>
@@ -110,14 +92,23 @@ class ViewReports extends Component {
         );
     };
     onDelete = () => {
-        if (window.prompt(this.props.user.scq) === this.props.user.sca) {
+        if (
+            window.confirm(
+                `Are you sure you want to delete ${this.props.curReport.title}?`
+            )
+        ) {
             this.props.deleteReport(this.props.rid);
+            this.setState({
+                redirectToPastPages: <Redirect to="/pastreports"></Redirect>,
+            });
         }
     };
     OnClickSave = () => {
-        if (this.state.text === "" && this.state.information === "") {
-            alert("please enter a new title or description");
-        } else if (window.prompt(this.props.user.scq) === this.props.user.sca) {
+        if (this.state.title === "") {
+            alert("Missing field: Title cannot be empty");
+        } else if (this.state.information === "") {
+            alert("Missing field: Description cannot be empty");
+        } else {
             this.props.updateReport(
                 this.props.rid,
                 this.state.title,
@@ -163,11 +154,9 @@ class ViewReports extends Component {
     renderDesc = (owner) => {
         if (owner && this.state.editMode) {
             return (
-                <div
-                    class="ui input"
-                    style={{ width: "100%", display: "block" }}
-                >
+                <div class="ui input" style={{ width: "100%" }}>
                     <textarea
+                        style={{ width: "100%" }}
                         type="text"
                         value={this.state.information}
                         onChange={(e) =>
@@ -189,6 +178,9 @@ class ViewReports extends Component {
                 "pk.eyJ1IjoiZmFyaGFuaG0iLCJhIjoiY2tuMTUxYjNnMHIyODJvbzJueDJzdWJmcCJ9.EIl7ZcqlshPyJxnxyGNGhg",
             interactive: false,
         });
+        if (this.state.redirectToPastPages) {
+            return this.state.redirectToPastPages;
+        }
         const { curReport } = this.props;
         if (curReport === {} || curReport === null) {
             return (
@@ -200,6 +192,7 @@ class ViewReports extends Component {
         const owner = this.props.loggedin && this.props.uid === curReport.uid;
         const markerIcons = [blueMarker, greenMarker, redMarker];
         const rdate = new Date(curReport.date);
+        const L = this.props.lang;
         return (
             <DashboarWrapper>
                 <div className="view-con">
@@ -231,17 +224,25 @@ class ViewReports extends Component {
                         </div>
                         <div className="view-progress">
                             <ul>
-                                {L === "en" ? updates.map(({ type, q, a }) => {
-                                    return (<Updates key={q} q={q} a={a} type={type} /> );
-                                })
-                                    : updatesFr.map(({ type, q, a }) =>{
-                                    return (<Updates key={q} q={q} a={a} type={type} /> );
-                                })}
+                                {(curReport.updates || []).map(
+                                    ({ type, q, a }) => {
+                                        return (
+                                            <Updates
+                                                key={q}
+                                                q={q}
+                                                a={a}
+                                                type={type}
+                                            />
+                                        );
+                                    }
+                                )}
                             </ul>
                         </div>
                         {this.renderToolbar(owner)}
                         <div className="view-descr">
-                            <label className="descr">{L === "en" ? "Description:" : "La description"}</label>
+                            <label className="descr">
+                                {L === "en" ? "Description" : "La description:"}
+                            </label>
                             {this.renderDesc(owner)}
                         </div>
                         <div className="view-by">
@@ -253,7 +254,11 @@ class ViewReports extends Component {
                                     {rdate.toLocaleDateString()}
                                 </div>
                                 <div className="view-by__body-posted">
-                                    <strong>{L === "en" ? "Posted by: " : "Posté par: "}</strong>{" "}
+                                    <strong>
+                                        {L === "en"
+                                            ? "Posted by:"
+                                            : "Posté par:"}
+                                    </strong>{" "}
                                     {curReport.username}
                                 </div>
                             </div>

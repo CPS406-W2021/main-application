@@ -116,9 +116,15 @@ class Settings extends Component {
             );
         }
     };
+    deleteProfile = () => {
+        if (
+            window.prompt(this.props.user.scq) === this.props.user.sca &&
+            window.confirm("Are you sure you want to delete your accunt ?")
+        )
+            this.props.deleteAccount();
+    };
     render() {
         const L = this.props.lang;
-        console.log(this.props.user);
         return (
             <DashboarWrapper currentPage={2}>
                 <div className="pro-con">
@@ -196,14 +202,7 @@ class Settings extends Component {
                                 </div>
                                 <button
                                     class="ui red button"
-                                    onClick={() => {
-                                        if (
-                                            window.prompt(
-                                                this.props.user.scq
-                                            ) === this.props.user.sca
-                                        )
-                                            this.props.deleteAccount();
-                                    }}
+                                    onClick={this.deleteProfile}
                                 >
                                     {L === "en"
                                         ? "Delete Account"

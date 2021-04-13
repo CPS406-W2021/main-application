@@ -42,11 +42,51 @@ class Vote extends Component {
     }
     render() {
         const L = this.props.lang;
+        const NOW = new Date();
+        const timeDifference = function (previous, current = NOW) {
+            var msPerMinute = 60 * 1000;
+            var msPerHour = msPerMinute * 60;
+            var msPerDay = msPerHour * 24;
+            var msPerMonth = msPerDay * 30;
+            var msPerYear = msPerDay * 365;
+
+            var elapsed = current - previous;
+
+            if (elapsed < msPerMinute) {
+                return Math.round(elapsed / 1000) + " seconds ago";
+            } else if (elapsed < msPerHour) {
+                return Math.round(elapsed / msPerMinute) + " minutes ago";
+            } else if (elapsed < msPerDay) {
+                return Math.round(elapsed / msPerHour) + " hours ago";
+            } else if (elapsed < msPerMonth) {
+                return (
+                    "approximately " +
+                    Math.round(elapsed / msPerDay) +
+                    " days ago"
+                );
+            } else if (elapsed < msPerYear) {
+                return (
+                    "approximately " +
+                    Math.round(elapsed / msPerMonth) +
+                    " months ago"
+                );
+            } else {
+                return (
+                    "approximately " +
+                    Math.round(elapsed / msPerYear) +
+                    " years ago"
+                );
+            }
+        };
         return (
             <DashboarWrapper>
                 <div className="vot">
                     <div className="header">
-                        <h1>{ L === "en" ? "Current Problems in Toronto" : "Problèmes actuels à Toronto" }</h1>
+                        <h1>
+                            {L === "en"
+                                ? "Current Problems in Toronto"
+                                : "Problèmes actuels à Toronto"}
+                        </h1>
                         <div className="header-icons">
                             <span
                                 className="horn"
@@ -55,7 +95,11 @@ class Vote extends Component {
                                 }
                             >
                                 <i class="large bullhorn icon"></i>
-                                <strong>{ L === "en" ? "Most Relevant" : "Le plus pertinent" }</strong>
+                                <strong>
+                                    {L === "en"
+                                        ? "Most Relevant"
+                                        : "Le plus pertinent"}
+                                </strong>
                             </span>
                             <span
                                 className="clock"
@@ -64,7 +108,11 @@ class Vote extends Component {
                                 }
                             >
                                 <i class="large black clock outline icon"></i>
-                                <strong>{ L === "en" ? "Most Recent" : "Le plus récent" }</strong>
+                                <strong>
+                                    {L === "en"
+                                        ? "Most Recent"
+                                        : "Le plus récent"}
+                                </strong>
                             </span>
                         </div>
                     </div>
@@ -78,6 +126,7 @@ class Vote extends Component {
                             key,
                             uid,
                             votes,
+                            date,
                         }) => {
                             return (
                                 <Fragment>
@@ -88,7 +137,7 @@ class Vote extends Component {
                                                 onClick={() =>
                                                     this.props.upVoteReport(
                                                         key,
-                                                        uid
+                                                        this.props.currUser
                                                     )
                                                 }
                                             >
@@ -102,7 +151,7 @@ class Vote extends Component {
                                                 onClick={() =>
                                                     this.props.downVoteReport(
                                                         key,
-                                                        uid
+                                                        this.props.currUser
                                                     )
                                                 }
                                             >
@@ -124,15 +173,23 @@ class Vote extends Component {
                                             </span>
                                             <br></br>
                                             <span className="info">
-                                            { L === "en" ? "Posted by" : "Posté par" }{" "}
+                                                {L === "en"
+                                                    ? "Posted by"
+                                                    : "Posté par"}{" "}
                                                 <span className="usr">
                                                     {username}
                                                 </span>{" "}
-                                                { L === "en" ? " 13 hours ago" : " Il y a 13 heures" }
+                                                {L === "en"
+                                                    ? `${timeDifference(
+                                                          new Date(date)
+                                                      )}`
+                                                    : " Il y a 13 heures"}
                                             </span>
                                             <br></br>
                                             <span className="loc">
-                                            { L === "en" ? "Location: " : "Emplacement: " }{" "}
+                                                {L === "en"
+                                                    ? "Location: "
+                                                    : "Emplacement: "}{" "}
                                                 <span className="address">
                                                     {name}
                                                 </span>
@@ -144,7 +201,9 @@ class Vote extends Component {
                                                     className="open"
                                                 >
                                                     <i class="grey folder open outline icon"></i>
-                                                    { L === "en" ? "View Full Report" : "Afficher le rapport complet" }
+                                                    {L === "en"
+                                                        ? "View Full Report"
+                                                        : "Afficher le rapport complet"}
                                                 </Link>
                                                 <span
                                                     className="share"
@@ -155,7 +214,9 @@ class Vote extends Component {
                                                     }}
                                                 >
                                                     <i class="grey share square outline icon"></i>
-                                                    { L === "en" ? "Share" : "Partager" }
+                                                    {L === "en"
+                                                        ? "Share"
+                                                        : "Partager"}
                                                 </span>
                                             </div>
                                         </div>
@@ -172,7 +233,7 @@ class Vote extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state.auth.uid);
+    // console.log(state.auth.uid);
     const REPORTS = state.firestore.data["reports"]
         ? Object.keys(state.firestore.data["reports"]).map((k) => ({
               key: k,
@@ -184,6 +245,7 @@ const mapStateToProps = (state) => {
         ready: state.report.ready,
         lang: state.lang.lang,
         reports: REPORTS,
+        currUser: state.auth.uid,
     };
 };
 const mapDispatchToProps = (dispatch) => ({
