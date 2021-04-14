@@ -10,20 +10,20 @@
 The home page is the landing page of the website. In the home page, the user can log in/sign in to CYPRESS, access the FAQ section, and/or take part of a survey. If a user is unsure about a specific matter, the **FAQ section** answers the most common questions regarding CYPRESS. The **survey** is to allow feedback to continously improve CYPRESS according to the users needs. After completion, the answers to the survey are stored into the database. 
 
 ![image](https://user-images.githubusercontent.com/72548456/114468926-375d0f00-9bba-11eb-958f-afb7abe99092.png)
-![image](https://user-images.githubusercontent.com/72548456/114469047-6ecbbb80-9bba-11eb-9cdf-9e618948815c.png)
+![image](https://user-images.githubusercontent.com/72548456/114639210-3c45bf80-9c9b-11eb-8608-c590d8d8481e.png)
 ![survey](https://user-images.githubusercontent.com/72548456/114468784-05e44380-9bba-11eb-9960-4b3a86da52c2.png)
 
 ### 2. User Account
 To access the features of CYPRESS, a user must register for an account by filling out a registration form. If successful, the user can log in using valid credentials and is directed to the dashboard. The user can also access their account details on the **My Account** page where they can choose to edit their account information, reset their password, or delete their CYPRESS account. 
 
 ![login](https://user-images.githubusercontent.com/72548456/114472052-9709e900-9bbf-11eb-8c99-03d15a920492.png)
-![image](https://user-images.githubusercontent.com/72548456/114468454-86ef0b00-9bb9-11eb-8aef-1d37b2a27fba.png)
+![image](https://user-images.githubusercontent.com/72548456/114639294-731bd580-9c9b-11eb-9da1-a26ca03c4c0f.png)
 
 ### 3. Report a Problem
 We used the [Mapbox GL JS API](https://docs.mapbox.com/mapbox-gl-js/api/) to provide a user friendly map that allows the user to pinpoint the exact location of the problem that they are reporting, hence making it easier for the city workers to fix the problem as soon as possible. Reports are shown in the map using markers (Red, Blue, Green) as well as a side bar that displays recent reports along with the report type, location, and date/time it was reported. When the user clicks on a location on the map and the **```"Click to Add a Report!"```** button , they are prompted to confirm their location then directed to a page where they can select the type of problem, enter more information, as well as choose if they want to receive updates on the report.
 
-![image](https://user-images.githubusercontent.com/72548456/114469810-d0d8f080-9bbb-11eb-959e-f755c6372509.png)
-![image](https://user-images.githubusercontent.com/72548456/114472869-1b10a080-9bc1-11eb-80ab-d95d41993eaa.png)
+![image](https://user-images.githubusercontent.com/72548456/114639330-8cbd1d00-9c9b-11eb-81d2-ad11da9bca68.png)
+![image](https://user-images.githubusercontent.com/72548456/114639465-f2110e00-9c9b-11eb-862e-f7af455fb9fc.png)
 
 
 ### 4. My Past Reports
@@ -36,8 +36,9 @@ This page displays a list of all the problems that the user has reported. The us
 ![image](https://user-images.githubusercontent.com/72548456/114469917-fbc34480-9bbb-11eb-940d-98da14def628.png)
 
 ### 5. Vote
-In the vote page, users can upvote and downvote based on the urgency, importance, or relevance of the problem. Additionally, users can also view the full report details, as well as share the report via link. Sorting by Most Recent and Most Relevant are currently not implemented, but might be implemented in a future sprint.
-![image](https://user-images.githubusercontent.com/72548456/114469881-ee0dbf00-9bbb-11eb-88c0-8aac4fe29d27.png)
+In the vote page, users can upvote and downvote based on the urgency, importance, or relevance of the problem. Additionally, users can also view the full report details, as well as share the report via link. The user can also sort the posting by most recent and most relevant (highest votes).
+
+![image](https://user-images.githubusercontent.com/72548456/114639357-a1011a00-9c9b-11eb-8dfb-a607a536c8f2.png)
 
 ### 7. Contact City Officials
 The contact page displays a table of Toronto's City Council along with their contact information (e-mail and telephone number), easily accessible for users who wish to speak to them directly. Users can also use the search feature and sort the table by Ward or Councillor Name. 
