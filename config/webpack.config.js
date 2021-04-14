@@ -407,9 +407,6 @@ module.exports = function (webpackEnv) {
                             test: /\.(js|mjs|jsx|ts|tsx)$/,
                             include: paths.appSrc,
                             loader: require.resolve("babel-loader"),
-                            ignore: [
-                                "./node_modules/mapbox-gl/dist/mapbox-gl.js",
-                            ],
                             options: {
                                 customize: require.resolve(
                                     "babel-preset-react-app/webpack-overrides"
@@ -427,6 +424,9 @@ module.exports = function (webpackEnv) {
                                     ],
                                 ],
 
+                                ignore: [
+                                    "./node_modules/mapbox-gl/dist/mapbox-gl.js",
+                                ],
                                 plugins: [
                                     [
                                         require.resolve(
@@ -464,6 +464,9 @@ module.exports = function (webpackEnv) {
                                 babelrc: false,
                                 configFile: false,
                                 compact: false,
+                                ignore: [
+                                    "./node_modules/mapbox-gl/dist/mapbox-gl.js",
+                                ],
                                 presets: [
                                     [
                                         require.resolve(
@@ -476,9 +479,6 @@ module.exports = function (webpackEnv) {
                                 // See #6846 for context on why cacheCompression is disabled
                                 cacheCompression: false,
 
-                                ignore: [
-                                    "./node_modules/mapbox-gl/dist/mapbox-gl.js",
-                                ],
                                 // Babel sourcemaps are needed for debugging into node_modules
                                 // code.  Without the options below, debuggers like VSCode
                                 // show incorrect code and set breakpoints on the wrong lines.
