@@ -48,9 +48,6 @@ class DashboarWrapper extends Component {
                                 <img src={Image} alt="Toronto Logo" />
                                 <div>Cypress</div>
                             </div>
-                            <div className="wp-header__titleSlogan">
-                                Cypress / {this.props.text}
-                            </div>
                         </div>
                         <div className="wp-header__pages">
                             <div className="wp-header__nav">
