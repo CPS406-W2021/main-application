@@ -29,7 +29,11 @@ class Survey extends Component {
             );
             return;
         }
-        alert("Thanks for filling out the survey!");
+        alert(
+            L === "en"
+                ? "Thanks for filling out the survey!"
+                : "Merci d'avoir répondu au sondage!"
+        );
         this.setState({ redirect: <Redirect to="/"></Redirect> });
         this.props.enterSurvey(answers);
     };
