@@ -95,7 +95,9 @@ class ViewReports extends Component {
         const L = this.props.lang;
         if (
             window.confirm(
-                L === "en" ? `Are you sure you want to delete ${this.props.curReport.title}?` : `Etes-vous sûr que vous voulez supprimer ${this.props.curReport.title}?`
+                L === "en"
+                    ? `Are you sure you want to delete ${this.props.curReport.title}?`
+                    : `Etes-vous sûr que vous voulez supprimer ${this.props.curReport.title}?`
             )
         ) {
             this.props.deleteReport(this.props.rid);
@@ -105,10 +107,19 @@ class ViewReports extends Component {
         }
     };
     OnClickSave = () => {
+        const L = this.props.lang;
         if (this.state.title === "") {
-            alert("Missing field: Title cannot be empty");
+            alert(
+                L === "en"
+                    ? "Missing field: Title cannot be empty"
+                    : "Champ manquant: le titre ne peut pas être vide"
+            );
         } else if (this.state.information === "") {
-            alert("Missing field: Description cannot be empty");
+            alert(
+                L === "en"
+                    ? "Missing field: Description cannot be empty"
+                    : "Champ manquant: la description ne peut pas être vide"
+            );
         } else {
             this.props.updateReport(
                 this.props.rid,
@@ -271,8 +282,6 @@ class ViewReports extends Component {
     }
 }
 
-
-
 const mapStateToProps = (state, props) => {
     let curReport = {};
     if (state.firestore.data.reports) {
@@ -287,7 +296,6 @@ const mapStateToProps = (state, props) => {
         lang: state.lang.lang,
         redirect: state.redirect,
     };
-    
 };
 
 const mapDispatchToProps = (dispatch) => ({

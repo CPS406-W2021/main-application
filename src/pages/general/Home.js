@@ -93,30 +93,34 @@ class Home extends Component {
                         ? "The CyPress system is designed to allow you to report problems that concern you about the city. Our mission is to improve the city's public safety through the contibutions of our citizens."
                         : "Le système CyPress est conçu pour vous permettre de signaler les problèmes qui vous concernent À propos de la ville. Notre mission est d'améliorer la sécurité publique de la ville grâce au contributions de nos citoyens."}
                 </i>
-                <div className="slogan-btn__con">
-                    <button
-                        type="button"
-                        className="btn-login"
-                        onClick={() =>
-                            this.setState({
-                                redirect: <Redirect to="/login"></Redirect>,
-                            })
-                        }
-                    >
-                        {L === "en" ? "Log In" : "Connexion"}
-                    </button>
-                    <button
-                        type="button"
-                        className="btn-signup"
-                        onClick={() =>
-                            this.setState({
-                                redirect: <Redirect to="/register"></Redirect>,
-                            })
-                        }
-                    >
-                        {L === "en" ? "Sign Up" : "S'inscrire"}
-                    </button>
-                </div>
+                {!this.props.loggedin && (
+                    <div className="slogan-btn__con">
+                        <button
+                            type="button"
+                            className="btn-login"
+                            onClick={() =>
+                                this.setState({
+                                    redirect: <Redirect to="/login"></Redirect>,
+                                })
+                            }
+                        >
+                            {L === "en" ? "Log In" : "Connexion"}
+                        </button>
+                        <button
+                            type="button"
+                            className="btn-signup"
+                            onClick={() =>
+                                this.setState({
+                                    redirect: (
+                                        <Redirect to="/register"></Redirect>
+                                    ),
+                                })
+                            }
+                        >
+                            {L === "en" ? "Sign Up" : "S'inscrire"}
+                        </button>
+                    </div>
+                )}
             </div>
         );
     }
@@ -187,6 +191,7 @@ class Home extends Component {
 const mapStateToProps = (state) => ({
     lang: state.lang.lang,
     redirect: state.redirect,
+    loggedin: state.auth.loggedin,
 });
 
 const mapDispatchToProps = (dispatch) => ({});

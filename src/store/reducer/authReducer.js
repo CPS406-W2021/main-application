@@ -7,7 +7,8 @@ const INIT_STATE = {
     registerredirect: "",
     userData: {},
 };
-const authReducer = (state = INIT_STATE, action) => {
+const authReducer = (state = INIT_STATE, action, curState) => {
+    console.log(curState);
     switch (action.type) {
         case "CLEAR_ERROR":
             return { ...state, error: "", registerredirect: "" };
