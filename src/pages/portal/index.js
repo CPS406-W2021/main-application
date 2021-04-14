@@ -55,7 +55,7 @@ class PortalBase extends Component {
                     {this.renderMap()}
                     <div className="portal-button">
                         {L === "en"
-                            ? "Click to add a report!"
+                            ? "Click on the map to create a report!"
                             : "Cliquez pour ajouter un rapport!"}
                     </div>
                     <div className="portal-search">
